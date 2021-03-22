@@ -329,8 +329,11 @@ Vous pouvez choisir le critere qui classera la lecture en pass ou fail. Classiqu
 Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
 
 Quid du fichier FAST5 Bulk ?
-Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore: elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
-Il est possible de visualiser le signal et de voir les coupures déterminant les lectures (dans BulkVis [Publi de Bulkvis] par exemple).
+
+Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore: 
+- elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
+- il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis].
+
 Attention, cette option génère un gros volume de données.
 
 
