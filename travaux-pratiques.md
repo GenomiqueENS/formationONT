@@ -267,7 +267,7 @@ Les flowcells sont remplacées si ce n’est pas le cas !
 **Exercice 3 : Revenez au menu précedent et lancez le Flowcell Check**
 
 
-* Paramétrage et lancement d’un run 
+**Exercice 4 : Paramétrez et lancez votre run**
 
 Il faut définir 
 - Votre expérience 
@@ -277,13 +277,14 @@ Il faut définir
 - L’alignement à la volée ou non et par conséquent, les séquences références
 
 Commençons !
-Définissez votre expérience et passez à la selection du kit (N’oubliez pas de lui donnez un nom !).
+
+**Définissez votre expérience et passez à la selection du kit (N’oubliez pas de lui donnez un nom !):**
 
 Dans la section permettant le choix du kit de séquençage à utiliser, tous les kits sont disponibles. Il est possible de les filtrer selon ce que l’on séquence, selon les banques faites…
 Choisissez ce qui vous intéresse. A la plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
 Il est important de ne pas se tromper. Chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
 
-Passez au choix des options de runs.
+**Passez au choix des options de runs:**
 
 Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps. 
 Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
@@ -292,10 +293,8 @@ Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer le
 Le temps entre chaque changement des canaux est aussi paramétrable. Vous pouvez également sauvegarder un nombre de pore pour les faire intervenir dans la durée du run.
 Concrètement, nous ne changeons jamais ces paramètres.
 
-Passez à la configuration du basecalling.
+**Passez à la configuration du basecalling:**
 
- 
-**Configuration de l’appel de base**
 L’appel de base peut être réalisé à la volée ou après le run. Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
 Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soient la machine choisie pour réaliser l’appel de base.
 
@@ -305,7 +304,7 @@ Trois modes de basecalling sont possibles:
 - High-accuracy : Plus long mais moins d’erreur
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
-Passons aux code-barres:
+**Passons aux code-barres:**
 Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres: 
 - Suppression des code-barres aux extrémités des données basecallées
 - Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture.
@@ -320,7 +319,7 @@ Si vous faites du RNASeq, vous pouvez également donner en entrée de minimap2, 
 Vous pouvez utiliser paftools, un outil intégrer à minimap2 pour les construire à partir des fichiers d’annotation gtf.
 
 
-Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?
+**Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?**
 - Des FAST5 : Ce sont les données brutes. Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
 - Des fastq : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
 - Des Bam : Ce sont les données alignées si l’alignement à la volée a été demandé
