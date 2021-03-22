@@ -314,6 +314,25 @@ Si un seul des code-barres est trouvé, la lecture est perdue
 
 Attention, le sequençage nanopore est encore imprecis. Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent etre mal reconnues. Vous risquez de perdre beaucoup à être trop stringent.
 
+Minknow  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utiliser de façon standard.
+Si vous souhaitez le faire, vous devez fournir un fichier fasta de référence.
+Si vous faites du RNASeq, vous pouvez également donner en entrée de minimap2, un fichier bed12 définissant les jonctions de vos isoformes.
+Vous pouvez utiliser paftools, un outil intégrer à minimap2 pour les construire à partir des fichiers d’annotation gtf.
+
+
+Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?
+- Des FAST5 : Ce sont les données brutes. Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
+- Des fastq : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
+- Des Bam : Ce sont les données alignées si l’alignement à la volée a été demandé
+
+Vous pouvez choisir le critere qui classera la lecture en pass ou fail. Classiquement, les lectures aillant un score de qualité inférieur à 7 sont considérées comme mauvaises (fail). Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
+Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
+
+Quid du fichier FAST5 Bulk ?
+Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore: elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
+Il est possible de visualiser le signal et de voir les coupures déterminant les lectures (dans BulkVis [Publi de Bulkvis] par exemple).
+Attention, cette option génère un gros volume de données.
+
 
 
 <a name="fast5"></a>
@@ -550,3 +569,6 @@ toulliqQC --report-name  Formation_MinION \
 * [Documentation de PycoQC](https://github.com/tleonardi/pycoQC)
 * [Documentation de ToulliqQC](https://github.com/GenomicParisCentre/toulligQC)
 * [Documentation de Nanocomp](https://github.com/wdecoster/nanocomp)
+* [Publi de Bulkvis](BulkVis: a graphical viewer for Oxford nanopore bulk FAST5 files, 
+Alexander Payne et al, Bioinformatics, Volume 35, Issue 13, 1 July 2019, Pages 2193–2198)
+
