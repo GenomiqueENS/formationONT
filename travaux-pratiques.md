@@ -158,10 +158,13 @@ Dans ce TP, nous allons nous concentrer dans ce TP sur 3 méthodes, deux en util
 
 ### Support Physique
 
-Vous pouvez insérer une clé USB ou une carte SD dans le MinION et réaliser des transferts de fichiers.
+Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION et réaliser des transferts de fichiers.
 
 * Il vaut mieux éviter de se servir de ces supports physiques pour y écrire les données produites au cours du run (idem pour les montages réseaux) car cela pourrait faire un goulot d’étranglement et avoir pour conséquence une perte de données (Nous ignorons s’il y a un cache pour les données en cours d’acquisition).
-* Le système de fichier du support Physique est important. Les systèmes de fichiers natifs de macOS (HFS+, AFS) ne sont pas supportés. Attention les systèmes de fichiers FAT ne supportent pas des fichiers de plus de 4 Go. Il est préférable d’utiliser exFat ou Ext2/3/4 (Linux).
+* Le type de système de fichier du support physique est important :
+    *  les systèmes de fichiers natifs de macOS (HFS+, AFS) ne sont pas supportés
+    *  les systèmes de fichiers FAT historiques (FAT, FAT32, vFAT) ne supportent pas des fichiers de plus de 4 Go
+    *  Il est préférable d’utiliser exFat (supportant les fichiers >= 4 Go et disponible en lecture/ecriture sous Windows, macOS et Linux) ou Ext2/3/4 (Linux).
 
 * Dans *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
 
