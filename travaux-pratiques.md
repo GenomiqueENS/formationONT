@@ -220,11 +220,11 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 * Sélectionnez un des élements du fichier et allez dans le sous-dossier *Raw* et double-cliquez sur le « fichier » *Signal*
 * Une fenêtre apparait avec un tableau contenant une seule colonne. Il s’agit des valeurs brutes du séquençage
 
-**Question 2 : Combien y a-t-il de valeurs et quel est l’ordre de grandeur de celle-ci ? **
+**Question 2 : Combien y a-t-il de valeurs et quel est l’ordre de grandeur de celle-ci ?**
 
 * Sélectionnez la première et seule colonne et appuyez ensuite le bouton en haut à gauche pour visualiser le signal. Une fenêtre avec les options de visualisation apparait, appuyez simplement sur *OK*
 
-**Question 3 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas) **
+**Question 3 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas)**
 
 **Question 4 : Dans les sous dossiers d'une lecture, retrouvez le numéro de pore, le numéro de la flowcell et la date de début de run**
 
