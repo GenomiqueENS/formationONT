@@ -9,7 +9,7 @@
 * Présentation des différents types de flowcells et séquenceur ONT
 * [Démo : Mise en service d’un MinION Mk1C](#config)
 * [TP 1 : Connexion au MinION Mk1C en ligne de commande](#connexion)
-* [TP 2 : Connexion à distance gràce à MinKNOW Stand Alone GUI](#minknow-stand-alone-gui)
+* [TP 2 : Connexion à distance grace à MinKNOW Stand Alone GUI](#minknow-stand-alone-gui)
 * [TP 3 : Transfert des données](#transfert)
 * [TP 4 : Interface de MinKNOW et lancement d’un run](#minknow)
 * [TP 5 : Les fichiers bruts Fast5](#fast5)
@@ -29,62 +29,83 @@ Lors de ce TP, nous utilisons deux séquenceurs MinION :
 * Un MinION Mk1B couplé à un MinIT, son nom de domaine est `minion01.in-genomique.biologie.ens.fr`
 * Et un MinION Mk1C son nom de domaine est `minion02.in-genomique.biologie.ens.fr`
 
-Le MinION Mk1C peut être assimilé à un MinIT couplé à un MinION Mk1B doté d'un ecran tactile. Donc toutes les informations et procedures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
+Au cours de ce TP, des noms de domaine `minion0X.in-genomique.biologie.ens.fr` seront indiqués, il faudra remplacer le **X** par le numéro de votre séquenceur.
 
-Les données utilisées lors de ce TP sont celles qui ont été produites lors de la précédente session expérimentale de cette formation.
+Le MinION Mk1C peut être assimilé à un MinIT couplé à un MinION Mk1B doté d’un écran tactile. Cela signifie que toutes les informations et procédures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
+
+Les données utilisées lors de ce TP sont celles qui ont été produites lors de la précédente session expérimentale de cette formation. Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*. Deux échantillons avait été multiplexé.
 
 **Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT. Il convient évidemment de les changer lors de mise en production d’un séquenceur.
 
 
 <a name="config"></a>
-## Démo : Mise en service d’un MinION Mk1C
+## Démo : Mise en service d’un MinION Mk1C
 
-La version du système préinstallé sur les MinION Mk1C est (etait ?) bogué. La configuration initiale du réseau est particulièrement délicate à mettre en place. Cependant une fois celle-ci mise en place et la mise à jour du système effectuée, l’environnement logiciel du séquenceur s’avère plutôt stable.
+La version du système préinstallé sur les MinION Mk1C est (était ?) notoirement boguée notamment en ce qui concerne la configuration réseau via MinKNOW (Elle ne fonctionne pas). Cette configuration initiale est certes délicate à mettre en place mais une fois les mises à jour du système effectuées, l’environnement logiciel du séquenceur s’avère stable.
 
 Dans cette partie, vous trouverez la procédure à suivre pour mettre en service un MinION Mk1C.
 
 Pour réaliser cette opération, il est nécessaire de disposer :
-* Un cable réseau
-* Un ordinateur avec une carte Wifi sous Linux, macOS ou Windows 10 (version septembre 2017 minimum)
+
+* Un câble réseau
+* Un ordinateur avec une carte Wifi sous Linux, macOS ou Windows 10 (version supérieure ou égale à celle de septembre 2017)
 * Un séquenceur MinION Mk1C
 
-La procédure à suivre est la suivante
-1. Branchement de l’appareil au réseau électrique. Attention, les prises électriques mâles des appareils ONT sont parfois capricieuses, une multiprise peut être nécessaire pour brancher correctement l’appareil.
+La procédure à suivre est la suivante :
+
+1. Branchement de l’appareil au réseau électrique. Attention, les prises électriques mâles des appareils ONT sont parfois capricieuses, une multiprise peut être nécessaire pour brancher correctement l’appareil
 2. On allume l’appareil
-3. À l’aide d’ordinateur doté une carte Wifi, connectez-vous au Hotspot *NOM_DU_HOTSPOT* créé par le séquenceur. Le mot de passe de ce Hotspot est *MOT_DE_PASSE*
+3. À l’aide d’ordinateur, connectez-vous en Wifi au Hotspot *NOM_DU_HOTSPOT* créé par le séquenceur. Le mot de passe de ce Hotspot est *MOT_DE_PASSE*
 4. Connectez-vous en SSH au séquenceur
 ```bash
 ssh minit@192.168.0.1
 ```
-5. Option 1 : configuration dynamique (DHCP) de la connexion Ethernet. Pour cela, on utilise la commande suivante :
+
+Une fois que nous avons accès au système du séquenceur, nous allons pouvoir agir sur la configuration réseau. Pour cela, il faut utiliser la commande `nmcli` de l’utilitaire *NetWork Manager* qui permet de gérer la configuration réseau de l’ensemble du système. Dans un premier temps, nous pouvons :
+
+* Lister les configurations des connexions réseaux
 ```bash
-sudo nmcli c down static
-sudo nmcli c up dhcp
+nmcli connection show
 ```
-6. Option 2 : configuration statique de la connexion Ethernet. Pour cela, on utilise la commande suivante :
+* Afficher les caractéristiques d’une connexion
 ```bash
-sudo nmcli c edit static
-sudo nmcli c down dhcp
-sudo nmcli c up static
+nmcli connection show static
 ```
-7. Mise à jour du séquenceur
+
+Il faut maintenant choisir la manière dont vous allez configurer la connexion Ethernet filaire. La commande `sudo` permet de passer en mode administrateur le temps d’exécuter une commande.
+
+* Option 1 : configuration dynamique (DHCP) de la connexion Ethernet.
 ```bash
-apt update
-apt dist-upgrade
-shutdown --reboot now
+sudo nmcli connection down static
+sudo nmcli connection up dhcp
 ```
+* Option 2 : configuration statique de la connexion Ethernet. Il est prudent de recopier la configuration avant toute modification des caractéristiques d’une connexion
+```bash
+sudo nmcli connection edit static
+sudo nmcli connection down dhcp
+sudo nmcli connection up static
+```
+
+Maintenant que la configuration a été correctement définie, il ne reste plus qu’à mettre à jour le système à l’aide des commandes suivantes :
+```bash
+sudo apt update
+apt list --upgradable
+sudo apt dist-upgrade
+sudo shutdown --reboot now
+```
+
 
 
 <a name="connexion"></a>
 ## TP 1 : Connexion au MinION Mk1C en ligne de commande
 
-Le MinION Mk1C comme tous les séquenceurs d’ONT disposant d’une unité de calcul, fonctionne sous un système Linux. Oxford Nanopore Technologies, laisse à ses utilisateurs un accès total au système d’exploitation de ses machines au travers de connexions de type SSH. SSH (Secure Shell) est à la fois un programme informatique et un protocole de communication sécurisé permettant l'accès à distance à des ordinateurs en ligne de commande.
+Le MinION Mk1C comme tous les séquenceurs d’ONT couplés à un ordinateur, fonctionne sous un système Linux. Oxford Nanopore Technologies, laisse à ses utilisateurs un accès total au système d’exploitation de ses machines au travers de connexions de type SSH. SSH (Secure Shell) est à la fois un programme informatique et un protocole de communication sécurisé permettant l’accès à distance à des ordinateurs via la ligne de commande.
 
-Dans ce TP, nous verrons comment se connecter via la commande `ssh` à un séquenceur et nous récupérerons quelques informations sur le système informatique pilotant le séquenceur.
+Dans ce TP, nous verrons comment se connecter à un MinION Mk1C via la commande `ssh` et nous récupérerons quelques informations sur le système informatique pilotant le séquenceur.
 
-* Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) et se placer dans le dossier *formation-minion* sur le Bureau
+* Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) et se placer dans le dossier *Formation-MinION-23-03-2021* sur le Bureau
 ```bash
-cd ~/desktop/formation-minion
+cd ~/Desktop/Formation-MinION-23-03-2021
 ```
 
 * Connectez-vous au MinION en ligne de commande (le mot de passe est "**minit**")
@@ -105,13 +126,13 @@ htop
 
 **Question 4 : Combien de cœur possède le processeur (CPU) ?**
 
-**Question 5 : Rechercher MinKNOW dans la liste des processus. On s’aperçoit que MinKNOW que MinKNOW est composé d’au moins deux parties (le cœur du logiciel et l’interface graphique)**
+**Exercice 5 : Rechercher MinKNOW dans la liste des processus. On s’aperçoit que MinKNOW que MinKNOW est composé d’au moins deux parties (le cœur du logiciel et l’interface graphique)**
 
 **Question 6 : Quel est le processus qui utilise le plus le processeur ? À quoi sert-il ?**
 
-* On constate que le processus `guppy_basecall_server` consomme beaucoup de temps processeur. Appuyez sur la touche **q** pour quitter
+* Appuyez sur la touche **q** pour quitter le programme `htop`
 
-* Les données de séquençages sont stockées dans la partition `/data`, deplacez-vous y pour y lister les derniers runs :
+* Les données de séquençages sont stockées dans la partition `/data`, déplacez-vous-y pour y lister les derniers runs :
 ```bash
 cd /data
 ls -l
@@ -126,13 +147,13 @@ df -h /data
 
 **Question 8 : Combien d’espace disponible reste-t-il pour stocker de nouveaux runs ?**
 
-* Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez. Il convient donc d’être extrêmement prudent, car vous n’aurez pas de message d’avertissements (par exemple lorsque vous supprimer des données avec la commande `rm`).
+**Avertissement :** Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez. Il convient donc d’être __extrêmement__ prudent, car vous n’aurez pas de message d’avertissements (comme lorsque vous souhaitez supprimer des données avec la commande `rm`).
 
 
 <a name="minknow-standalone-gui"></a>
 ## TP 2 : Connexion à distance gràce à MinKNOW Stand Alone GUI
 
-L’écran du MinION est relativement petit et pas toujours pratique, c’est pour cette raison (et aussi, car le MinIT ne disposait pas d’écran) que la société a développé le logiciel *MinKNOW Stand Alone GUI* qui permet de contrôler à distance un ou plusieurs séquenceurs.
+L’écran du MinION est relativement petit et pas toujours très pratique à utiliser, c’est pour cette raison (et aussi, car le MinIT ne disposait pas d’écran) que la société ONT a développé le logiciel *MinKNOW Stand Alone GUI* qui permet de contrôler à distance un ou plusieurs séquenceurs.
 
 Dans ce TP, nous verrons comment installer ce logiciel sur un ordinateur de bureau (un iMac) et le configurer pour prendre le contrôle d’un séquenceur.
 
@@ -141,7 +162,7 @@ L’application *MinKNOW Stand Alone GUI* est disponible sur différents support
 * [Android](https://play.google.com/store/apps/details?id=com.nanoporetech.minknowui)
 * [IPhone et iPad](https://apps.apple.com/fr/app/minknow/id1504645283)
 
-Pour le moment, il n’existe de pas de version pour Linux.
+Pour le moment, il n’existe de pas de version pour les systèmes Linux.
 
 * Installation du MinKNOW Stand Alone GUI
     * Allez dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
@@ -149,9 +170,9 @@ Pour le moment, il n’existe de pas de version pour Linux.
     * Dans la fenêtre qui s’ouvre, déplacer l’icone *MinKNOW UI* dans le raccourci vers le dossier *Applications*
 
 * Configuration de l’application
-    * Au démarrage MinKNOW vous propose de vous connecter avec votre compte Nanopore. Choisissez *Continue as guest*
+    * Au démarrage MinKNOW vous propose de vous connecter avec votre compte Nanopore. Choisissez *Continue as guest* (à quoi sert la connexion au compte ONT ?)
     * Vous arrivez sur la page du *Connection manager*. Le mode tutoriel est activé, quittez le en cliquant sur le bouton **⋮**
-    * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add  host**, et rentrez l’adresse IP ou le nom de domaine du séquenceur (voir les informations utiles au début de ce document)
+    * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion0X.in-genomique.biologie.ens.fr`
     * Dans la section *Saved Host*, devrait apparaitre une icone *Mk1C* ou *MinIT* selon le sequençeur auquel vous vous êtes connecté
     * Cliquez sur l’hôte crée pour pouvoir controler à distance le sequenceur
 
@@ -161,7 +182,8 @@ Pour le moment, il n’existe de pas de version pour Linux.
 <a name="transfert"></a>
 ## TP 3 : Transfert des données
 
-Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil. Il est donc nécessaire de pouvoir transférer des données depuis et vers le séquenceur. Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
+Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil (les unités de stockage ont des caractéristiques compatibles avec le débit du séquenceur). Il est donc nécessaire de pouvoir transférer des données depuis et vers le séquenceur. Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
+
 * Disque dur ou clé USB
 * micro SD-Card
 * Partage SMB
@@ -172,37 +194,37 @@ Dans ce TP, nous allons nous concentrer dans ce TP sur 3 méthodes, deux en util
 
 ### Support Physique
 
-Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION et réaliser des transferts de fichiers.
+Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION ainsi réaliser des transferts de fichiers via l'interface graphique de MinKNOW.
 
 * Il vaut mieux éviter de se servir de ces supports physiques pour y écrire les données produites au cours du run (idem pour les montages réseaux) car cela pourrait faire un goulot d’étranglement et avoir pour conséquence une perte de données (Nous ignorons s’il y a un cache pour les données en cours d’acquisition).
-* Le type de système de fichier du support physique est important :
-    *  les systèmes de fichiers natifs de macOS (HFS+, AFS) ne sont pas supportés
-    *  les systèmes de fichiers FAT historiques (FAT, FAT32, vFAT) ne supportent pas des fichiers de plus de 4 Go
-    *  Il est préférable d’utiliser exFat (supportant les fichiers ⩾ 4 Go et disponible en lecture/écriture sous Windows, macOS et Linux) ou Ext2/3/4 (Linux).
+* Le choix type de système de fichier du support physique est très important car :
+    * les systèmes de fichiers natifs de macOS (HFS+, AFS) ne sont pas supportés
+    * les systèmes de fichiers FAT historiques (FAT, FAT32, vFAT) ne supportent pas des fichiers de plus de 4 Go
+    * Il est préférable d’utiliser exFat (supportant les fichiers ⩾ 4 Go et disponible en lecture/écriture sous Windows, macOS et Linux) ou Ext2/3/4 (Linux).
 
-* Dans *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
+* Ouvrez *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
 
-**Exercice 1 : Brancher une clé USB et à l’aide de l’interface graphique copier un fichier de la clé dans le dossier /data**
+**Exercice 1 : Brancher une clé USB et à l’aide de l’interface graphique copier un fichier de la clé dans le dossier */data* **
 
 **Exercice 2 : À l’aide de l’interface graphique copier un petit dossier vers la clé USB. Démontez-la et retirer là et branchez-la sur l’ordinateur pour vérifier que vous pouvez accéder aux données.**
 
 ### Partage SMB
 
-Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide de SMB.
+Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB. Le protocole SMB (Server Message Block3) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows. Désormais ce protocole est pris en charge par macOS et Linux.
 
 **Note :** Il faut noter qu’il est possible de faire l’inverse et de monter un partage réseau (SMB ou NFS) depuis l’interface de MinKNOW. Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*.
 
 * Création du montage
     * Dans *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
-    * Appuyer sur le Bouton grisé *Share Samba network* en haut à droite
+    * Appuyer sur le Bouton grisé *Share Samba network* en haut à droite (Samba est le nom de l'implentation du protocole SMB sous Linux)
     * Une boite de dialogue apparaît vous demandant de choisir un mot de passe pour ce partage. Remplissez-la.
     * Le partage est alors activé
 
 
 * Montage du partage sur l’ordinateur
-    * Dans le Finder et dans le menu sélectionez *Aller* / *Se connecter au serveur…*
-    * Utiliser *smb://minion0X.in-genomique.biologie.ens.fr* (remplacez minion0X par minion01 ou minion02 selon votre séquenceur. Appuyer sur le bouton *Se connecter*
-    * Une boite de dialogue apparait. Choissez *Utilisateur référencé*, le nom de l’utilisateur est **minit** et le mot de passe celui que vous avez précédemment choisi. Appuyez sur le bouton *Se connecter*
+    * Dans le Finder et dans le menu sélectionnez *Aller* / *Se connecter au serveur…*
+    * Utiliser *smb://minion0X.in-genomique.biologie.ens.fr*. Appuyer sur le bouton *Se connecter*
+    * Une boite de dialogue apparaît. Choisissez *Utilisateur référencé*, le nom de l’utilisateur est **minit** et le mot de passe celui que vous avez précédemment choisi. Appuyez sur le bouton *Se connecter*
 
 **Exercice 3 : Utiliser ce partage pour copier des fichiers vers le montage. Vérifiez que les fichiers copiés sont bien visibles dans l’interface de MinKNOW**
 
@@ -210,9 +232,9 @@ Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux f
 
 SFTP est l’évolution sécurisée du protocole de transfert de fichier FTP qui date des années 70. SFTP est habituellement utilisable sur une machine dès qu’un serveur SSH est configuré, comme c’est le cas sur MinION Mk1C.
 
-* Récupération d’un run. Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes (adapter la commande avec le nom de votre MinION : minion-0X -> minion-01 ou minion-02):
+* Récupération d’un run. Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
 ```bash
-cd ~/Desktop
+cd ~/Desktop/Formation-MinION-23-03-2021/Données
 sftp -r minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO .
 ```
 
@@ -256,14 +278,11 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 
 * Sélectionnez un des éléments du fichier et allez dans le sous-dossier *Raw* et double-cliquez sur le « fichier » *Signal*
 * Une fenêtre apparaît avec un tableau contenant une seule colonne. Il s’agit des valeurs brutes du séquençage
-
-**Question 2 : Combien y a-t-il de valeurs et quel est l’ordre de grandeur de celle-ci ?**
-
 * Sélectionnez la première et seule colonne et appuyez ensuite le bouton en haut à gauche pour visualiser le signal. Une fenêtre avec les options de visualisation apparaît, appuyez simplement sur *OK*
 
-**Question 3 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas)**
+**Question 2 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas)**
 
-**Question 4 : Dans les sous dossiers d’une lecture, retrouvez le numéro de pore, le numéro de la flowcell et la date de début de run**
+**Exercice 3 : Dans les sous dossiers d’une lecture, retrouvez le numéro de pore, le numéro de la flowcell et la date de début de run**
 
 
 <a name="basecalling-minknow"></a>
@@ -273,9 +292,9 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 
 
 <a name="basecalling-cmdline"></a>
-## TP 7 : Appel de Base en ligne de commande
+## TP 7 : Appel de Base en ligne de commande
 
-L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies. D’autres outils existent/existaient pour cette tache, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
+L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies. D’autres outils existent/existaient pour cette tache, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant. Oxford Nanopore propose également d’autres logiciels pour l’appel de base mais ceux-ci sont dédiés à la recherche algorithmique et il ne vaut mieux pas les utiliser en production.
 
 Dans ce TP, nous verrons comment lancer l’appel de base en ligne de commande et nous explorerons les fichiers générés lors de ce traitement.
 
@@ -283,6 +302,8 @@ Pour fonctionner, il est nécessaire de fournir à Guppy un fichier de configura
 Celui-ci peut être automatiquement déterminé par Guppy si on lui fournit à l’aide des arguments `--flowcell` et `--kit`.
 Cependant si cette solution est choisie le mode *haute précision (hac)* sera automatiquement sélectionné.
 Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*. Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
+
+* Ouvrez le logiciel `Terminal` sur l'ordinateur et connectez-vous via `ssh` au séquenceur
 
 * Pour connaître les fichiers de configuration qui seront automatiquement sélectionnés en fonction de la flowcell et du kit, il suffit de lancer la commande suivante :
 ```bash
@@ -295,7 +316,8 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy_server
 /usr/bin/guppy_basecall_client --port 5555 \
                                --server_file_load_timeout 600 \
                                --num_callers=1 \
-                               --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5 --fast5_out \
+                               --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5 \
+                               --fast5_out \
                                --save_path /data/appel_de_base_ligne_de_commande_guppy_server \
                                --compress_fastq \
                                --recursive \
@@ -310,7 +332,8 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy_server
 mkdir /data/appel_de_base_ligne_de_commande_guppy
 /usr/bin/guppy_basecaller --device auto \
                           --save_path /data/appel_de_base_ligne_de_commande_guppy \
-                          --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5 --fast5_out \
+                          --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5 \
+                          --fast5_out \
                           --compress_fastq \
                           --recursive \
                           --min_score 40.000000 \
@@ -322,11 +345,11 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 * Pour plus d’informations, notamment sur comment configurer l’alignement et le rognage des adaptateurs, il convient de se reporter à la [documentation de Guppy](https://community.nanoporetech.com/protocols/Guppy-protocol/v/gpb_2003_v1_revu_14dec2018) et à l’aide en ligne de commande (`guppy_basecaller --help`).
 
-**Question 1 : Quel est l’interet d’utiliser Guppy en mode serveur sur un MinION Mk1C ? et sur GridION ou PromethION ?**
+**Question 1 : Quel est l’intérêt d’utiliser Guppy en mode serveur sur un MinION Mk1C ? et sur GridION ou PromethION ?**
 
 **Question 2 : Quel est le désavantage d’utiliser Guppy en mode serveur ?**
 
-* À la fin de l’appel de base on obtient l’arborescence suivante
+* À la fin de l’appel de base on obtient l’arborescence suivante :
 ```
 .
 ├── barcode01
@@ -378,13 +401,13 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 **Exercice 6 : Ouvrez un des fichiers Fast5 produits lors du démultiplexage avec HDFView. Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage. Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
 
-* Sur l’ordinateur, allez dans le dossier *formation-minion/appel_de_base* sur le Bureau et ouvrez avec Firefox le fichier *sequencing_telemetry.js*
+* Sur l’ordinateur, allez dans le dossier *Formation-MinION-23-03-2021/appel_de_base* sur le Bureau et ouvrez avec Firefox le fichier *sequencing_telemetry.js*
 
 **Question 7 : Que contient ce fichier ? Avons-nous vu déjà une partie de ces informations quelque part ?**
 
 * Toujours dans le même dossier, ouvrez le fichier *sequencing_summary.txt* à l’aide d’un tableur (Microsoft Excel ou Libreoffice Calc), il s’agit d’un fichier texte tabulé (TSV).
 
-**Question 8 : Que contient ce fichier ? Avons-nous vu un fichier avec le même nom précédemment ? Quelles sont les différences entre ces fichiers ?**
+**Question 8 : Que contient ce fichier ? Avons-nous vu un fichier avec un nom identique précédemment ? Quelles sont les différences entre ces fichiers ?**
 
 **Question 9 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
 
@@ -399,13 +422,13 @@ Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits p
 ### Rapport de MinKNOW
 
 * À la fin d’un run, MinKNOW va sauver sous la forme d’un fichier PDF, les informations et les graphiques qu’il affichait au cours du run.
-* Sur l’ordinateur, allez dans le dossier *formation-minion/qc/MinKNOW* sur le Bureau et ouvrez le rapport PDF.
+* Sur l’ordinateur, allez dans le dossier *Formation-MinION-23-03-2021/qc/MinKNOW* sur le Bureau et ouvrez le rapport PDF.
 
 **Question 1 : Que manque-t-il dans le rapport produit par MinKNOW à la fin du run ?**
 
 ### PycoQC
 
-* PycoQC est un outil permettant de produire un rapport de contrôle qualité après démultiplexage. Il se base sur le contenu du fichier *sequencing_summary.txt*
+* PycoQC est un outil permettant de produire un rapport de contrôle qualité après démultiplexage. Il se base sur le contenu du fichier *sequencing_summary.txt*.
 
 * PycoQC est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 ```bash
@@ -420,7 +443,7 @@ pycoQC --summary_file sequencing_summary.txt \
        --json_outfile pycoQC-report.json
 ```
 
-* Sur l’ordinateur, allez dans le dossier *formation-minion/qc/PycoQC* sur le Bureau et ouvrez le rapport HTML.
+* Sur l’ordinateur, allez dans le dossier *Formation-MinION-23-03-2021/qc/PycoQC* sur le Bureau et ouvrez le rapport HTML.
 
 **Question 2 : Qu’apporte PycoQC par rapport produit par MinKNOW ?**
 
@@ -428,7 +451,7 @@ pycoQC --summary_file sequencing_summary.txt \
 
 * ToulliqQC est un autre outil permettant de produire un rapport de contrôle qualité après démultiplexage. Il est développé par la plateforme génomique de l’ENS. Il se base sur les contenus des fichiers *sequencing_summary.txt* et *sequencing_telemetry.js*.
 
-* ToulliqQC est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
+* ToulliqQC est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 
 ```bash
 pip install toulliqQC
@@ -437,18 +460,18 @@ pip install toulliqQC
 * Avec les données que nous avons générées, la commande à lancer pour produire le rapport est la suivante :
 
 ```bash
-toulliqQC --report-name  Formation_MinION \
+toulliqQC --report-name Formation_MinION \
           --telemetry-source sequencing_telemetry.js \
           --sequencing-summary-source sequencing_summary.txt \
           --barcodes BC11,BC12 \
           --output .
 ```
 
-* Sur l’ordinateur, allez dans le dossier *formation-minion/qc/ToulligQC* sur le Bureau et ouvrez le rapport HTML.
+* Sur l’ordinateur, allez dans le dossier *Formation-MinION-23-03-2021/qc/ToulligQC* sur le Bureau et ouvrez le rapport HTML.
 
 **Note :** Le rapport produit ici a été réalisé par la version beta 3 de ToulligQC 2.0. La version finale est attendue d’ici la fin du mois.
 
-**Question 3 : Qu’apporte ToulligQC par rapport produit par PycoQC ?**
+**Question 3 : Qu’apporte ToulligQC par rapport produit par PycoQC ?**
 
 **Question 4 : Que manque-t-il à ToulligQC ?**
 
