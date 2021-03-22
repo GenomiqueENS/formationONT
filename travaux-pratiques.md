@@ -558,7 +558,25 @@ toulliqQC --report-name  Formation_MinION \
 
 ### Nanocomp
 
-**TODO**
+NanoComp est un outil faisant partie d'une suite appelée NanoPack. Il permet de comparer des echantillons d'un même run via le fichier sequencing_summary.txt, des fichiers fastq, des fasta, des alignements via des fichiers bam.
+Il est donc utilisable à plein d'étapes de l'analyse se qui en fait un outil interessant. 
+La suite est toujours maintenue.
+NanoPack est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
+
+```bash
+pip install nanopack
+```
+
+* Avec les données que nous avons générées, la commande à lancer pour produire le rapport est la suivante :
+
+
+```bash
+NanoComp --summary /data/sequencing_summary.txt \
+ --barcoded \
+ -o /res/NanoComp_summary-plots
+
+```
+* Sur l’ordinateur, allez dans le dossier *formation-minion/qc/NanoComp* sur le Bureau et ouvrez le rapport HTML.
 
 
 <a name="biblio"></a>
