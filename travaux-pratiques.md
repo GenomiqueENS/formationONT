@@ -32,7 +32,7 @@
 * Principe de l'appel de base
 * [TP 6 : Relancer un appel de base avec MinKNOW](#basecalling-minknow)
 * [TP 7 : Appel de Base en ligne de commande](#basecalling-cmdline)
-* [TP 8: Contrôle Qualité post run](#qc)
+* [TP 8 : Contrôle Qualité post run](#qc)
 * Alignement
 * Conclusion
 
@@ -67,6 +67,10 @@ Liens utiles:
 <a name="connexion"></a>
 ## TP 1 : Connexion au MinION Mk1C en ligne de commande
 
+Le MinION Mk1C comme tous les séquenceur d'ONT disposant d'une unité de calcul, fonctionne sous un système Linux. Oxford Nanopore Technologies, laisse à ses utilisateurs un accès total au système d'exploitation des ses machine au travers de connexions de type SSH. SSH (Secure Shell) est à la fois un programme informatique et un protocole de communication sécurisé permetant l'accès à distance à des ordinateurs en ligne de commande.
+
+Dans ce TP, nous verrons comment se connecter via la commande `ssh` à un séquenceur et nous recupererons quelques information sur le système informatique pilotant le séquenceur.
+
 * Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) et se placer dans le dossier *formation-minion* sur le Bureau
 ```bash
 cd ~/desktop/formation-minion
@@ -74,12 +78,12 @@ cd ~/desktop/formation-minion
 
 * Connectez-vous au MinION en ligne de commande (le mot de passe est "**minit**")
 ```bash
-ssh minit@minion02.in-genomique.biologie.ens.fr
+ssh minit@minion0X.in-genomique.biologie.ens.fr
 ```
 
 **Question 1 : Sous quel système d’exploitation tourne le MinION Mk1C ?**
 
-**Question 2 : Quel type de processeur (CPU) utilise le MinION Mk1C ?**
+**Question 2 : Quel type de processeur (CPU) utilise le MinION Mk1C ? Quelle conséquence cela a-t-il ?**
 
 **Question 3 : Combien de paquets du système peuvent-ils être mis à jour ?**
 
@@ -123,8 +127,11 @@ df -h /data
 <a name="minknow-standalone-gui"></a>
 ## TP 2 : Connexion à distance gràce à MinKNOW Stand Alone GUI
 
-MinKNOW Stand Alone GUI permet de contrôler à distance un ou plusieurs séquenceurs. Cette application est disponible sur différents supports :
+L'écran du MinION est relativement petit et pas toujours pratique, c'est pour cette raison (et aussi car le MinIT ne disposait pas d'écran) que la société a developpé le logiciel *MinKNOW Stand Alone GUI* qui permet de contrôler à distance un ou plusieurs séquenceurs.
 
+Dans ce TP, nous verrons comment installer ce logiciel sur un ordinateur de bureau (un iMac) et le configurer pour prende le controle d'un séquenceur.
+
+L'application *MinKNOW Stand Alone GUI* est disponible sur différents supports :
 * [Windows et macOS](https://community.nanoporetech.com/downloads)
 * [Android](https://play.google.com/store/apps/details?id=com.nanoporetech.minknowui)
 * [IPhone et iPad](https://apps.apple.com/fr/app/minknow/id1504645283)
