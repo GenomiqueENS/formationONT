@@ -264,6 +264,8 @@ Le nombre de pores disponibles doit être supérieur à :
 - 800 dans le cas d’une flowcell MinION
 Les flowcells sont remplacées si ce n’est pas le cas !
 
+**Exercice 3 : Revenez au menu précedent et lancez le Flowcell Check**
+
 
 * Paramétrage et lancement d’un run 
 
@@ -279,12 +281,15 @@ Définissez votre expérience et passez à la selection du kit (N’oubliez pas 
 
 Dans la section permettant le choix du kit de séquençage à utiliser, tous les kits sont disponibles. Il est possible de les filtrer selon ce que l’on séquence, selon les banques faites…
 Choisissez ce qui vous intéresse. A la plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
-Il est important de ne pas se tromper car chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
+Il est important de ne pas se tromper. Chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
 
 Passez au choix des options de runs.
 
-Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps. Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
-Le voltage initial de la flowcell peut être modifié mais il vaut mieux être expert pour cela. Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitoire les canaux en permanence pour une meilleure performance de ceux-ci. Le temps entre chaque changement des canaux est aussi paramétrable. Vous pouvez également sauvegarder un nombre de pore pour les faire intervenir dans la durée du run.
+Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps. 
+Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
+Le voltage initial de la flowcell peut être modifié mais il vaut mieux être expert pour cela. 
+Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer les canaux en permanence pour une meilleure performance de ceux-ci. 
+Le temps entre chaque changement des canaux est aussi paramétrable. Vous pouvez également sauvegarder un nombre de pore pour les faire intervenir dans la durée du run.
 Concrètement, nous ne changeons jamais ces paramètres.
 
 
