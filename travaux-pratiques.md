@@ -320,7 +320,7 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 * Remarquera que cette ligne de commande précédente est plus lente (14m30s) que la précédente (7m30) car les paramètres de parallélisation n’ont pas été optimisés.
 
-* Pour plus d’informations, notamment sur comment configurer l’alignement et le rognage des adaptateurs, il convient de se reporter à la [https://community.nanoporetech.com/protocols/Guppy-protocol/v/gpb_2003_v1_revu_14dec2018](documentation de Guppy) et à l’aide en ligne de commande (`guppy_basecaller --help`).
+* Pour plus d’informations, notamment sur comment configurer l’alignement et le rognage des adaptateurs, il convient de se reporter à la [documentation de Guppy](https://community.nanoporetech.com/protocols/Guppy-protocol/v/gpb_2003_v1_revu_14dec2018) et à l’aide en ligne de commande (`guppy_basecaller --help`).
 
 **Question 1 : Quel est l’interet d’utiliser Guppy en mode serveur sur un MinION Mk1C ? et sur GridION ou PromethION ?**
 
