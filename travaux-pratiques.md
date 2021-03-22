@@ -1,4 +1,5 @@
-# Formation MinION Session Bioinformatique 23 mars 2021
+<a href="https://genomique.biologie.ens.fr/"><img src="https://www.outils.genomique.biologie.ens.fr/aozan/images/logo_genomicpariscentre-90pxh.png" align="left" height="90" width="90"> </a>
+# Formation MinION Session Bioinformatique<br/>23 mars 2021
 
 ## TODO préparation TP
 * Remettre le mot de passe du compte minit des séquenceur à 'minit'
