@@ -240,8 +240,8 @@ Choisissez le séquenceur sur lequel vous travaillez. Placez une flowcell dans l
 
 
 Le menu accessible sur la gauche de l'application vous propose 5 options : Start, Sequencing overview, Experiments, System messages, Host settings.
+Parcourez les Host settings.
 
-Parcourez les Host settings :
 **Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ou du MinIT ?
 Où verifier que MinKNOW est bien à jour ?**
 
