@@ -46,6 +46,8 @@ Lors de ce TP, nous utilisons deux séquenceurs MinION :
 * MinION Mk1B couplé à un MinIT, son nom de domaine est `minion01.in-genomique.biologie.ens.fr`
 * MinION Mk1C son nom de domaine est `minion02.in-genomique.biologie.ens.fr`
 
+Toutes les informations et procedures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
+
 Les données utilisées lors de ce TP sont celles qui ont été produites lors de la précédente session expérimentale de cette formation.
 
 
@@ -55,6 +57,41 @@ Les données utilisées lors de ce TP sont celles qui ont été produites lors d
 
 <a name="config"></a>
 ## Démo : Mise en service d’un MinION Mk1C
+
+La version du système préinstallé sur les MinION Mk1C est (etait ?) bogué. La configuration initiale du réseau est particulièrement délicate à mettre en place. Cependant une fois celle-ci mise en place et la mise à jour du système effectuée, l’environnement logiciel du séquenceur s’avère plutôt stable.
+
+Dans cette partie, vous trouverez la procédure à suivre pour mettre en service un MinION Mk1C.
+
+Pour réaliser cette opération, il est nécessaire de disposer :
+* Un cable réseau
+* Un ordinateur avec une carte Wifi sous Linux, macOS ou windows 10 (version septembre 2017 minimum)
+* Un séquenceur MinION Mk1C
+
+La procédure à suivre est la suivante
+1. Branchement de l’appareil au réseau électrique. Attention, les prises électriques mâles des appareils ONT sont parfois capricieuses, une multiprise peut être nécessaire pour brancher correctement l’appareil.
+2. On allume l’appareil
+3. À l’aide d’ordinateur doté une carte Wifi, connectez-vous au Hotspot *NOM_DU_HOTSPOT* créé par le séquenceur. Le mot de passe de ce Hotspot est *MOT_DE_PASSE*
+4. Connectez-vous en SSH au séquenceur
+```bash
+ssh minit@192.168.0.1
+```
+5. Option 1 : configuration dynamique (DHCP) de la connexion Ethernet. Pour cela, on utilise la commande suivante :
+```bash
+sudo nmcli c down static
+sudo nmcli c up dhcp
+```
+6. Option 2 : configuration statique de la connexion Ethernet. Pour cela, on utilise la commande suivante :
+```bash
+sudo nmcli c edit static
+sudo nmcli c down dhcp
+sudo nmcli c up static
+```
+7. Mise à jour du séquenceur
+```bash
+apt update
+apt dist-upgrade
+shutdown --reboot now
+```
 
 
 <a name="connexion"></a>
