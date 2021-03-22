@@ -35,9 +35,10 @@
 * [TP 8 : Contrôle Qualité post run](#qc)
 * Alignement
 * Conclusion
+* [Bibliographie](#biblio)
 
 
-### Informations utiles
+#### Informations utiles
 
 Lors de ce TP, nous utilisons deux séquenceurs MinION :
 
@@ -46,16 +47,7 @@ Lors de ce TP, nous utilisons deux séquenceurs MinION :
 
 Les données utilisées lors de ce TP sont celles qui ont été produites lors de la précédente session expérimentale de cette formation.
 
-Liens utiles:
 
-* [Téléchargement des outils ONT](https://community.nanoporetech.com/downloads)
-* [Notes de version de MinKNOW pour le MinION Mk1C](https://community.nanoporetech.com/downloads/minion-mk1c-software/release_notes)
-* [Documentation de MinKNOW pour le MinION Mk1C](https://community.nanoporetech.com/protocols/minion-mk1c-protocol/v/mkc_2005_v1_revm_27nov2019/updating)
-* [Documentation de Guppy](https://community.nanoporetech.com/protocols/Guppy-protocol/v/gpb_2003_v1_revu_14dec2018)
-* [Documentation de MiniMap2](https://github.com/lh3/minimap2)
-* [Documentation de PycoQC](https://github.com/tleonardi/pycoQC)
-* [Documentation de ToulliqQC](https://github.com/GenomicParisCentre/toulligQC)
-* [Documentation de Nanocomp](https://github.com/wdecoster/nanocomp)
 
 **Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT. Il convient évidemment de les changer lors de mise en production d’un séquenceur.
 
@@ -452,3 +444,15 @@ toulliqQC --report-name  Formation_MinION \
 ### Nanocomp
 
 ** TOTO **
+
+
+<a name="biblio"></a>
+## Bibliographie
+* [Téléchargement des outils ONT](https://community.nanoporetech.com/downloads)
+* [Notes de version de MinKNOW pour le MinION Mk1C](https://community.nanoporetech.com/downloads/minion-mk1c-software/release_notes)
+* [Documentation de MinKNOW pour le MinION Mk1C](https://community.nanoporetech.com/protocols/minion-mk1c-protocol/v/mkc_2005_v1_revm_27nov2019/updating)
+* [Documentation de Guppy](https://community.nanoporetech.com/protocols/Guppy-protocol/v/gpb_2003_v1_revu_14dec2018)
+* [Documentation de MiniMap2](https://github.com/lh3/minimap2)
+* [Documentation de PycoQC](https://github.com/tleonardi/pycoQC)
+* [Documentation de ToulliqQC](https://github.com/GenomicParisCentre/toulligQC)
+* [Documentation de Nanocomp](https://github.com/wdecoster/nanocomp)
