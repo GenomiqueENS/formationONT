@@ -307,8 +307,8 @@ Trois modes de basecalling sont possibles:
 
 Passons aux code-barres:
 Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres: 
-- Suppression des code barres aux extrémités des données basecallées
-- Recherche des code barres à chaque extrémité de la lecture pour classifier la lecture.
+- Suppression des code-barres aux extrémités des données basecallées
+- Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture.
 Si un seul des code-barres est trouvé, la lecture est perdue
 - Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé 
 
