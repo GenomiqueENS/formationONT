@@ -1,23 +1,6 @@
 <a href="https://genomique.biologie.ens.fr/"><img src="https://www.outils.genomique.biologie.ens.fr/aozan/images/logo_genomicpariscentre-90pxh.png" align="left"> </a>
 # Formation MinION Session Bioinformatique<br/>23 mars 2021
 
-## TODO préparation TP
-* Remettre le mot de passe du compte minit des séquenceur à 'minit'
-* Supprimer les vieux runs sur les séquenceurs
-* Supprimer MinKNOW UI des macs
-* Supprimer la configuration de MinKNOW ~/Library/Application Support/MinKNOW
-* Vérifier le tutoriel de mise en service sur le MinIT
-* Installer la dernière version de LibreOffice 7.1.1
-* Trouver 2 clés USB
-* Prévoir un bloc note pour y noter les questions et ce qui ne fonctionne pas
-
-* Faire un fichier FASTA avec 1 chromosome
-* Faire un fichier BED avec 1 chromosome
-
-* Lancer l’appel de base sur les données
-* Publier une version ToulligQC b3
-
-
 
 ## Sommaire
 
@@ -49,8 +32,6 @@ Lors de ce TP, nous utilisons deux séquenceurs MinION :
 Toutes les informations et procedures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
 
 Les données utilisées lors de ce TP sont celles qui ont été produites lors de la précédente session expérimentale de cette formation.
-
-
 
 **Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT. Il convient évidemment de les changer lors de mise en production d’un séquenceur.
 
@@ -117,17 +98,16 @@ ssh minit@minion0X.in-genomique.biologie.ens.fr
 
 **Question 3 : Combien de paquets du système peuvent-ils être mis à jour ?**
 
-
 * Une fois connecté sur le MinION, nous disposons d’un contrôle complet sur le fonctionnement de l’ordinateur pilotant le sequenceur. On peut ainsi voir en temps réel les programmes en cours d’exécution sur à l’aide de la commande `htop` :
 ```
 htop
 ```
+
 **Question 4 : Combien de cœur possède le processeur (CPU) ?**
 
 **Question 5 : Rechercher MinKNOW dans la liste des processus. On s’aperçoit que MinKNOW que MinKNOW est composé d’au moins deux parties (le cœur du logiciel et l’interface graphique)**
 
 **Question 6 : Quel est le processus qui utilise le plus le processeur ? À quoi sert-il ?**
-
 
 * On constate que le processus `guppy_basecall_server` consomme beaucoup de temps processeur. Appuyez sur la touche **q** pour quitter
 
@@ -139,7 +119,6 @@ ls -l
 
 **Question 7 : Quels sont les dossiers correspondants à des runs ?**
 
-
 * L’espace disponible sur cette partition est accessible à l’aide de la commande `df`:
 ```bash
 df -h /data
@@ -148,10 +127,6 @@ df -h /data
 **Question 8 : Combien d’espace disponible reste-t-il pour stocker de nouveaux runs ?**
 
 * Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez. Il convient donc d’être extrêmement prudent, car vous n’aurez pas de message d’avertissements (par exemple lorsque vous supprimer des données avec la commande `rm`).
-
-
-
-
 
 
 <a name="minknow-standalone-gui"></a>
@@ -181,6 +156,7 @@ Pour le moment, il n’existe de pas de version pour Linux.
     * Cliquez sur l’hôte crée pour pouvoir controler à distance le sequenceur
 
 **Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/MinKNOW* (*~* correspond au chemin de votre dossier personnel). Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relancer l’application.
+
 
 <a name="transfert"></a>
 ## TP 3 : Transfert des données
@@ -213,7 +189,6 @@ Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION 
 ### Partage SMB
 
 Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide de SMB.
-
 
 **Note :** Il faut noter qu’il est possible de faire l’inverse et de monter un partage réseau (SMB ou NFS) depuis l’interface de MinKNOW. Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*.
 
@@ -282,21 +257,20 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 * Sélectionnez un des élements du fichier et allez dans le sous-dossier *Raw* et double-cliquez sur le « fichier » *Signal*
 * Une fenêtre apparait avec un tableau contenant une seule colonne. Il s’agit des valeurs brutes du séquençage
 
-**Question 2 : Combien y a-t-il de valeurs et quel est l’ordre de grandeur de celle-ci ? **
+**Question 2 : Combien y a-t-il de valeurs et quel est l’ordre de grandeur de celle-ci ?**
 
 * Sélectionnez la première et seule colonne et appuyez ensuite le bouton en haut à gauche pour visualiser le signal. Une fenêtre avec les options de visualisation apparait, appuyez simplement sur *OK*
 
-**Question 3 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas) **
+**Question 3 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas)**
 
 **Question 4 : Dans les sous dossiers d'une lecture, retrouvez le numéro de pore, le numéro de la flowcell et la date de début de run**
-
 
 
 <a name="basecalling-minknow"></a>
 ## TP 6: Relancer un appel de base avec MinKNOW
 
-
 **TODO**
+
 
 <a name="basecalling-cmdline"></a>
 ## TP 7 : Appel de Base en ligne de commande
@@ -352,7 +326,6 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 **Question 2 : Quel est le désavantage d’utiliser Guppy en mode serveur ?**
 
-
 * À la fin de l’appel de base on obtient l’arborescence suivante
 ```
 .
@@ -397,23 +370,23 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
     └── FAO31058_ec55bcd2_5.fast5
 ```
 
-** Question 3 : Pourquoi avons-nous plusieurs fichiers FASTQ par code-barre ? Que vaut-il mieux faire avant de réaliser analyse secondaire ?**
+**Question 3 : Pourquoi avons-nous plusieurs fichiers FASTQ par code-barre ? Que vaut-il mieux faire avant de réaliser analyse secondaire ?**
 
-** Question 4 : Deux échantillons ont été déposés sur la flowcell lors du run. Pourquoi avons-nous une 12 dossiers pour des codes-barres lieu de 2 ?**
+**Question 4 : Deux échantillons ont été déposés sur la flowcell lors du run. Pourquoi avons-nous une 12 dossiers pour des codes-barres lieu de 2 ?**
 
-** Question 5 : À quoi correspond le dossier les fichiers FASTQ du dossier *unclassified* ?**
+**Question 5 : À quoi correspond le dossier les fichiers FASTQ du dossier *unclassified* ?**
 
-** Exercice 6 : Ouvrrez un des fichier Fast5 produits lors du démultiplexage avec HDFView. Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage. Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
+**Exercice 6 : Ouvrrez un des fichier Fast5 produits lors du démultiplexage avec HDFView. Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage. Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
 
 * Sur l’ordinateur, allez dans le dossier *formation-minion/appel_de_base* sur le Bureau et ouvrez avec Firefox le fichier *sequencing_telemetry.js*
 
-** Question 7 : Que contient ce fichier ? Avons-nous vu déjà une partie de ces informations quelque part ?**
+**Question 7 : Que contient ce fichier ? Avons-nous vu déjà une partie de ces informations quelque part ?**
 
 * Toujours dans le même dossier, ouvrez le fichier *sequencing_summary.txt* à l’aide d’un tableur (Microsoft Excel ou Libreoffice Calc), il s’agit d’un fichier texte tabulé (TSV).
 
-** Question 8 : Que contient ce fichier ? Avons-nous vu un fichier avec le même nom précédemment ? Quelles sont les différences entre ces fichiers ?**
+**Question 8 : Que contient ce fichier ? Avons-nous vu un fichier avec le même nom précédemment ? Quelles sont les différences entre ces fichiers ?**
 
-** Question 9 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
+**Question 9 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
 
 
 <a name="qc"></a>
@@ -421,16 +394,14 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différent outil et nous en comparerons les avantages et les inconvenients.
 
-** Note : ** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
-
+**Note : ** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
 
 ### Rapport de MinKNOW
 
 * À la fin d’un run, MinKNOW va sauver sous la forme d’un fichier PDF, les informations et les graphiques qu’il affichait au cours du run.
 * Sur l’ordinateur, allez dans le dossier *formation-minion/qc/MinKNOW* sur le Bureau et ouvrez le rapport PDF.
 
-** Question 1 : Que manque-t-il dans le rapport produit par MinKNOW à la fin du run ? **
-
+**Question 1 : Que manque-t-il dans le rapport produit par MinKNOW à la fin du run ?**
 
 ### PycoQC
 
@@ -451,8 +422,7 @@ pycoQC --summary_file sequencing_summary.txt \
 
 * Sur l’ordinateur, allez dans le dossier *formation-minion/qc/PycoQC* sur le Bureau et ouvrez le rapport HTML.
 
-** Question 2 : Qu’apporte PycoQC par rapport produit par MinKNOW ? **
-
+**Question 2 : Qu’apporte PycoQC par rapport produit par MinKNOW ?**
 
 ### ToulliqQC
 
@@ -478,13 +448,13 @@ toulliqQC --report-name  Formation_MinION \
 
 **Note :** Le rapport produit ici a été réalisé par la version beta 3 de ToulligQC 2.0. La version finale est attendue d’ici la fin du mois.
 
-** Question 3 : Qu’apporte ToulligQC par rapport produit par PycoQC ? **
+**Question 3 : Qu’apporte ToulligQC par rapport produit par PycoQC ?**
 
-** Question 4 : Que manque-t-il à ToulligQC ? **
+**Question 4 : Que manque-t-il à ToulligQC ?**
 
 ### Nanocomp
 
-** TOTO **
+**TODO**
 
 
 <a name="biblio"></a>
