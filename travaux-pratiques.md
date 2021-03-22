@@ -333,23 +333,23 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
     └── FAO31058_ec55bcd2_5.fast5
 ```
 
-** Question 3 : Pourquoi avons-nous plusieurs fichiers FASTQ par code-barre ? Que vaut-il mieux faire avant de réaliser analyse secondaire ?**
+**Question 3 : Pourquoi avons-nous plusieurs fichiers FASTQ par code-barre ? Que vaut-il mieux faire avant de réaliser analyse secondaire ?**
 
-** Question 4 : Deux échantillons ont été déposés sur la flowcell lors du run. Pourquoi avons-nous une 12 dossiers pour des codes-barres lieu de 2 ?**
+**Question 4 : Deux échantillons ont été déposés sur la flowcell lors du run. Pourquoi avons-nous une 12 dossiers pour des codes-barres lieu de 2 ?**
 
-** Question 5 : À quoi correspond le dossier les fichiers FASTQ du dossier *unclassified* ?**
+**Question 5 : À quoi correspond le dossier les fichiers FASTQ du dossier *unclassified* ?**
 
-** Exercice 6 : Ouvrrez un des fichier Fast5 produits lors du démultiplexage avec HDFView. Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage. Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
+**Exercice 6 : Ouvrrez un des fichier Fast5 produits lors du démultiplexage avec HDFView. Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage. Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
 
 * Sur l’ordinateur, allez dans le dossier *formation-minion/appel_de_base* sur le Bureau et ouvrez avec Firefox le fichier *sequencing_telemetry.js*
 
-** Question 7 : Que contient ce fichier ? Avons-nous vu déjà une partie de ces informations quelque part ?**
+**Question 7 : Que contient ce fichier ? Avons-nous vu déjà une partie de ces informations quelque part ?**
 
 * Toujours dans le même dossier, ouvrez le fichier *sequencing_summary.txt* à l’aide d’un tableur (Microsoft Excel ou Libreoffice Calc), il s’agit d’un fichier texte tabulé (TSV).
 
-** Question 8 : Que contient ce fichier ? Avons-nous vu un fichier avec le même nom précédemment ? Quelles sont les différences entre ces fichiers ?**
+**Question 8 : Que contient ce fichier ? Avons-nous vu un fichier avec le même nom précédemment ? Quelles sont les différences entre ces fichiers ?**
 
-** Question 9 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
+**Question 9 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
 
 
 <a name="qc"></a>
@@ -357,14 +357,14 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différent outil et nous en comparerons les avantages et les inconvenients.
 
-** Note : ** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
+**Note : ** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
 
 ### Rapport de MinKNOW
 
 * À la fin d’un run, MinKNOW va sauver sous la forme d’un fichier PDF, les informations et les graphiques qu’il affichait au cours du run.
 * Sur l’ordinateur, allez dans le dossier *formation-minion/qc/MinKNOW* sur le Bureau et ouvrez le rapport PDF.
 
-** Question 1 : Que manque-t-il dans le rapport produit par MinKNOW à la fin du run ? **
+**Question 1 : Que manque-t-il dans le rapport produit par MinKNOW à la fin du run ?**
 
 ### PycoQC
 
@@ -385,7 +385,7 @@ pycoQC --summary_file sequencing_summary.txt \
 
 * Sur l’ordinateur, allez dans le dossier *formation-minion/qc/PycoQC* sur le Bureau et ouvrez le rapport HTML.
 
-** Question 2 : Qu’apporte PycoQC par rapport produit par MinKNOW ? **
+**Question 2 : Qu’apporte PycoQC par rapport produit par MinKNOW ?**
 
 ### ToulliqQC
 
@@ -411,13 +411,13 @@ toulliqQC --report-name  Formation_MinION \
 
 **Note :** Le rapport produit ici a été réalisé par la version beta 3 de ToulligQC 2.0. La version finale est attendue d’ici la fin du mois.
 
-** Question 3 : Qu’apporte ToulligQC par rapport produit par PycoQC ? **
+**Question 3 : Qu’apporte ToulligQC par rapport produit par PycoQC ?**
 
-** Question 4 : Que manque-t-il à ToulligQC ? **
+**Question 4 : Que manque-t-il à ToulligQC ?**
 
 ### Nanocomp
 
-** TODO **
+**TODO**
 
 
 <a name="biblio"></a>
