@@ -1,4 +1,4 @@
-<a href="https://genomique.biologie.ens.fr/"><img src="https://www.outils.genomique.biologie.ens.fr/aozan/images/logo_genomicpariscentre-90pxh.png" align="left" height="80" width="80"> </a>
+<a href="https://genomique.biologie.ens.fr/"><img src="https://www.outils.genomique.biologie.ens.fr/aozan/images/logo_genomicpariscentre-90pxh.png" align="left"> </a>
 # Formation MinION Session Bioinformatique<br/>23 mars 2021
 
 ## TODO préparation TP
