@@ -155,14 +155,14 @@ Pour le moment, il n’existe de pas de version pour Linux.
 <a name="transfert"></a>
 ## TP 3 : Transfert des données
 
-Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
+Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquencage dans le stockage interne de l'appareil. Il est donc nécessaire de pouvoir transferer des données depuis et vers le séquenceur. Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
 * Disque dur ou clé USB
 * micro SD-Card
 * Partage SMB
 * Partage NFS
 * Tout autre méthode de partage réseau que permet Linux en ligne de commande (NFS, SSH, SFTP, FTP…)
 
-Nous allons nous concentrer dans ce TP sur 3 méthodes : Clé USB, Partage SMB et SFTP
+Dans ce TP, nous allons nous concentrer dans ce TP sur 3 méthodes, deux en utilisant MinKNOW (Clé USB et Partage SMB) et une en ligne de commande (SFTP).
 
 ### Support Physique
 
@@ -230,6 +230,8 @@ sftp -rp TOTO minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO-copie .
 
 Les fichiers Fast5 sont les fichiers contenant les données brutes du séquençage. Ces fichiers sont en fait des fichiers au format [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) qui utilise une structure arborescente propre à Nanopore.
 
+Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux comprendre le principe le l'appel de base que nous aborderons dans le prochain TP.
+
 Pour visualiser le contenu de ces fichiers, il est nécessaire d’utiliser des outils spécifiques. Dans le cadre de TP, nous utiliserons l’outil HDFView qui permet de visualiser des fichiers au format HDF5.
 
 * Installation de HDFView
@@ -266,7 +268,14 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 <a name="basecalling-cmdline"></a>
 ## TP 7 : Appel de Base en ligne de commande
 
-* L’appel de base est réalisé à l’aide du logiciel Guppy développé par ONT. Pour fonctionner, il est nécessaire de lui fournir un fichier de configuration décrivant le modèle à utiliser pour effectuer l’appel de base. Celui-ci peut être automatiquement déterminé par Guppy si on lui fournit à l’aide des arguments `--flowcell` et `--kit`. Cependant si cette solution est choisie le mode *haute précision (hac)* sera automatiquement selectionné. Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*. Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
+L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies. D'autres outils exitent/existaient pour cette tache mais il est recommandé d'utiliser celui d'ONT qui certainement aujourd'hui le plus performant. 
+
+Dans ce TP, nous verrons comment lancer l'appel de base en ligne de commande et nous explorerons les fichiers générés lors de ce traitement.
+
+Pour fonctionner, il est nécessaire de fournir à Guppy un fichier de configuration décrivant le modèle à utiliser pour effectuer l’appel de base.
+Celui-ci peut être automatiquement déterminé par Guppy si on lui fournit à l’aide des arguments `--flowcell` et `--kit`.
+Cependant si cette solution est choisie le mode *haute précision (hac)* sera automatiquement selectionné.
+Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*. Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
 
 * Pour connaitre les fichiers de configuration qui seront automatiquement sélectionnés en fonction de la flowcell et du kit, il suffit de lancer la commande suivante :
 ```bash
@@ -376,6 +385,8 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 <a name="qc"></a>
 ## TP 8  Contrôle Qualité post run
+
+Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différent outil et nous en comparerons les avantages et les inconvenients.
 
 ** Note : ** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
 
