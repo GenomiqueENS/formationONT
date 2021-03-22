@@ -292,6 +292,26 @@ Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer le
 Le temps entre chaque changement des canaux est aussi paramétrable. Vous pouvez également sauvegarder un nombre de pore pour les faire intervenir dans la durée du run.
 Concrètement, nous ne changeons jamais ces paramètres.
 
+Passez à la configuration du basecalling.
+
+ 
+> Configuration de l’appel de base
+L’appel de base peut être réalisé à la volée ou après le run. Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
+Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soient la machine choisie pour réaliser l’appel de base.
+
+
+Trois modes de basecalling sont possibles:
+- Fast : Pratique pour le diagnostique parce rapide
+- High-accuracy : Plus long mais moins d’erreur
+- Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
+
+> Configuration du traitement des barcodes
+Dans le  cas d’utilisation de code barres : 
+- Suppression des code barres aux extrémités des données basecallées
+- Recherche des code barres à chaque extrémité de la lecture pour classifier la lecture.
+Si un seul des code barres est trouvé, la lecture est perdue
+- Recherche de code barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé 
+
 
 
 
