@@ -1,23 +1,6 @@
 <a href="https://genomique.biologie.ens.fr/"><img src="https://www.outils.genomique.biologie.ens.fr/aozan/images/logo_genomicpariscentre-90pxh.png" align="left"> </a>
 # Formation MinION Session Bioinformatique<br/>23 mars 2021
 
-## TODO préparation TP
-* Remettre le mot de passe du compte minit des séquenceur à 'minit'
-* Supprimer les vieux runs sur les séquenceurs
-* Supprimer MinKNOW UI des macs
-* Supprimer la configuration de MinKNOW ~/Library/Application Support/MinKNOW
-* Vérifier le tutoriel de mise en service sur le MinIT
-* Installer la dernière version de LibreOffice 7.1.1
-* Trouver 2 clés USB
-* Prévoir un bloc note pour y noter les questions et ce qui ne fonctionne pas
-
-* Faire un fichier FASTA avec 1 chromosome
-* Faire un fichier BED avec 1 chromosome
-
-* Lancer l’appel de base sur les données
-* Publier une version ToulligQC b3
-
-
 
 ## Sommaire
 
@@ -47,8 +30,6 @@ Lors de ce TP, nous utilisons deux séquenceurs MinION :
 * MinION Mk1C son nom de domaine est `minion02.in-genomique.biologie.ens.fr`
 
 Les données utilisées lors de ce TP sont celles qui ont été produites lors de la précédente session expérimentale de cette formation.
-
-
 
 **Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT. Il convient évidemment de les changer lors de mise en production d’un séquenceur.
 
@@ -80,17 +61,16 @@ ssh minit@minion0X.in-genomique.biologie.ens.fr
 
 **Question 3 : Combien de paquets du système peuvent-ils être mis à jour ?**
 
-
 * Une fois connecté sur le MinION, nous disposons d’un contrôle complet sur le fonctionnement de l’ordinateur pilotant le sequenceur. On peut ainsi voir en temps réel les programmes en cours d’exécution sur à l’aide de la commande `htop` :
 ```
 htop
 ```
+
 **Question 4 : Combien de cœur possède le processeur (CPU) ?**
 
 **Question 5 : Rechercher MinKNOW dans la liste des processus. On s’aperçoit que MinKNOW que MinKNOW est composé d’au moins deux parties (le cœur du logiciel et l’interface graphique)**
 
 **Question 6 : Quel est le processus qui utilise le plus le processeur ? À quoi sert-il ?**
-
 
 * On constate que le processus `guppy_basecall_server` consomme beaucoup de temps processeur. Appuyez sur la touche **q** pour quitter
 
@@ -102,7 +82,6 @@ ls -l
 
 **Question 7 : Quels sont les dossiers correspondants à des runs ?**
 
-
 * L’espace disponible sur cette partition est accessible à l’aide de la commande `df`:
 ```bash
 df -h /data
@@ -111,10 +90,6 @@ df -h /data
 **Question 8 : Combien d’espace disponible reste-t-il pour stocker de nouveaux runs ?**
 
 * Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez. Il convient donc d’être extrêmement prudent, car vous n’aurez pas de message d’avertissements (par exemple lorsque vous supprimer des données avec la commande `rm`).
-
-
-
-
 
 
 <a name="minknow-standalone-gui"></a>
@@ -144,6 +119,7 @@ Pour le moment, il n’existe de pas de version pour Linux.
     * Cliquez sur l’hôte crée pour pouvoir controler à distance le sequenceur
 
 **Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/MinKNOW* (*~* correspond au chemin de votre dossier personnel). Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relancer l’application.
+
 
 <a name="transfert"></a>
 ## TP 3 : Transfert des données
@@ -176,7 +152,6 @@ Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION 
 ### Partage SMB
 
 Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide de SMB.
-
 
 **Note :** Il faut noter qu’il est possible de faire l’inverse et de monter un partage réseau (SMB ou NFS) depuis l’interface de MinKNOW. Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*.
 
@@ -254,12 +229,11 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 **Question 4 : Dans les sous dossiers d'une lecture, retrouvez le numéro de pore, le numéro de la flowcell et la date de début de run**
 
 
-
 <a name="basecalling-minknow"></a>
 ## TP 6: Relancer un appel de base avec MinKNOW
 
-
 **TODO**
+
 
 <a name="basecalling-cmdline"></a>
 ## TP 7 : Appel de Base en ligne de commande
@@ -314,7 +288,6 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 **Question 1 : Quel est l’interet d’utiliser Guppy en mode serveur sur un MinION Mk1C ? et sur GridION ou PromethION ?**
 
 **Question 2 : Quel est le désavantage d’utiliser Guppy en mode serveur ?**
-
 
 * À la fin de l’appel de base on obtient l’arborescence suivante
 ```
@@ -386,14 +359,12 @@ Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits p
 
 ** Note : ** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
 
-
 ### Rapport de MinKNOW
 
 * À la fin d’un run, MinKNOW va sauver sous la forme d’un fichier PDF, les informations et les graphiques qu’il affichait au cours du run.
 * Sur l’ordinateur, allez dans le dossier *formation-minion/qc/MinKNOW* sur le Bureau et ouvrez le rapport PDF.
 
 ** Question 1 : Que manque-t-il dans le rapport produit par MinKNOW à la fin du run ? **
-
 
 ### PycoQC
 
@@ -415,7 +386,6 @@ pycoQC --summary_file sequencing_summary.txt \
 * Sur l’ordinateur, allez dans le dossier *formation-minion/qc/PycoQC* sur le Bureau et ouvrez le rapport HTML.
 
 ** Question 2 : Qu’apporte PycoQC par rapport produit par MinKNOW ? **
-
 
 ### ToulliqQC
 
@@ -447,7 +417,7 @@ toulliqQC --report-name  Formation_MinION \
 
 ### Nanocomp
 
-** TOTO **
+** TODO **
 
 
 <a name="biblio"></a>
