@@ -230,7 +230,55 @@ sftp -rp TOTO minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO-copie .
 <a name="minknow"></a>
 ## TP 4 : Interface de MinKNOW et lancement d'un run
 
-**TODO**
+Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C. Cette interface permet l'accès à un certain nombre de paramètres, le lancement des runs, du basecalling, de l'alignements des lectures obtenues...etc
+
+
+* Utilisation du MinION Mk1C via son interface graphique
+
+Après lancement de l'application vous avez accès aux séquenceurs qui lui sont accessibles. Aujourd'hui, vous en voyez deux, minion01 (le minion via le MinIT) et minion02 (le Mk1C).
+Choisissez le séquenceur sur lequel vous travaillez. Placez une flowcell dans l'emplacement prévu. Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interface.
+
+
+Le menu accessible sur la gauche de l'application vous propose 5 options : Start, Sequencing overview, Experiments, System messages, Host settings.
+
+Parcourez les Host settings :
+**Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ou du MinIT ?
+Où verifier que MinKNOW est bien à jour ?**
+
+Ce sous menu vous permet de 
+- savoir l’espace qu’il vous reste sur vos disques
+- naviguer dans vos résultats, run par run
+- effectuer la mise à jour du système d’exploitation de votre appareil 
+- mettre à jour MinKNOW
+
+
+* Vérification initiale du séquenceur ou de la flowcell
+
+A la réception du séquenceur vous devez verifier son état. Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l'appareil. Il s’agit de la flowcell de configuration (CTC). Insérez là dans l'emplacement de la flowcell et cliquez sur start. En choisissant la section Hardware check, vois pouvez lancer la vérification de votre matériel. 
+
+**Exercice 2 : Lancez le Hardware Check**
+
+Avant chaque lancement de run, vous devez aussi vous assurer que la flowcell rempli les conditions d’utilisation: il est nécessaire de vérifier le nombre de pores disponibles sur la flowcell avant de charger les échantillons.
+Le nombre de pores disponibles doit être supérieur à : 
+- 50 dans le cas d’une flowcell Flongle
+- 800 dans le cas d’une flowcell MinION
+Les flowcells sont remplacées si ce n’est pas le cas !
+
+
+* Paramétrage et lancement d’un run 
+
+Il faut définir 
+- Votre expérience 
+- Le kit utilisé
+- Le type de basecalling (choix du modèle de réseau de neurone) s’il est fait à la volée
+- Les format de sortie de vos données
+- L’alignement à la volée ou non et par conséquent, les séquences références
+
+Commençons !
+
+
+
+
 
 
 <a name="fast5"></a>
