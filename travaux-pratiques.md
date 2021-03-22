@@ -26,10 +26,10 @@
 
 Lors de ce TP, nous utilisons deux séquenceurs MinION :
 
-* MinION Mk1B couplé à un MinIT, son nom de domaine est `minion01.in-genomique.biologie.ens.fr`
-* MinION Mk1C son nom de domaine est `minion02.in-genomique.biologie.ens.fr`
+* Un MinION Mk1B couplé à un MinIT, son nom de domaine est `minion01.in-genomique.biologie.ens.fr`
+* Et un MinION Mk1C son nom de domaine est `minion02.in-genomique.biologie.ens.fr`
 
-Toutes les informations et procedures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
+Le MinION Mk1C peut être assimilé à un MinIT couplé à un MinION Mk1B doté d'un ecran tactile. Donc toutes les informations et procedures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
 
 Les données utilisées lors de ce TP sont celles qui ont été produites lors de la précédente session expérimentale de cette formation.
 
@@ -45,7 +45,7 @@ Dans cette partie, vous trouverez la procédure à suivre pour mettre en service
 
 Pour réaliser cette opération, il est nécessaire de disposer :
 * Un cable réseau
-* Un ordinateur avec une carte Wifi sous Linux, macOS ou windows 10 (version septembre 2017 minimum)
+* Un ordinateur avec une carte Wifi sous Linux, macOS ou Windows 10 (version septembre 2017 minimum)
 * Un séquenceur MinION Mk1C
 
 La procédure à suivre est la suivante
