@@ -23,15 +23,16 @@
 * Présentation de la Plateforme Génomique de l'ENS
 * Rappel du principe de la technologie ONT
 * Présentation des différents types de flowcells et séquenceur ONT
-* Demo [Mise en service d’un MinION Mk1C/MinIT](#config)
-* TP 1 [Connexion au MinION Mk1C en ligne de commande](#connexion)
-* TP 2 [Connexion à distance grâce à MinKNOW UI](#minknow-ui)
-* TP 3 [Transfert des données](#transfert)
-* TP 4 [Interface de MinKNOW et lancement d'un run](#minknow)
+* [Démo : Mise en service d’un MinION Mk1C](#config)
+* [TP 1 : Connexion au MinION Mk1C en ligne de commande](#connexion)
+* [TP 2 : Connexion à distance gràce à MinKNOW Stand Alone GUI](#minknow-stand-alone-gui)
+* [TP 3 : Transfert des données](#transfert)
+* [TP 4 : Interface de MinKNOW et lancement d'un run](#minknow)
+* [TP 5 : Les fichiers bruts Fast5](#fast5)
 * Principe de l'appel de base
-* TP X: Relancer un appel de base avec MinKNOW
-* TP X: Appel de Base en ligne de commande
-* TP X: Contrôle Qualité post run
+* [TP 6 : Relancer un appel de base avec MinKNOW](#basecalling-minknow)
+* [TP 7 : Appel de Base en ligne de commande](#basecalling-cmdline)
+* [TP 8: Contrôle Qualité post run](#qc)
 * Alignement
 * Conclusion
 
@@ -60,11 +61,11 @@ Liens utiles:
 
 
 <a name="config"></a>
-## Démo : Mise en service d’un MinION Mk1C/MinIT (Démo)
+## Démo : Mise en service d’un MinION Mk1C
 
 
 <a name="connexion"></a>
-## TP 1 : Connexion au MinION en ligne de commande
+## TP 1 : Connexion au MinION Mk1C en ligne de commande
 
 * Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) et se placer dans le dossier *formation-minion* sur le Bureau
 ```bash
@@ -119,7 +120,7 @@ df -h /data
 
 
 
-<a name="minknow-ui"></a>
+<a name="minknow-standalone-gui"></a>
 ## TP 2 : Connexion à distance gràce à MinKNOW Stand Alone GUI
 
 MinKNOW Stand Alone GUI permet de contrôler à distance un ou plusieurs séquenceurs. Cette application est disponible sur différents supports :
@@ -218,7 +219,7 @@ sftp -rp TOTO minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO-copie .
 
 
 <a name="fast5"></a>
-## TP X : Le format FAST5
+## TP 5 : Les fichiers bruts Fast5
 
 Les fichiers Fast5 sont les fichiers contenant les données brutes du séquençage. Ces fichiers sont en fait des fichiers au format [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) qui utilise une structure arborescente propre à Nanopore.
 
@@ -249,7 +250,14 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 
 
 
-## TP X: Appel de Base en ligne de commande
+<a name="basecalling-minknow"></a>
+## TP 6: Relancer un appel de base avec MinKNOW
+
+
+**TODO**
+
+<a name="basecalling-cmdline"></a>
+## TP 7 : Appel de Base en ligne de commande
 
 * L’appel de base est réalisé à l’aide du logiciel Guppy développé par ONT. Pour fonctionner, il est nécessaire de lui fournir un fichier de configuration décrivant le modèle à utiliser pour effectuer l’appel de base. Celui-ci peut être automatiquement déterminé par Guppy si on lui fournit à l’aide des arguments `--flowcell` et `--kit`. Cependant si cette solution est choisie le mode *haute précision (hac)* sera automatiquement selectionné. Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*. Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
 
@@ -359,7 +367,8 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 ** Question 9 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
 
 
-## TP X Contrôle Qualité post run
+<a name="qc"></a>
+## TP 8  Contrôle Qualité post run
 
 ** Note : ** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
 
