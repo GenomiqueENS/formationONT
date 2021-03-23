@@ -251,7 +251,7 @@ sftp -rp TOTO minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO-copie .
 
 
 <a name="minknow"></a>
-## TP 4 : Interface de MinKNOW et lancement d'un run
+## TP 4 : Interface de MinKNOW, lancement d'un run et du basecalling via l'interface
 
 Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C. Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues...etc
 
@@ -396,14 +396,10 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 **Exercice 3 : Dans les sous dossiers d’une lecture, retrouvez le numéro de pore, le numéro de la flowcell et la date de début de run**
 
 
-<a name="basecalling-minknow"></a>
-## TP 6: Relancer un appel de base avec MinKNOW
-
-**TODO**
 
 
 <a name="basecalling-cmdline"></a>
-## TP 7 : Appel de Base en ligne de commande
+## TP 6 : Appel de Base en ligne de commande
 
 L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies. D’autres outils existent/existaient pour cette tache, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant. Oxford Nanopore propose également d’autres logiciels pour l’appel de base mais ceux-ci sont dédiés à la recherche algorithmique et il ne vaut mieux pas les utiliser en production.
 
@@ -524,7 +520,7 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 
 <a name="qc"></a>
-## TP 8 Contrôle Qualité post run
+## TP 7 Contrôle Qualité post run
 
 Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différent outil et nous en comparerons les avantages et les inconvénients.
 
