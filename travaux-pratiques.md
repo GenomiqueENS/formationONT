@@ -7,13 +7,13 @@
 * Présentation de la Plateforme Génomique de l'ENS
 * Rappel du principe de la technologie ONT
 * Présentation des différents types de flowcells et séquenceur ONT
+* Principe de l’appel de base
 * [Démo : Mise en service d’un MinION Mk1C](#config)
 * [TP 1 : Connexion au MinION Mk1C en ligne de commande](#connexion)
 * [TP 2 : Connexion à distance grace à MinKNOW Stand Alone GUI](#minknow-stand-alone-gui)
 * [TP 3 : Transfert des données](#transfert)
 * [TP 4 : Interface de MinKNOW, lancement d'un run et du basecalling via l'interface](#minknow)
 * [TP 5 : Les fichiers bruts Fast5](#fast5)
-* Principe de l’appel de base
 * [TP 6 : Appel de Base en ligne de commande](#basecalling-cmdline)
 * [TP 7 : Contrôle Qualité post run](#qc)
 * Alignement
@@ -393,8 +393,6 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 **Question 2 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas)**
 
 **Exercice 3 : Dans les sous dossiers d’une lecture, retrouvez le numéro de pore, le numéro de la flowcell et la date de début de run**
-
-
 
 
 <a name="basecalling-cmdline"></a>
