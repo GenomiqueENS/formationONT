@@ -11,12 +11,11 @@
 * [TP 1 : Connexion au MinION Mk1C en ligne de commande](#connexion)
 * [TP 2 : Connexion à distance grace à MinKNOW Stand Alone GUI](#minknow-stand-alone-gui)
 * [TP 3 : Transfert des données](#transfert)
-* [TP 4 : Interface de MinKNOW et lancement d’un run](#minknow)
+* [TP 4 : Interface de MinKNOW, lancement d'un run et du basecalling via l'interface](#minknow)
 * [TP 5 : Les fichiers bruts Fast5](#fast5)
 * Principe de l’appel de base
-* [TP 6 : Relancer un appel de base avec MinKNOW](#basecalling-minknow)
-* [TP 7 : Appel de Base en ligne de commande](#basecalling-cmdline)
-* [TP 8 : Contrôle Qualité post run](#qc)
+* [TP 6 : Appel de Base en ligne de commande](#basecalling-cmdline)
+* [TP 7 : Contrôle Qualité post run](#qc)
 * Alignement
 * Conclusion
 * [Bibliographie](#biblio)
