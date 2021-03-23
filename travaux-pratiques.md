@@ -253,7 +253,7 @@ sftp -rp TOTO minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO-copie .
 <a name="minknow"></a>
 ## TP 4 : Interface de MinKNOW et lancement d'un run
 
-Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C. Cette interface permet l'accès à un certain nombre de paramètres, le lancement des runs, du basecalling, de l'alignements des lectures obtenues...etc
+Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C. Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues...etc
 
 
 * Utilisation du MinION Mk1C via son interface graphique
@@ -268,21 +268,21 @@ Parcourez les Host settings.
 **Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ou du MinIT ?
 Où verifier que MinKNOW est bien à jour ?**
 
-Ce sous menu vous permet de 
-- savoir l’espace qu’il vous reste sur vos disques
+Ce sous menu vous permet de
+- connaitre l’espace qu’il vous reste sur vos disques
 - naviguer dans vos résultats, run par run
-- effectuer la mise à jour du système d’exploitation de votre appareil 
+- effectuer la mise à jour du système d’exploitation de votre appareil
 - mettre à jour MinKNOW
 
 
 * Vérification initiale du séquenceur ou de la flowcell
 
-A la réception du séquenceur vous devez verifier son état. Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l'appareil. Il s’agit de la flowcell de configuration (CTC). Insérez là dans l'emplacement de la flowcell et cliquez sur start. En choisissant la section Hardware check, vois pouvez lancer la vérification de votre matériel. 
+A la réception du séquenceur vous devez verifier son état. Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l'appareil. Il s’agit de la flowcell de configuration (CTC). Insérez là dans l'emplacement de la flowcell et cliquez sur start. En choisissant la section Hardware check, vois pouvez lancer la vérification de votre matériel.
 
 **Exercice 2 : Lancez le Hardware Check**
 
 Avant chaque lancement de run, vous devez aussi vous assurer que la flowcell rempli les conditions d’utilisation: il est nécessaire de vérifier le nombre de pores disponibles sur la flowcell avant de charger les échantillons.
-Le nombre de pores disponibles doit être supérieur à : 
+Le nombre de pores disponibles doit être supérieur à :
 - 50 dans le cas d’une flowcell Flongle
 - 800 dans le cas d’une flowcell MinION
 Les flowcells sont remplacées si ce n’est pas le cas !
@@ -292,8 +292,8 @@ Les flowcells sont remplacées si ce n’est pas le cas !
 
 **Exercice 4 : Paramétrez et lancez votre run**
 
-Il faut définir 
-- Votre expérience 
+Il faut définir
+- Votre expérience
 - Le kit utilisé
 - Le type de basecalling (choix du modèle de réseau de neurone) s’il est fait à la volée
 - Les format de sortie de vos données
@@ -303,23 +303,24 @@ Commençons !
 
 **Définissez votre expérience et passez à la selection du kit (N’oubliez pas de lui donnez un nom !):**
 
-Dans la section permettant le choix du kit de séquençage à utiliser, tous les kits sont disponibles. Il est possible de les filtrer selon ce que l’on séquence, selon les banques faites…
+Dans la section permettant le choix du kit de séquençage à utiliser, tous les kits sont disponibles.
+Il est possible de les filtrer selon ce que l’on séquence, selon les banques faites…
 Choisissez ce qui vous intéresse. A la plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
-Il est important de ne pas se tromper. Chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
+Il est important de ne pas se tromper: chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
 
 **Passez au choix des options de runs:**
 
-Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps. 
+Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps.
 Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
-Le voltage initial de la flowcell peut être modifié mais il vaut mieux être expert pour cela. 
-Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer les canaux en permanence pour une meilleure performance de ceux-ci. 
-Le temps entre chaque changement des canaux est aussi paramétrable. Vous pouvez également sauvegarder un nombre de pore pour les faire intervenir dans la durée du run.
-Concrètement, nous ne changeons jamais ces paramètres.
+Le voltage initial de la flowcell peut être modifié mais il vaut mieux être expert pour cela.
+Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer les canaux en permanence pour une meilleure performance de ceux-ci.
+Le temps entre chaque changement des canaux (mux scan) est aussi paramétrable. Vous pouvez également sauvegarder un pourcentage de pores pour les faire intervenir dans la durée du run.
+Concrètement, nous ne changeons jamais ces paramètres. Vous pouvez jouer avec pendant le TP.
 
 **Passez à la configuration du basecalling:**
 
 L’appel de base peut être réalisé à la volée ou après le run. Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
-Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soient la machine choisie pour réaliser l’appel de base.
+Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soit la machine choisie pour réaliser l’appel de base.
 
 
 Trois modes de basecalling sont possibles:
@@ -328,35 +329,40 @@ Trois modes de basecalling sont possibles:
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
 **Passons aux code-barres:**
-Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres: 
+
+Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres:
 - Suppression des code-barres aux extrémités des données basecallées
-- Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture.
-Si un seul des code-barres est trouvé, la lecture est perdue
-- Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé 
+- Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue
+- Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé
 
 Attention, le sequençage nanopore est encore imprecis. Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent etre mal reconnues. Vous risquez de perdre beaucoup à être trop stringent.
 
-Minknow  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utiliser de façon standard.
+
+**Lancement de l'alignement à la volée:**
+
+Minknow  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utilisé de façon standard.
 Si vous souhaitez le faire, vous devez fournir un fichier fasta de référence.
 Si vous faites du RNASeq, vous pouvez également donner en entrée de minimap2, un fichier bed12 définissant les jonctions de vos isoformes.
-Vous pouvez utiliser paftools, un outil intégrer à minimap2 pour les construire à partir des fichiers d’annotation gtf.
+Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construire à partir des fichiers d’annotation gtf.
 
 
 **Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?**
+
 - Des FAST5 : Ce sont les données brutes. Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
 - Des fastq : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
-- Des Bam : Ce sont les données alignées si l’alignement à la volée a été demandé
+- Des bam : Ce sont les données alignées si l’alignement à la volée a été demandé
 
-Vous pouvez choisir le critere qui classera la lecture en pass ou fail. Classiquement, les lectures aillant un score de qualité inférieur à 7 sont considérées comme mauvaises (fail). Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
+Vous pouvez choisir le critère qui classera la lecture en pass ou fail. Classiquement, les lectures aillant un score de qualité inférieur à 7 sont considérées comme mauvaises (fail). Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
 Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
 
 Quid du fichier FAST5 Bulk ?
 
-Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore: 
+Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore:
 - elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
-- il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis].
+- il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis]. Selon la séquence, il est possible que MinKnow ne coupe pas au bon endroit. Des chimères peuvent être créees de cette façon.
 
 Attention, cette option génère un gros volume de données.
+
 
 
 
