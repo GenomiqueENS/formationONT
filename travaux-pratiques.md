@@ -56,8 +56,8 @@ La procédure à suivre est la suivante :
 1. Branchement de l’appareil au réseau électrique. Attention, les prises électriques mâles des appareils ONT sont parfois capricieuses, une multiprise peut être nécessaire pour brancher correctement l’appareil
 2. On allume l’appareil
 3. À l’aide d’ordinateur, connectez-vous en Wifi au Hotspot *MC-XXXXXX* créé par le séquenceur. Le mot de passe de ce Hotspot est *WarmButterflyWings98*
-5. Trouvez l'adresse IP de la passerelle du réseau à l'aide de la commande `ipconfig` (Windows), `route -n get default` (macOS) ou `ip route`
-4. Connectez-vous en SSH au séquenceur
+5. Trouvez l'adresse IP de la passerelle du réseau à l'aide de la commande `ipconfig` (Windows), `route -n get default` (macOS) ou `ip route`. Celle-ci est également l'adresse du MinION Mk1C sur ce réseau
+4. Connectez-vous maintenant en SSH au séquenceur
 ```bash
 ssh minit@10.42.0.1
 ```
