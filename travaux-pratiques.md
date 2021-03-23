@@ -289,7 +289,7 @@ Les flowcells sont remplacées si ce n’est pas le cas !
 **Exercice 3 : Revenez au menu précedent et lancez le Flowcell Check**
 
 
-* Paramétrage et lancement d’un run 
+**Exercice 4 : Paramétrez et lancez votre run**
 
 Il faut définir 
 - Votre expérience 
@@ -299,13 +299,14 @@ Il faut définir
 - L’alignement à la volée ou non et par conséquent, les séquences références
 
 Commençons !
-Définissez votre expérience et passez à la selection du kit (N’oubliez pas de lui donnez un nom !).
+
+**Définissez votre expérience et passez à la selection du kit (N’oubliez pas de lui donnez un nom !):**
 
 Dans la section permettant le choix du kit de séquençage à utiliser, tous les kits sont disponibles. Il est possible de les filtrer selon ce que l’on séquence, selon les banques faites…
 Choisissez ce qui vous intéresse. A la plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
 Il est important de ne pas se tromper. Chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
 
-Passez au choix des options de runs.
+**Passez au choix des options de runs:**
 
 Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps. 
 Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
@@ -314,10 +315,8 @@ Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer le
 Le temps entre chaque changement des canaux est aussi paramétrable. Vous pouvez également sauvegarder un nombre de pore pour les faire intervenir dans la durée du run.
 Concrètement, nous ne changeons jamais ces paramètres.
 
-Passez à la configuration du basecalling.
+**Passez à la configuration du basecalling:**
 
- 
-**Configuration de l’appel de base**
 L’appel de base peut être réalisé à la volée ou après le run. Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
 Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soient la machine choisie pour réaliser l’appel de base.
 
@@ -327,7 +326,7 @@ Trois modes de basecalling sont possibles:
 - High-accuracy : Plus long mais moins d’erreur
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
-Passons aux code-barres:
+**Passons aux code-barres:**
 Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres: 
 - Suppression des code-barres aux extrémités des données basecallées
 - Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture.
@@ -335,6 +334,28 @@ Si un seul des code-barres est trouvé, la lecture est perdue
 - Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé 
 
 Attention, le sequençage nanopore est encore imprecis. Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent etre mal reconnues. Vous risquez de perdre beaucoup à être trop stringent.
+
+Minknow  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utiliser de façon standard.
+Si vous souhaitez le faire, vous devez fournir un fichier fasta de référence.
+Si vous faites du RNASeq, vous pouvez également donner en entrée de minimap2, un fichier bed12 définissant les jonctions de vos isoformes.
+Vous pouvez utiliser paftools, un outil intégrer à minimap2 pour les construire à partir des fichiers d’annotation gtf.
+
+
+**Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?**
+- Des FAST5 : Ce sont les données brutes. Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
+- Des fastq : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
+- Des Bam : Ce sont les données alignées si l’alignement à la volée a été demandé
+
+Vous pouvez choisir le critere qui classera la lecture en pass ou fail. Classiquement, les lectures aillant un score de qualité inférieur à 7 sont considérées comme mauvaises (fail). Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
+Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
+
+Quid du fichier FAST5 Bulk ?
+
+Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore: 
+- elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
+- il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis].
+
+Attention, cette option génère un gros volume de données.
 
 
 
@@ -560,7 +581,25 @@ toulliqQC --report-name Formation_MinION \
 
 ### Nanocomp
 
-**TODO**
+NanoComp est un outil faisant partie d'une suite appelée NanoPack. Il permet de comparer des echantillons d'un même run via le fichier sequencing_summary.txt, des fichiers fastq, des fasta, des alignements via des fichiers bam.
+Il est donc utilisable à plein d'étapes de l'analyse se qui en fait un outil interessant. 
+La suite est toujours maintenue.
+NanoPack est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
+
+```bash
+pip install nanopack
+```
+
+* Avec les données que nous avons générées, la commande à lancer pour produire le rapport est la suivante :
+
+
+```bash
+NanoComp --summary /data/sequencing_summary.txt \
+ --barcoded \
+ -o /res/NanoComp_summary-plots
+
+```
+* Sur l’ordinateur, allez dans le dossier *formation-minion/qc/NanoComp* sur le Bureau et ouvrez le rapport HTML.
 
 
 <a name="biblio"></a>
@@ -573,3 +612,6 @@ toulliqQC --report-name Formation_MinION \
 * [Documentation de PycoQC](https://github.com/tleonardi/pycoQC)
 * [Documentation de ToulliqQC](https://github.com/GenomicParisCentre/toulligQC)
 * [Documentation de Nanocomp](https://github.com/wdecoster/nanocomp)
+* [Publi de Bulkvis](BulkVis: a graphical viewer for Oxford nanopore bulk FAST5 files, 
+Alexander Payne et al, Bioinformatics, Volume 35, Issue 13, 1 July 2019, Pages 2193–2198)
+
