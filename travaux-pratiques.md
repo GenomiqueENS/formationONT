@@ -27,7 +27,7 @@
 Lors de ce TP, nous utilisons deux séquenceurs MinION :
 
 * Un MinION Mk1B couplé à un MinIT, son nom de domaine est `minion01.in-genomique.biologie.ens.fr`
-* Et un MinION Mk1C son nom de domaine est `minion02.in-genomique.biologie.ens.fr`
+* Un MinION Mk1C son nom de domaine est `minion02.in-genomique.biologie.ens.fr`
 
 Au cours de ce TP, des noms de domaine `minion0X.in-genomique.biologie.ens.fr` seront indiqués, il faudra remplacer le **X** par le numéro de votre séquenceur.
 
