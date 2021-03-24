@@ -2,6 +2,10 @@
 # Formation MinION Session Bioinformatique<br/>23 mars 2021
 
 
+Formateurs : Laurent Jourdren (*jourdren@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
+
+Contact Plateforme génomique de l'ENS : Site Web [https://genomique.biologie.ens.fr](https://genomique.biologie.ens.fr/), Courriel [genomique@bio.ens.psl.eu](mailto:genomique@bio.ens.psl.eu), Twitter [@Genomique_ENS](https://twitter.com/Genomique_ENS)
+
 ## Sommaire
 
 * Présentation de la Plateforme Génomique de l'ENS
@@ -255,7 +259,7 @@ sftp -rp TOTO minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO-copie .
 Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C. Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues...etc
 
 
-* Utilisation du MinION Mk1C via son interface graphique
+### Utilisation du MinION Mk1C via son interface graphique
 
 Après lancement de l'application vous avez accès aux séquenceurs qui lui sont accessibles. Aujourd'hui, vous en voyez deux, minion01 (le minion via le MinIT) et minion02 (le Mk1C).
 Choisissez le séquenceur sur lequel vous travaillez. Placez une flowcell dans l'emplacement prévu. Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interface.
@@ -268,13 +272,14 @@ Parcourez les Host settings.
 Où verifier que MinKNOW est bien à jour ?**
 
 Ce sous menu vous permet de
+
 - connaitre l’espace qu’il vous reste sur vos disques
 - naviguer dans vos résultats, run par run
 - effectuer la mise à jour du système d’exploitation de votre appareil
 - mettre à jour MinKNOW
 
 
-* Vérification initiale du séquenceur ou de la flowcell
+### Vérification initiale du séquenceur ou de la flowcell
 
 A la réception du séquenceur vous devez verifier son état. Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l'appareil. Il s’agit de la flowcell de configuration (CTC). Insérez là dans l'emplacement de la flowcell et cliquez sur start. En choisissant la section Hardware check, vois pouvez lancer la vérification de votre matériel.
 
@@ -282,16 +287,21 @@ A la réception du séquenceur vous devez verifier son état. Pour le faire, vou
 
 Avant chaque lancement de run, vous devez aussi vous assurer que la flowcell rempli les conditions d’utilisation: il est nécessaire de vérifier le nombre de pores disponibles sur la flowcell avant de charger les échantillons.
 Le nombre de pores disponibles doit être supérieur à :
+
 - 50 dans le cas d’une flowcell Flongle
 - 800 dans le cas d’une flowcell MinION
+
 Les flowcells sont remplacées si ce n’est pas le cas !
 
 **Exercice 3 : Revenez au menu précedent et lancez le Flowcell Check**
 
+### Lancement d'un run
+
 
 **Exercice 4 : Paramétrez et lancez votre run**
 
-Il faut définir
+Il faut définir :
+
 - Votre expérience
 - Le kit utilisé
 - Le type de basecalling (choix du modèle de réseau de neurone) s’il est fait à la volée
@@ -323,13 +333,15 @@ Nous allons voir comment le lancer à la volée. Les paramètres importants rest
 
 
 Trois modes de basecalling sont possibles:
+
 - Fast : Pratique pour le diagnostique parce rapide
 - High-accuracy : Plus long mais moins d’erreur
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
 **Passons aux code-barres:**
 
-Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres:
+Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres :
+
 - Suppression des code-barres aux extrémités des données basecallées
 - Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue
 - Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé
