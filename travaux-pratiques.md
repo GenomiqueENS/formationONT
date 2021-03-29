@@ -624,6 +624,5 @@ NanoComp --summary /data/sequencing_summary.txt \
 * [Documentation de PycoQC](https://github.com/tleonardi/pycoQC)
 * [Documentation de ToulliqQC](https://github.com/GenomicParisCentre/toulligQC)
 * [Documentation de Nanocomp](https://github.com/wdecoster/nanocomp)
-* [Publi de Bulkvis](BulkVis: a graphical viewer for Oxford nanopore bulk FAST5 files, 
-Alexander Payne et al, Bioinformatics, Volume 35, Issue 13, 1 July 2019, Pages 2193–2198)
+* [Publi de Bulkvis](https://dx.doi.org/10.1093%2Fbioinformatics%2Fbty841)
 
