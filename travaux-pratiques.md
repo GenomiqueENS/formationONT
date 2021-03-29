@@ -29,10 +29,10 @@ Contact Plateforme génomique de l'ENS : Site Web [https://genomique.biologie.en
 
 Lors de ce TP, nous utilisons deux séquenceurs MinION :
 
-* Un MinION Mk1B couplé à un MinIT, son nom de domaine est `minion01.in-genomique.biologie.ens.fr`
-* Un MinION Mk1C son nom de domaine est `minion02.in-genomique.biologie.ens.fr`
+* Un MinION Mk1B couplé à un MinIT, son nom de domaine est `minion01.example.com` ou `minion01`
+* Un MinION Mk1C son nom de domaine est `minion02.example.com` ou `minion02`
 
-Au cours de ce TP, des noms de domaine `minion0X.in-genomique.biologie.ens.fr` seront indiqués, il faudra remplacer le **X** par le numéro de votre séquenceur.
+Au cours de ce TP, des noms de domaine `minion0X.example.com`  seront indiqués, il faudra remplacer le **X** par le numéro de votre séquenceur.
 
 Le MinION Mk1C peut être assimilé à un MinIT couplé à un MinION Mk1B doté d’un écran tactile. Cela signifie que toutes les informations et procédures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
 
@@ -114,7 +114,7 @@ cd ~/Desktop/Formation-MinION-23-03-2021
 
 * Connectez-vous au MinION en ligne de commande (le mot de passe est "**minit**")
 ```bash
-ssh minit@minion0X.in-genomique.biologie.ens.fr
+ssh minit@minion0X
 ```
 
 **Question 1 : Sous quel système d’exploitation tourne le MinION Mk1C ?**
@@ -176,7 +176,7 @@ Pour le moment, il n’existe de pas de version pour les systèmes Linux.
 * Configuration de l’application
     * Au démarrage MinKNOW vous propose de vous connecter avec votre compte Nanopore. Choisissez *Continue as guest* (à quoi sert la connexion au compte ONT ?)
     * Vous arrivez sur la page du *Connection manager*. Le mode tutoriel est activé, quittez le en cliquant sur le bouton **⋮**
-    * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion0X.in-genomique.biologie.ens.fr`
+    * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion0X`
     * Dans la section *Saved Host*, devrait apparaitre une icone *Mk1C* ou *MinIT* selon le sequençeur auquel vous vous êtes connecté
     * Cliquez sur l’hôte crée pour pouvoir controler à distance le sequenceur
 
@@ -227,7 +227,7 @@ Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux f
 
 * Montage du partage sur l’ordinateur
     * Dans le Finder et dans le menu sélectionnez *Aller* / *Se connecter au serveur…*
-    * Utiliser *smb://minion0X.in-genomique.biologie.ens.fr*. Appuyer sur le bouton *Se connecter*
+    * Utiliser *smb://minion0X*. Appuyer sur le bouton *Se connecter*
     * Une boite de dialogue apparaît. Choisissez *Utilisateur référencé*, le nom de l’utilisateur est **minit** et le mot de passe celui que vous avez précédemment choisi. Appuyez sur le bouton *Se connecter*
 
 **Exercice 3 : Utiliser ce partage pour copier des fichiers vers le montage. Vérifiez que les fichiers copiés sont bien visibles dans l’interface de MinKNOW**
@@ -239,7 +239,7 @@ SFTP est l’évolution sécurisée du protocole de transfert de fichier FTP qui
 * Récupération d’un run. Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
 ```bash
 cd ~/Desktop/Formation-MinION-23-03-2021/Données
-sftp -r minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO .
+sftp -r minit@minion-0X:/data/TOTO .
 ```
 
 * L’option `-r` de `sftp` active une copie récursive des dossiers/fichiers.
@@ -247,7 +247,7 @@ sftp -r minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO .
 * Dépot de données sur le MinION (ex: pour relancer l’appel de base d'un run) :
 ```bash
 cd ~/Desktop
-sftp -rp TOTO minit@minion-0X.in-genomique.biologie.ens.fr:/data/TOTO-copie .
+sftp -rp TOTO minit@minion-0X:/data/TOTO-copie .
 ```
 
 * L’option `-p` de `sftp` permet de préserver les permissions et les dates des fichiers.
