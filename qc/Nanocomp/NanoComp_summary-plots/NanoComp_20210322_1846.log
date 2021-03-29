@@ -1,0 +1,20 @@
+2021-03-22 18:46:26,024 NanoComp 1.20.0 started with arguments Namespace(bam=None, barcoded=True, colors=None, dpi=100, fasta=None, fastq=None, format='png', maxlength=None, names=None, outdir='/res/NanoComp_summary-plots-log-transformed', plot='violin', prefix='', raw=False, readtype='1D', split_runs=False, summary=['/data/sequencing_summary.txt'], threads=4, title=None, verbose=False)
+2021-03-22 18:46:26,025 Python version is: 3.6.8 (default, Jan  9 2019, 04:25:33)  [GCC 4.9.2]
+2021-03-22 18:46:26,027 Nanoplotter: valid output format png
+2021-03-22 18:46:26,055 Nanoget: Collecting metrics from summary file /data/sequencing_summary.txt for 1D sequencing
+2021-03-22 18:46:26,058 Nanoget: Extracting metrics per barcode.
+2021-03-22 18:46:26,258 Nanoget: Finished collecting statistics from summary file /data/sequencing_summary.txt
+2021-03-22 18:46:26,408 Reduced DataFrame memory usage from 6.200308799743652Mb to 3.7560195922851562Mb
+2021-03-22 18:46:26,524 Nanoget: Gathered all metrics of 21360 reads
+2021-03-22 18:46:26,525 Using sequenced read lengths for plotting.
+2021-03-22 18:46:27,020 Nanoplotter: Creating barplots for number of reads and total throughput.
+2021-03-22 18:46:27,975 Nanoplotter: Creating violin plot for lengths.
+2021-03-22 18:46:28,557 Nanoplotter: Creating violin plot for log length.
+2021-03-22 18:46:29,095 Nanoplotter: Creating violin plot for quals.
+2021-03-22 18:46:29,856 Nanoplotter: Creating cumulative yield plots using 21360 reads.
+2021-03-22 18:46:31,319 Nanoplotter: orca not found, not creating static image of dynamic html.
+See https://github.com/plotly/orca
+2021-03-22 18:46:32,084 Nanoplotter: orca not found, not creating static image of dynamic html.
+See https://github.com/plotly/orca
+2021-03-22 18:46:34,151 Writing html report.
+2021-03-22 18:46:36,065 Succesfully processed all input.

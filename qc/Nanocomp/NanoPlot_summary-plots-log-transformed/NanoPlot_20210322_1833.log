@@ -1,0 +1,156 @@
+2021-03-22 18:33:19,280 NanoPlot 1.20.0 started with arguments Namespace(N50=False, alength=False, bam=None, barcoded=True, color='#4CB391', cram=None, downsample=None, dpi=100, drop_outliers=False, fasta=None, fastq=None, fastq_minimal=None, fastq_rich=None, font_scale=1, format='png', listcolors=False, loglength=True, maxlength=None, minlength=None, minqual=None, no_N50=False, outdir='/res/NanoPlot_summary-plots-log-transformed', percentqual=False, pickle=None, plots=['kde', 'dot'], prefix='', raw=False, readtype='1D', runtime_until=None, store=False, summary=['/data/sequencing_summary.txt'], threads=4, title=None, verbose=False)
+2021-03-22 18:33:19,280 Python version is: 3.6.8 (default, Jan  9 2019, 04:25:33)  [GCC 4.9.2]
+2021-03-22 18:33:19,281 Nanoplotter: valid output format png
+2021-03-22 18:33:19,303 Nanoget: Collecting metrics from summary file /data/sequencing_summary.txt for 1D sequencing
+2021-03-22 18:33:19,305 Nanoget: Extracting metrics per barcode.
+2021-03-22 18:33:19,489 Nanoget: Finished collecting statistics from summary file /data/sequencing_summary.txt
+2021-03-22 18:33:19,548 Reduced DataFrame memory usage from 6.200308799743652Mb to 3.7560195922851562Mb
+2021-03-22 18:33:19,628 Nanoget: Gathered all metrics of 21360 reads
+2021-03-22 18:33:19,696 Calculated statistics
+2021-03-22 18:33:20,055 Using sequenced read lengths for plotting.
+2021-03-22 18:33:20,058 Using log10 scaled read lengths.
+2021-03-22 18:33:20,072 Processing barcode11
+2021-03-22 18:33:20,078 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:33:20,080 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:33:20,081 Nanoplotter: Using 12783 reads maximum of 8836bp.
+2021-03-22 18:33:22,390 Created length plots
+2021-03-22 18:33:22,399 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 12783 reads.
+2021-03-22 18:33:28,264 Created LengthvsQual plot
+2021-03-22 18:33:28,265 Nanoplotter: Creating heatmap of reads per channel using 12783 reads.
+2021-03-22 18:33:29,466 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:33:29,474 Nanoplotter: Creating timeplots using 12783 reads.
+2021-03-22 18:33:32,120 Created timeplots.
+2021-03-22 18:33:32,121 Processing barcode12
+2021-03-22 18:33:32,132 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:33:32,135 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:33:32,135 Nanoplotter: Using 5692 reads maximum of 10185bp.
+2021-03-22 18:33:34,597 Created length plots
+2021-03-22 18:33:34,606 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 5692 reads.
+2021-03-22 18:33:39,702 Created LengthvsQual plot
+2021-03-22 18:33:39,702 Nanoplotter: Creating heatmap of reads per channel using 5692 reads.
+2021-03-22 18:33:40,602 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:33:40,608 Nanoplotter: Creating timeplots using 5692 reads.
+2021-03-22 18:33:43,202 Created timeplots.
+2021-03-22 18:33:43,202 Processing unclassified
+2021-03-22 18:33:43,213 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:33:43,216 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:33:43,217 Nanoplotter: Using 2685 reads maximum of 22666bp.
+2021-03-22 18:33:45,493 Created length plots
+2021-03-22 18:33:45,497 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 2685 reads.
+2021-03-22 18:33:50,627 Created LengthvsQual plot
+2021-03-22 18:33:50,628 Nanoplotter: Creating heatmap of reads per channel using 2685 reads.
+2021-03-22 18:33:51,721 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:33:51,726 Nanoplotter: Creating timeplots using 2685 reads.
+2021-03-22 18:33:53,834 Created timeplots.
+2021-03-22 18:33:53,835 Processing barcode01
+2021-03-22 18:33:53,840 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:33:53,841 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:33:53,842 Nanoplotter: Using 18 reads maximum of 3186bp.
+2021-03-22 18:33:55,420 Created length plots
+2021-03-22 18:33:55,424 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 18 reads.
+2021-03-22 18:33:58,225 Created LengthvsQual plot
+2021-03-22 18:33:58,225 Nanoplotter: Creating heatmap of reads per channel using 18 reads.
+2021-03-22 18:33:59,069 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:33:59,073 Nanoplotter: Creating timeplots using 18 reads.
+2021-03-22 18:34:01,185 Created timeplots.
+2021-03-22 18:34:01,186 Processing barcode08
+2021-03-22 18:34:01,191 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:34:01,193 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:34:01,194 Nanoplotter: Using 17 reads maximum of 2908bp.
+2021-03-22 18:34:02,841 Created length plots
+2021-03-22 18:34:02,845 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 17 reads.
+2021-03-22 18:34:05,600 Created LengthvsQual plot
+2021-03-22 18:34:05,600 Nanoplotter: Creating heatmap of reads per channel using 17 reads.
+2021-03-22 18:34:06,467 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:34:06,472 Nanoplotter: Creating timeplots using 17 reads.
+2021-03-22 18:34:08,563 Created timeplots.
+2021-03-22 18:34:08,564 Processing barcode04
+2021-03-22 18:34:08,570 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:34:08,572 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:34:08,573 Nanoplotter: Using 20 reads maximum of 4989bp.
+2021-03-22 18:34:10,320 Created length plots
+2021-03-22 18:34:10,324 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 20 reads.
+2021-03-22 18:34:13,430 Created LengthvsQual plot
+2021-03-22 18:34:13,431 Nanoplotter: Creating heatmap of reads per channel using 20 reads.
+2021-03-22 18:34:14,405 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:34:14,412 Nanoplotter: Creating timeplots using 20 reads.
+2021-03-22 18:34:16,449 Created timeplots.
+2021-03-22 18:34:16,449 Processing barcode02
+2021-03-22 18:34:16,455 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:34:16,458 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:34:16,458 Nanoplotter: Using 33 reads maximum of 7529bp.
+2021-03-22 18:34:18,177 Created length plots
+2021-03-22 18:34:18,183 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 33 reads.
+2021-03-22 18:34:21,129 Created LengthvsQual plot
+2021-03-22 18:34:21,129 Nanoplotter: Creating heatmap of reads per channel using 33 reads.
+2021-03-22 18:34:21,983 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:34:21,988 Nanoplotter: Creating timeplots using 33 reads.
+2021-03-22 18:34:23,954 Created timeplots.
+2021-03-22 18:34:23,954 Processing barcode07
+2021-03-22 18:34:23,960 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:34:23,961 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:34:23,962 Nanoplotter: Using 22 reads maximum of 5055bp.
+2021-03-22 18:34:25,535 Created length plots
+2021-03-22 18:34:25,539 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 22 reads.
+2021-03-22 18:34:28,506 Created LengthvsQual plot
+2021-03-22 18:34:28,506 Nanoplotter: Creating heatmap of reads per channel using 22 reads.
+2021-03-22 18:34:29,415 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:34:29,420 Nanoplotter: Creating timeplots using 22 reads.
+2021-03-22 18:34:31,417 Created timeplots.
+2021-03-22 18:34:31,418 Processing barcode09
+2021-03-22 18:34:31,423 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:34:31,425 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:34:31,425 Nanoplotter: Using 20 reads maximum of 3566bp.
+2021-03-22 18:34:33,081 Created length plots
+2021-03-22 18:34:33,084 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 20 reads.
+2021-03-22 18:34:36,029 Created LengthvsQual plot
+2021-03-22 18:34:36,030 Nanoplotter: Creating heatmap of reads per channel using 20 reads.
+2021-03-22 18:34:37,034 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:34:37,039 Nanoplotter: Creating timeplots using 20 reads.
+2021-03-22 18:34:39,102 Created timeplots.
+2021-03-22 18:34:39,103 Processing barcode03
+2021-03-22 18:34:39,108 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:34:39,110 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:34:39,110 Nanoplotter: Using 22 reads maximum of 6326bp.
+2021-03-22 18:34:40,736 Created length plots
+2021-03-22 18:34:40,739 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 22 reads.
+2021-03-22 18:34:43,842 Created LengthvsQual plot
+2021-03-22 18:34:43,844 Nanoplotter: Creating heatmap of reads per channel using 22 reads.
+2021-03-22 18:34:45,095 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:34:45,103 Nanoplotter: Creating timeplots using 22 reads.
+2021-03-22 18:34:47,612 Created timeplots.
+2021-03-22 18:34:47,612 Processing barcode10
+2021-03-22 18:34:47,617 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:34:47,619 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:34:47,620 Nanoplotter: Using 13 reads maximum of 6306bp.
+2021-03-22 18:34:49,321 Created length plots
+2021-03-22 18:34:49,325 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 13 reads.
+2021-03-22 18:34:52,184 Created LengthvsQual plot
+2021-03-22 18:34:52,184 Nanoplotter: Creating heatmap of reads per channel using 13 reads.
+2021-03-22 18:34:53,043 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:34:53,048 Nanoplotter: Creating timeplots using 13 reads.
+2021-03-22 18:34:55,074 Created timeplots.
+2021-03-22 18:34:55,074 Processing barcode06
+2021-03-22 18:34:55,079 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:34:55,081 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:34:55,081 Nanoplotter: Using 19 reads maximum of 2912bp.
+2021-03-22 18:34:56,634 Created length plots
+2021-03-22 18:34:56,640 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 19 reads.
+2021-03-22 18:34:59,467 Created LengthvsQual plot
+2021-03-22 18:34:59,468 Nanoplotter: Creating heatmap of reads per channel using 19 reads.
+2021-03-22 18:35:00,370 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:35:00,374 Nanoplotter: Creating timeplots using 19 reads.
+2021-03-22 18:35:02,592 Created timeplots.
+2021-03-22 18:35:02,592 Processing barcode05
+2021-03-22 18:35:02,599 Nanoplotter: Valid color #4CB391.
+2021-03-22 18:35:02,601 Nanoplotter: Creating length plots for Read length.
+2021-03-22 18:35:02,602 Nanoplotter: Using 16 reads maximum of 3585bp.
+2021-03-22 18:35:04,418 Created length plots
+2021-03-22 18:35:04,422 Nanoplotter: Creating Read lengths vs Average read quality plots using statistics from 16 reads.
+2021-03-22 18:35:07,250 Created LengthvsQual plot
+2021-03-22 18:35:07,251 Nanoplotter: Creating heatmap of reads per channel using 16 reads.
+2021-03-22 18:35:08,104 Created spatialheatmap for succesfull basecalls.
+2021-03-22 18:35:08,109 Nanoplotter: Creating timeplots using 16 reads.
+2021-03-22 18:35:10,451 Created timeplots.
+2021-03-22 18:35:10,451 Writing html report.
+2021-03-22 18:36:15,559 Finished!

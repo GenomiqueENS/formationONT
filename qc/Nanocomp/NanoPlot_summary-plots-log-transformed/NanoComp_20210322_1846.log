@@ -1,0 +1,12 @@
+2021-03-22 18:46:10,431 NanoComp 1.20.0 started with arguments Namespace(bam=None, barcoded=True, colors=None, dpi=100, fasta=None, fastq=None, format='png', maxlength=None, names=None, outdir='/res/NanoPlot_summary-plots-log-transformed', plot='violin', prefix='', raw=False, readtype='1D', split_runs=False, summary=['/data/sequencing_summary.txt'], threads=4, title=None, verbose=False)
+2021-03-22 18:46:10,432 Python version is: 3.6.8 (default, Jan  9 2019, 04:25:33)  [GCC 4.9.2]
+2021-03-22 18:46:10,434 Nanoplotter: valid output format png
+2021-03-22 18:46:10,459 Nanoget: Collecting metrics from summary file /data/sequencing_summary.txt for 1D sequencing
+2021-03-22 18:46:10,462 Nanoget: Extracting metrics per barcode.
+2021-03-22 18:46:10,649 Nanoget: Finished collecting statistics from summary file /data/sequencing_summary.txt
+2021-03-22 18:46:10,707 Reduced DataFrame memory usage from 6.200308799743652Mb to 3.7560195922851562Mb
+2021-03-22 18:46:10,849 Nanoget: Gathered all metrics of 21360 reads
+2021-03-22 18:46:10,850 Using sequenced read lengths for plotting.
+2021-03-22 18:46:11,158 Nanoplotter: Creating barplots for number of reads and total throughput.
+2021-03-22 18:46:12,102 Nanoplotter: Creating violin plot for lengths.
+2021-03-22 18:46:12,653 Nanoplotter: Creating violin plot for log length.
