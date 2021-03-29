@@ -366,7 +366,7 @@ Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construi
 Vous pouvez choisir le critère qui classera la lecture en pass ou fail. Classiquement, les lectures aillant un score de qualité inférieur à 7 sont considérées comme mauvaises (fail). Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
 Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
 
-Quid du fichier FAST5 Bulk ?
+**Quid du fichier FAST5 Bulk ?**
 
 Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore:
 - elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
