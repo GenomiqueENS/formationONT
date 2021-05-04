@@ -570,13 +570,13 @@ pycoQC --summary_file sequencing_summary.txt \
 * ToulliqQC est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 
 ```bash
-pip install toulliqQC
+pip install toulligqc
 ```
 
 * Avec les données que nous avons générées, la commande à lancer pour produire le rapport est la suivante :
 
 ```bash
-toulliqQC --report-name Formation_MinION \
+toulligqc --report-name Formation_MinION \
           --telemetry-source sequencing_telemetry.js \
           --sequencing-summary-source sequencing_summary.txt \
           --barcodes BC11,BC12 \
