@@ -533,7 +533,7 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différent outil et nous en comparerons les avantages et les inconvénients.
 
-**Note : ** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
+**Note :** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
 
 ### Rapport de MinKNOW
 
@@ -570,13 +570,13 @@ pycoQC --summary_file sequencing_summary.txt \
 * ToulliqQC est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 
 ```bash
-pip install toulliqQC
+pip install toulligqc
 ```
 
 * Avec les données que nous avons générées, la commande à lancer pour produire le rapport est la suivante :
 
 ```bash
-toulliqQC --report-name Formation_MinION \
+toulligqc --report-name Formation_MinION \
           --telemetry-source sequencing_telemetry.js \
           --sequencing-summary-source sequencing_summary.txt \
           --barcodes BC11,BC12 \
