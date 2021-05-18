@@ -239,7 +239,7 @@ SFTP est l’évolution sécurisée du protocole de transfert de fichier FTP qui
 * Récupération d’un run. Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
 ```bash
 cd ~/Desktop/Formation-MinION-23-03-2021/Données
-sftp -r minit@minion-0X:/data/TOTO .
+sftp -r minit@minion0X:/data/TOTO .
 ```
 
 * L’option `-r` de `sftp` active une copie récursive des dossiers/fichiers.
@@ -247,7 +247,7 @@ sftp -r minit@minion-0X:/data/TOTO .
 * Dépot de données sur le MinION (ex: pour relancer l’appel de base d'un run) :
 ```bash
 cd ~/Desktop
-sftp -rp TOTO minit@minion-0X:/data/TOTO-copie .
+sftp -rp TOTO minit@minion0X:/data/TOTO-copie .
 ```
 
 * L’option `-p` de `sftp` permet de préserver les permissions et les dates des fichiers.
