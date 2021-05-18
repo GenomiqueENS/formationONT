@@ -1,5 +1,5 @@
 <a href="https://genomique.biologie.ens.fr/"><img src="https://www.outils.genomique.biologie.ens.fr/aozan/images/logo_genomicpariscentre-90pxh.png" align="left"> </a>
-# Formation MinION Session Bioinformatique<br/>23 mars 2021
+# Formation MinION Session Bioinformatique<br/>
 
 
 Formateurs : Laurent Jourdren (*jourdren@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
@@ -107,9 +107,9 @@ Le MinION Mk1C comme tous les séquenceurs d’ONT couplés à un ordinateur, fo
 
 Dans ce TP, nous verrons comment se connecter à un MinION Mk1C via la commande `ssh` et nous récupérerons quelques informations sur le système informatique pilotant le séquenceur.
 
-* Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) et se placer dans le dossier *Formation-MinION-23-03-2021* sur le Bureau
+* Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) et se placer dans le dossier *Formation-MinION* sur le Bureau
 ```bash
-cd ~/Desktop/Formation-MinION-23-03-2021
+cd ~/Desktop/Formation-MinION
 ```
 
 * Connectez-vous au MinION en ligne de commande (le mot de passe est "**minit**")
@@ -238,7 +238,7 @@ SFTP est l’évolution sécurisée du protocole de transfert de fichier FTP qui
 
 * Récupération d’un run. Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
 ```bash
-cd ~/Desktop/Formation-MinION-23-03-2021/Données
+cd ~/Desktop/Formation-MinION/Données
 sftp -r minit@minion0X:/data/TOTO .
 ```
 
@@ -517,7 +517,7 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 **Exercice 6 : Ouvrez un des fichiers Fast5 produits lors du démultiplexage avec HDFView. Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage. Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
 
-* Sur l’ordinateur, allez dans le dossier *Formation-MinION-23-03-2021/appel_de_base* sur le Bureau et ouvrez avec Firefox le fichier *sequencing_telemetry.js*
+* Sur l’ordinateur, allez dans le dossier *Formation-MinION/appel_de_base* sur le Bureau et ouvrez avec Firefox le fichier *sequencing_telemetry.js*
 
 **Question 7 : Que contient ce fichier ? Avons-nous vu déjà une partie de ces informations quelque part ?**
 
@@ -538,7 +538,7 @@ Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits p
 ### Rapport de MinKNOW
 
 * À la fin d’un run, MinKNOW va sauver sous la forme d’un fichier PDF, les informations et les graphiques qu’il affichait au cours du run.
-* Sur l’ordinateur, allez dans le dossier *Formation-MinION-23-03-2021/qc/MinKNOW* sur le Bureau et ouvrez le rapport PDF.
+* Sur l’ordinateur, allez dans le dossier *Formation-MinION/qc/MinKNOW* sur le Bureau et ouvrez le rapport PDF.
 
 **Question 1 : Que manque-t-il dans le rapport produit par MinKNOW à la fin du run ?**
 
@@ -559,7 +559,7 @@ pycoQC --summary_file sequencing_summary.txt \
        --json_outfile pycoQC-report.json
 ```
 
-* Sur l’ordinateur, allez dans le dossier *Formation-MinION-23-03-2021/qc/PycoQC* sur le Bureau et ouvrez le rapport HTML.
+* Sur l’ordinateur, allez dans le dossier *Formation-MinION/qc/PycoQC* sur le Bureau et ouvrez le rapport HTML.
 
 **Question 2 : Qu’apporte PycoQC par rapport produit par MinKNOW ?**
 
@@ -583,7 +583,7 @@ toulligqc --report-name Formation_MinION \
           --output .
 ```
 
-* Sur l’ordinateur, allez dans le dossier *Formation-MinION-23-03-2021/qc/ToulligQC* sur le Bureau et ouvrez le rapport HTML.
+* Sur l’ordinateur, allez dans le dossier *Formation-MinION/qc/ToulligQC* sur le Bureau et ouvrez le rapport HTML.
 
 **Note :** Le rapport produit ici a été réalisé par la version beta 3 de ToulligQC 2.0. La version finale est attendue d’ici la fin du mois.
 
