@@ -60,7 +60,7 @@ La procédure à suivre est la suivante :
 2. On allume l’appareil
 3. À l’aide d’ordinateur, connectez-vous en Wifi au Hotspot *MC-XXXXXX* créé par le séquenceur. Le mot de passe de ce Hotspot est *WarmButterflyWings98*
 5. Trouvez l'adresse IP de la passerelle du réseau à l'aide de la commande `ipconfig` (Windows), `route -n get default` (macOS) ou `ip route` (Linux). Celle-ci est également l'adresse du MinION Mk1C sur ce réseau
-4. Connectez-vous maintenant en SSH au séquenceur (le mot de passe d'origine du compte est *minit*)
+4. Connectez-vous maintenant en SSH au séquenceur au compte d'administration *minit* (dans l'exemple ci-dessous, 10.42.0.1 correspond à l'adresse IP l'adresse IP de la passerelle du réseau récupérée à l'étape précédente; le mot de passe d'origine du compte d'administration est *minit*)
 ```bash
 ssh minit@10.42.0.1
 ```
@@ -76,7 +76,7 @@ nmcli connection show
 nmcli connection show static
 ```
 
-Il faut maintenant choisir la manière dont vous allez configurer la connexion Ethernet filaire. La commande `sudo` permet de passer en mode administrateur le temps d’exécuter une commande.
+Il faut maintenant choisir la manière dont vous allez configurer la connexion Ethernet filaire. En mode dynamique (DHCP), ce qui est recommandé, le séquenceur va se connecter à serveur DHCP pour obtenir sa configuration réseau. Pour utiliser ce mode de fonctionnement, il sera peut-être nécessaire de fournir l'adresse MAC de la carte réseau à votre service informatique pour qu'il autorise le séquenceur à recevoir sa configuration réseau. La commande `sudo` permet de passer en mode administrateur le temps d’exécuter une commande.
 
 * Option 1 : configuration dynamique (DHCP) de la connexion Ethernet.
 ```bash
