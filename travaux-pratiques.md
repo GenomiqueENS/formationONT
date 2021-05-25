@@ -12,7 +12,7 @@ Contact Plateforme génomique de l'ENS : Site Web [https://genomique.biologie.en
 * Rappel du principe de la technologie ONT
 * Présentation des différents types de flowcells et séquenceur ONT
 * Principe de l’appel de base
-* [Démo : Mise en service d’un MinION Mk1C](#config)
+* [Dépannage : Mise en service d’un MinION Mk1C](#config)
 * [TP 1 : Connexion au MinION Mk1C en ligne de commande](#connexion)
 * [TP 2 : Connexion à distance grace à MinKNOW Stand Alone GUI](#minknow-stand-alone-gui)
 * [TP 3 : Transfert des données](#transfert)
@@ -36,13 +36,13 @@ Au cours de ce TP, des noms de domaine `minion0X.example.com`  seront indiqués,
 
 Le MinION Mk1C peut être assimilé à un MinIT couplé à un MinION Mk1B doté d’un écran tactile. Cela signifie que toutes les informations et procédures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
 
-Les données utilisées lors de ce TP sont celles qui ont été produites lors de la précédente session expérimentale de cette formation. Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*. Deux échantillons avait été multiplexé.
+Les données utilisées lors de ce TP sont celles qui ont été produites lors de la session expérimentale de cette formation le 15 mars 2021. Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*. Deux échantillons avait été multiplexé.
 
 **Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT. Il convient évidemment de les changer lors de mise en production d’un séquenceur.
 
 
 <a name="config"></a>
-## Démo : Mise en service d’un MinION Mk1C
+## Dépannage : Mise en service d’un MinION Mk1C
 
 La version du système préinstallé sur les MinION Mk1C est (était ?) notoirement boguée notamment en ce qui concerne la configuration réseau via MinKNOW (Elle ne fonctionne pas). Cette configuration initiale est certes délicate à mettre en place mais une fois les mises à jour du système effectuées, l’environnement logiciel du séquenceur s’avère stable.
 
@@ -59,8 +59,8 @@ La procédure à suivre est la suivante :
 1. Branchement de l’appareil au réseau électrique. Attention, les prises électriques mâles des appareils ONT sont parfois capricieuses, une multiprise peut être nécessaire pour brancher correctement l’appareil
 2. On allume l’appareil
 3. À l’aide d’ordinateur, connectez-vous en Wifi au Hotspot *MC-XXXXXX* créé par le séquenceur. Le mot de passe de ce Hotspot est *WarmButterflyWings98*
-5. Trouvez l'adresse IP de la passerelle du réseau à l'aide de la commande `ipconfig` (Windows), `route -n get default` (macOS) ou `ip route`. Celle-ci est également l'adresse du MinION Mk1C sur ce réseau
-4. Connectez-vous maintenant en SSH au séquenceur
+5. Trouvez l'adresse IP de la passerelle du réseau à l'aide de la commande `ipconfig` (Windows), `route -n get default` (macOS) ou `ip route` (Linux). Celle-ci est également l'adresse du MinION Mk1C sur ce réseau
+4. Connectez-vous maintenant en SSH au séquenceur (le mot de passe d'origine du compte est *minit*)
 ```bash
 ssh minit@10.42.0.1
 ```
@@ -80,22 +80,22 @@ Il faut maintenant choisir la manière dont vous allez configurer la connexion E
 
 * Option 1 : configuration dynamique (DHCP) de la connexion Ethernet.
 ```bash
-sudo nmcli connection down static
-sudo nmcli connection up dhcp
+sudo nmcli connection down static    # Désactive la configuration statique de la connexion fillaire
+sudo nmcli connection up dhcp        # Active la configuration dynamique de la connexion fillaire
 ```
 * Option 2 : configuration statique de la connexion Ethernet. Il est prudent de recopier la configuration avant toute modification des caractéristiques d’une connexion
 ```bash
-sudo nmcli connection edit static
-sudo nmcli connection down dhcp
-sudo nmcli connection up static
+sudo nmcli connection edit static    # Édite la configuration statique de la connexion fillaire
+sudo nmcli connection down dhcp      # Désactive la configuration dynamique de la connexion fillaire
+sudo nmcli connection up static      # Active la configuration statique de la connexion fillaire
 ```
 
 Maintenant que la configuration a été correctement définie, il ne reste plus qu’à mettre à jour le système à l’aide des commandes suivantes :
 ```bash
-sudo apt update
-apt list --upgradable
-sudo apt dist-upgrade
-sudo shutdown --reboot now
+sudo apt update                      # Mise à jour de la liste des paquets disponibles 
+apt list --upgradable                # Affiche les paquets pour lesquels une mise à jour est disponible
+sudo apt dist-upgrade                # Lance la mise à jour du système
+sudo shutdown --reboot now           # Redémarre le système
 ```
 
 
