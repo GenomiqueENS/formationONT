@@ -67,13 +67,17 @@ ssh minit@10.42.0.1
 
 Une fois que nous avons accès au système du séquenceur, nous allons pouvoir agir sur la configuration réseau. Pour cela, il faut utiliser la commande `nmcli` de l’utilitaire *NetWork Manager* qui permet de gérer la configuration réseau de l’ensemble du système. Dans un premier temps, nous pouvons :
 
-* Lister les configurations des connexions réseaux
+* Lister les configurations réseaux (les configurations actives apparaissent en vert)
 ```bash
 nmcli connection show
 ```
-* Afficher les caractéristiques d’une connexion
+* Afficher les caractéristiques d’une configuration réseau
 ```bash
 nmcli connection show static
+```
+* Afficher les caractéristiques de la connexion filaire actuelle (notamment son adresse MAC)
+```bash
+nmcli device show eth0
 ```
 
 Il faut maintenant choisir la manière dont vous allez configurer la connexion Ethernet filaire. En mode dynamique (DHCP), ce qui est recommandé, le séquenceur va se connecter à serveur DHCP pour obtenir sa configuration réseau. Pour utiliser ce mode de fonctionnement, il sera peut-être nécessaire de fournir l'adresse MAC de la carte réseau à votre service informatique pour qu'il autorise le séquenceur à recevoir sa configuration réseau. La commande `sudo` permet de passer en mode administrateur le temps d’exécuter une commande.
