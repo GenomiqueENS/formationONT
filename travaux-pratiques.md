@@ -154,7 +154,7 @@ df -h /data
 **Avertissement :** Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez. Il convient donc d’être __extrêmement__ prudent, car vous n’aurez pas de message d’avertissements (comme lorsque vous souhaitez supprimer des données avec la commande `rm`).
 
 
-<a name="minknow-standalone-gui"></a>
+<a name="minknow-stand-alone-gui"></a>
 ## TP 2 : Connexion à distance gràce à MinKNOW Stand Alone GUI
 
 L’écran du MinION est relativement petit et pas toujours très pratique à utiliser, c’est pour cette raison (et aussi, car le MinIT ne disposait pas d’écran) que la société ONT a développé le logiciel *MinKNOW Stand Alone GUI* qui permet de contrôler à distance un ou plusieurs séquenceurs.
