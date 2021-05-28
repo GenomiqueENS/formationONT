@@ -80,7 +80,7 @@ nmcli connection show static
 nmcli device show eth0
 ```
 
-Il faut maintenant choisir la manière dont vous allez configurer la connexion Ethernet filaire. En mode dynamique (DHCP), ce qui est recommandé, le séquenceur va se connecter à serveur DHCP pour obtenir sa configuration réseau. Pour utiliser ce mode de fonctionnement, il sera peut-être nécessaire de fournir l'adresse MAC de la carte réseau à votre service informatique pour qu'il autorise le séquenceur à recevoir sa configuration réseau. La commande `sudo` permet de passer en mode administrateur le temps d’exécuter une commande.
+Il faut maintenant choisir la manière dont vous allez configurer la connexion Ethernet filaire. En mode dynamique (DHCP), ce qui est recommandé, le séquenceur va se connecter à un serveur DHCP pour obtenir sa configuration réseau. Pour utiliser ce mode de fonctionnement, il sera peut-être nécessaire de fournir l'adresse MAC de la carte réseau à votre service informatique pour qu'il autorise le séquenceur à recevoir sa configuration réseau. La commande `sudo` permet de passer en mode administrateur le temps d’exécuter une commande.
 
 * Option 1 : configuration dynamique (DHCP) de la connexion Ethernet.
 ```bash
@@ -212,13 +212,13 @@ Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION 
 
 * Ouvrez *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
 
-**Exercice 1 : Brancher une clé USB et à l’aide de l’interface graphique copier un fichier de la clé dans le dossier */data* **
+**Exercice 1 : Brancher une clé USB et à l’aide de l’interface graphique copier un fichier de la clé dans le dossier */data*.**
 
 **Exercice 2 : À l’aide de l’interface graphique copier un petit dossier vers la clé USB. Démontez-la et retirer là et branchez-la sur l’ordinateur pour vérifier que vous pouvez accéder aux données.**
 
 ### Partage SMB
 
-Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB. Le protocole SMB (Server Message Block3) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows. Désormais ce protocole est pris en charge par macOS et Linux.
+Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB. Le protocole SMB (Server Message Block) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows. Désormais ce protocole est pris en charge par macOS et Linux.
 
 **Note :** Il faut noter qu’il est possible de faire l’inverse et de monter un partage réseau (SMB ou NFS) depuis l’interface de MinKNOW. Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*.
 
@@ -260,7 +260,7 @@ sftp -rp TOTO minit@minion0X:/data/TOTO-copie .
 <a name="minknow"></a>
 ## TP 4 : Interface de MinKNOW, lancement d'un run et du basecalling via l'interface
 
-Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C. Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues...etc
+Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C. Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues, etc...
 
 
 ### Utilisation du MinION Mk1C via son interface graphique
@@ -275,8 +275,7 @@ Parcourez les Host settings.
 **Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ou du MinIT ?
 Où verifier que MinKNOW est bien à jour ?**
 
-Ce sous menu vous permet de
-
+Ce sous menu vous permet de :
 - connaitre l’espace qu’il vous reste sur vos disques
 - naviguer dans vos résultats, run par run
 - effectuer la mise à jour du système d’exploitation de votre appareil
@@ -291,7 +290,6 @@ A la réception du séquenceur vous devez verifier son état. Pour le faire, vou
 
 Avant chaque lancement de run, vous devez aussi vous assurer que la flowcell rempli les conditions d’utilisation: il est nécessaire de vérifier le nombre de pores disponibles sur la flowcell avant de charger les échantillons.
 Le nombre de pores disponibles doit être supérieur à :
-
 - 50 dans le cas d’une flowcell Flongle
 - 800 dans le cas d’une flowcell MinION
 
@@ -300,7 +298,6 @@ Les flowcells sont remplacées si ce n’est pas le cas !
 **Exercice 3 : Revenez au menu précedent et lancez le Flowcell Check**
 
 ### Lancement d'un run
-
 
 **Exercice 4 : Paramétrez et lancez votre run**
 
@@ -314,14 +311,16 @@ Il faut définir :
 
 Commençons !
 
-**Définissez votre expérience et passez à la selection du kit (N’oubliez pas de lui donnez un nom !):**
+
+**Définissez votre expérience et passez à la selection du kit (N’oubliez pas de lui donnez un nom !) :**
 
 Dans la section permettant le choix du kit de séquençage à utiliser, tous les kits sont disponibles.
 Il est possible de les filtrer selon ce que l’on séquence, selon les banques faites…
 Choisissez ce qui vous intéresse. A la plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
 Il est important de ne pas se tromper: chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
 
-**Passez au choix des options de runs:**
+
+**Passez au choix des options de runs :**
 
 Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps.
 Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
@@ -330,19 +329,19 @@ Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer le
 Le temps entre chaque changement des canaux (mux scan) est aussi paramétrable. Vous pouvez également sauvegarder un pourcentage de pores pour les faire intervenir dans la durée du run.
 Concrètement, nous ne changeons jamais ces paramètres. Vous pouvez jouer avec pendant le TP.
 
-**Passez à la configuration du basecalling:**
+
+**Passez à la configuration du basecalling :**
 
 L’appel de base peut être réalisé à la volée ou après le run. Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
 Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soit la machine choisie pour réaliser l’appel de base.
 
-
-Trois modes de basecalling sont possibles:
-
+Trois modes de basecalling sont possibles :
 - Fast : Pratique pour le diagnostique parce rapide
 - High-accuracy : Plus long mais moins d’erreur
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
-**Passons aux code-barres:**
+
+**Passons aux code-barres :**
 
 Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres :
 
@@ -353,7 +352,7 @@ Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs pa
 Attention, le sequençage nanopore est encore imprecis. Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent etre mal reconnues. Vous risquez de perdre beaucoup à être trop stringent.
 
 
-**Lancement de l'alignement à la volée:**
+**Lancement de l'alignement à la volée :**
 
 Minknow  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utilisé de façon standard.
 Si vous souhaitez le faire, vous devez fournir un fichier fasta de référence.
@@ -363,12 +362,13 @@ Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construi
 
 **Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?**
 
-- Des FAST5 : Ce sont les données brutes. Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
-- Des fastq : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
-- Des bam : Ce sont les données alignées si l’alignement à la volée a été demandé
+- Des Fast5 : Ce sont les données brutes. Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
+- Des FASTQ : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
+- Des BAM : Ce sont les données alignées si l’alignement à la volée a été demandé
 
 Vous pouvez choisir le critère qui classera la lecture en pass ou fail. Classiquement, les lectures aillant un score de qualité inférieur à 7 sont considérées comme mauvaises (fail). Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
 Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
+
 
 **Quid du fichier FAST5 Bulk ?**
 
@@ -377,8 +377,6 @@ Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore
 - il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis]. Selon la séquence, il est possible que MinKnow ne coupe pas au bon endroit. Des chimères peuvent être créees de cette façon.
 
 Attention, cette option génère un gros volume de données.
-
-
 
 
 <a name="fast5"></a>
