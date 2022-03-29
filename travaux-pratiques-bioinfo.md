@@ -4,7 +4,10 @@
 
 Formateurs : Laurent Jourdren (*jourdren@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
 
-Contact Plateforme GenomiqueENS : Site Web [https://genomique.biologie.ens.fr](https://genomique.biologie.ens.fr/), Courriel [genomique@bio.ens.psl.eu](mailto:genomique@bio.ens.psl.eu), Twitter [@Genomique_ENS](https://twitter.com/Genomique_ENS)
+Contact Plateforme GenomiqueENS :
+* Site Web [https://genomique.biologie.ens.fr](https://genomique.biologie.ens.fr/)
+* Courriel [genomique@bio.ens.psl.eu](mailto:genomique@bio.ens.psl.eu)
+* Twitter [@Genomique_ENS](https://twitter.com/Genomique_ENS)
 
 ## Sommaire
 
