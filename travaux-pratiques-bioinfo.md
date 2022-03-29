@@ -1,4 +1,4 @@
-<a href="https://genomique.biologie.ens.fr/"><img src="https://genomique.biologie.ens.fr/assets/logo-petit-GenomiqueENS-bd1bf7fc9faf28c27bda11ee8252a9c5.png" align="left" width="90px" style="backgroundcolor:#000038;"></a>
+<a href="https://genomique.biologie.ens.fr/"><img src="https://github.com/GenomiqueENS/eoulsan/raw/master/src/site/resources/images/logo-GenomiqueENS-90pxh.png" align="left"></a>
 # Formation MinION Session Bioinformatique<br/>
 
 
