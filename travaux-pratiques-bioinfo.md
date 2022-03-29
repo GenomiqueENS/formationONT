@@ -389,7 +389,7 @@ Trois modes de basecalling sont possibles :
 - High-accuracy : Plus long mais moins d’erreur
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
-Note : Un mode Super high acurracy existe mais il est seulement disponible en ligne de commande.
+**Note :** Un mode Super high acurracy existe mais il est seulement disponible en ligne de commande.
 Il est indispensable de disposer d'une carte GPU puissante pour réaliser l'appel de base dans ce mode.
 
 **Passons aux code-barres :**
