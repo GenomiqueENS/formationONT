@@ -1,10 +1,10 @@
-<a href="https://genomique.biologie.ens.fr/"><img src="https://genomique.biologie.ens.fr/assets/logo-petit-GenomiqueENS-bd1bf7fc9faf28c27bda11ee8252a9c5.png" align="left" width="90px"></a>
+<a href="https://genomique.biologie.ens.fr/"><img src="https://genomique.biologie.ens.fr/assets/logo-petit-GenomiqueENS-bd1bf7fc9faf28c27bda11ee8252a9c5.png" align="left" width="90px" style="backgroundcolor:#000038;"></a>
 # Formation MinION Session Bioinformatique<br/>
 
 
 Formateurs : Laurent Jourdren (*jourdren@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
 
-Contact Plateforme génomique de l'ENS : Site Web [https://genomique.biologie.ens.fr](https://genomique.biologie.ens.fr/), Courriel [genomique@bio.ens.psl.eu](mailto:genomique@bio.ens.psl.eu), Twitter [@Genomique_ENS](https://twitter.com/Genomique_ENS)
+Contact Plateforme GenomiqueENS : Site Web [https://genomique.biologie.ens.fr](https://genomique.biologie.ens.fr/), Courriel [genomique@bio.ens.psl.eu](mailto:genomique@bio.ens.psl.eu), Twitter [@Genomique_ENS](https://twitter.com/Genomique_ENS)
 
 ## Sommaire
 
@@ -214,7 +214,7 @@ Il est donc nécessaire de pouvoir transférer des données depuis et vers le s�
 * Partage NFS
 * Tout autre méthode de partage réseau que permet Linux en ligne de commande (NFS, SSH, SFTP, FTP…)
 
-Dans ce TP, nous allons nous concentrer dans ce TP sur 3 méthodes, deux en utilisant MinKNOW (Clé USB et Partage SMB) et une en ligne de commande (SFTP).
+Dans ce TP, nous allons nous concentrer dans ce TP sur 4 méthodes, trois en utilisant MinKNOW (Clé USB, Partage SMB et montage réseau) et une en ligne de commande (SFTP).
 
 ### Support Physique
 
@@ -233,6 +233,8 @@ Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION 
 **Exercice 2 : À l’aide de l’interface graphique copier un petit dossier vers la clé USB. Démontez-la et retirer là et branchez-la sur l’ordinateur pour vérifier que vous pouvez accéder aux données.**
 
 ### Partage SMB
+
+**Avertissement :** Cette méthode n'est pas disponible dans la version de MinKNOW utilisée pour ce TP, le bouton *Share Samba network* n'apparaissant pas.
 
 Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB.
 Le protocole SMB (Server Message Block) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows.
@@ -254,6 +256,23 @@ Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*
     * Une boite de dialogue apparaît. Choisissez *Utilisateur référencé*, le nom de l’utilisateur est **minit** et le mot de passe celui que vous avez précédemment choisi. Appuyez sur le bouton *Se connecter*
 
 **Exercice 3 : Utiliser ce partage pour copier des fichiers vers le montage. Vérifiez que les fichiers copiés sont bien visibles dans l’interface de MinKNOW**
+
+### Montage d'un disque réseau sur le MinION
+
+Dans la méthode précedente, nous rendions accessible les données du MinION sur un autre ordinateur.
+Il est également possible de faire l'inverse, c'est à dire monter un disque réseau sur le MinION.
+
+Pour cela il faut procéder de la manière suivante :
+* Dans *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
+* Appuyer sur le Bouton *Add a network drive*
+
+Deux types de protocoles de montage de disque réseau sont disponibles :
+* SMB, protocole le plus courant dans le monde Windows et macOS généralement plus simple à mettre en oeuvre
+* NFS, protocole venant du monde Unix/Linux
+
+Le meilleur moyen d'utiliser cette possibilité est d'utiliser l'infrastrure de stockage de votre établissement ou de disposer d'un [NAS (Network Attached Storage)](https://fr.wikipedia.org/wiki/Serveur_de_stockage_en_r%C3%A9seau), qui permettra de vous connecter avec l'un ou l'autre des protocoles.
+
+La [documentation de MinKNOW](https://community.nanoporetech.com/docs/prepare/library_prep_protocols/minion-mk1c-user-manual/v/mkc_2005_v1_revt_27nov2019/mount-network-drive) explique comment configurer votre montage réseau en fonction du protocole retenu.
 
 ### SFTP
 
