@@ -437,10 +437,14 @@ Attention, cette option génère un gros volume de données.
 Les fichiers Fast5 sont les fichiers contenant les données brutes du séquençage.
 Ces fichiers sont en fait des fichiers au format [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) qui utilise une structure arborescente propre à Nanopore.
 
-Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux comprendre le principe le l’appel de base que nous aborderons dans le prochain TP.
-
 Pour visualiser le contenu de ces fichiers, il est nécessaire d’utiliser des outils spécifiques. Dans le cadre de TP, nous utiliserons l’outil HDFView qui permet de visualiser des fichiers au format HDF5.
 
+**Note :** Depuis la version 21.05.8 de MinKNOW (juin 2021), le format des fichiers Fast5 a évolué.
+Le signal electrique est désormais compressé par défaut à l'aide de l'algorithme [VBZ](https://github.com/nanoporetech/vbz_compression) developpé par ONT.
+Cet algorithme permet de reduire d'environ 1/3 la taille des données précédement compressées à l'aide de l'algorithme gzip et de réduire très fortement les temps de compresssion/décompression.
+Cette algorithme n'étant pas standard, le signal electrique n'est plus visualisable dans HDFView pour les données compressées en VBZ.
+
+Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux comprendre le principe le l’appel de base que nous aborderons dans le prochain TP.
 * Installation de HDFView
     * Aller dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
     * Faire un double clic sur *HDFView-3.1.2.dmg*
