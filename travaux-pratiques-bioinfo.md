@@ -389,7 +389,7 @@ Trois modes de basecalling sont possibles :
 - High-accuracy : Plus long mais moins d’erreur
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
-**Note :** Un mode Super high acurracy existe mais il est seulement disponible en ligne de commande.
+**Note :** Un mode Super acurracy existe mais il est seulement disponible en ligne de commande.
 Il est indispensable de disposer d'une carte GPU puissante pour réaliser l'appel de base dans ce mode.
 
 **Passons aux code-barres :**
@@ -482,6 +482,10 @@ Pour fonctionner, il est nécessaire de fournir à Guppy un fichier de configura
 Celui-ci peut être automatiquement déterminé par Guppy si on lui fournit à l’aide des arguments `--flowcell` et `--kit`.
 Cependant si cette solution est choisie le mode *haute précision (hac)* sera automatiquement sélectionné.
 Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*. Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
+
+**Note :** Si vous disposez d'une carte GPU puissante (non recommandé sur un MinION Mk1C), vous pouvez également forcer l'utilisation du mode super accuracy à l'aide de la configuration *dna_r9.4.1_450bps_sup*.
+La qualité de l'appel de base en mode super accuracy est légèrement supérieure au mode high accuracy mais demande beaucoup plus de temps de calcul que ce dernier.
+Le mode high accuracy est généralement un bon compromis entre temps de calcul et qualité de l'appel de base.
 
 * Ouvrez le logiciel `Terminal` sur l'ordinateur et connectez-vous via `ssh` au séquenceur
 
