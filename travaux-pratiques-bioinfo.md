@@ -1,4 +1,4 @@
-<a href="https://genomique.biologie.ens.fr/"><img src="https://www.outils.genomique.biologie.ens.fr/aozan/images/logo_genomicpariscentre-90pxh.png" align="left"> </a>
+<a href="https://genomique.biologie.ens.fr/"><img src="https://genomique.biologie.ens.fr/assets/logo-petit-GenomiqueENS-bd1bf7fc9faf28c27bda11ee8252a9c5.png" align="left" width="90px"></a>
 # Formation MinION Session Bioinformatique<br/>
 
 
@@ -36,7 +36,12 @@ Au cours de ce TP, des noms de domaine `minion0X.example.com`  seront indiqués,
 
 Le MinION Mk1C peut être assimilé à un MinIT couplé à un MinION Mk1B doté d’un écran tactile. Cela signifie que toutes les informations et procédures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
 
-Les données utilisées lors de ce TP sont celles qui ont été produites lors de la session expérimentale de cette formation le 15 mars 2021. Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*. Deux échantillons avait été multiplexé.
+MinKNOW est le logiciel pilotant les MinION et GridION.
+Au cours de ce TP, la version de MinKNOW utilisé est la 21.11.7 datant du 03 février 2022.
+Il s'agit de la dernière version fonctionnant sous Ubuntu 16.06 ainsi que sur le MinIT, les MinION Mk1C doivent être mis à niveau vers Ubuntu 18.06 pour recevoir les nouvelles mises à jour suivantes de MinKNOW.
+
+Les données utilisées lors de ce TP sont celles qui ont été produites lors de la session expérimentale de cette formation le 15 mars 2021. Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*.
+Deux échantillons avait été multiplexé.
 
 **Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT. Il convient évidemment de les changer lors de mise en production d’un séquenceur.
 
@@ -65,7 +70,9 @@ La procédure à suivre est la suivante :
 ssh minit@10.42.0.1
 ```
 
-Une fois que nous avons accès au système du séquenceur, nous allons pouvoir agir sur la configuration réseau. Pour cela, il faut utiliser la commande `nmcli` de l’utilitaire *NetWork Manager* qui permet de gérer la configuration réseau de l’ensemble du système. Dans un premier temps, nous pouvons :
+Une fois que nous avons accès au système du séquenceur, nous allons pouvoir agir sur la configuration réseau.
+Pour cela, il faut utiliser la commande `nmcli` de l’utilitaire *NetWork Manager* qui permet de gérer la configuration réseau de l’ensemble du système.
+Dans un premier temps, nous pouvons :
 
 * Lister les configurations réseaux (les configurations actives apparaissent en vert)
 ```bash
@@ -80,7 +87,10 @@ nmcli connection show static
 nmcli device show eth0
 ```
 
-Il faut maintenant choisir la manière dont vous allez configurer la connexion Ethernet filaire. En mode dynamique (DHCP), ce qui est recommandé, le séquenceur va se connecter à un serveur DHCP pour obtenir sa configuration réseau. Pour utiliser ce mode de fonctionnement, il sera peut-être nécessaire de fournir l'adresse MAC de la carte réseau à votre service informatique pour qu'il autorise le séquenceur à recevoir sa configuration réseau. La commande `sudo` permet de passer en mode administrateur le temps d’exécuter une commande.
+Il faut maintenant choisir la manière dont vous allez configurer la connexion Ethernet filaire.
+En mode dynamique (DHCP), ce qui est recommandé, le séquenceur va se connecter à un serveur DHCP pour obtenir sa configuration réseau.
+Pour utiliser ce mode de fonctionnement, il sera peut-être nécessaire de fournir l'adresse MAC de la carte réseau à votre service informatique pour qu'il autorise le séquenceur à recevoir sa configuration réseau.
+La commande `sudo` permet de passer en mode administrateur le temps d’exécuter une commande.
 
 * Option 1 : configuration dynamique (DHCP) de la connexion Ethernet.
 ```bash
@@ -107,7 +117,9 @@ sudo shutdown --reboot now           # Redémarre le système
 <a name="connexion"></a>
 ## TP 1 : Connexion au MinION Mk1C en ligne de commande
 
-Le MinION Mk1C comme tous les séquenceurs d’ONT couplés à un ordinateur, fonctionne sous un système Linux. Oxford Nanopore Technologies, laisse à ses utilisateurs un accès total au système d’exploitation de ses machines au travers de connexions de type SSH. SSH (Secure Shell) est à la fois un programme informatique et un protocole de communication sécurisé permettant l’accès à distance à des ordinateurs via la ligne de commande.
+Le MinION Mk1C comme tous les séquenceurs d’ONT couplés à un ordinateur, fonctionne sous un système Linux.
+Oxford Nanopore Technologies, laisse à ses utilisateurs un accès total au système d’exploitation de ses machines au travers de connexions de type SSH.
+SSH (Secure Shell) est à la fois un programme informatique et un protocole de communication sécurisé permettant l’accès à distance à des ordinateurs via la ligne de commande.
 
 Dans ce TP, nous verrons comment se connecter à un MinION Mk1C via la commande `ssh` et nous récupérerons quelques informations sur le système informatique pilotant le séquenceur.
 
@@ -155,7 +167,8 @@ df -h /data
 
 **Question 8 : Combien d’espace disponible reste-t-il pour stocker de nouveaux runs ?**
 
-**Avertissement :** Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez. Il convient donc d’être __extrêmement__ prudent, car vous n’aurez pas de message d’avertissements (comme lorsque vous souhaitez supprimer des données avec la commande `rm`).
+**Avertissement :** Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez.
+Il convient donc d’être __extrêmement__ prudent, car vous n’aurez pas de message d’avertissements (comme lorsque vous souhaitez supprimer des données avec la commande `rm`).
 
 
 <a name="minknow-stand-alone-gui"></a>
@@ -174,7 +187,7 @@ Pour le moment, il n’existe de pas de version pour les systèmes Linux.
 
 * Installation du MinKNOW Stand Alone GUI
     * Allez dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
-    * Faire un double clic sur *MinKNOW UI OSX-4.2.8.dmg*
+    * Faire un double clic sur *MinKNOW UI OSX-4.5.5.dmg*
     * Dans la fenêtre qui s’ouvre, déplacer l’icone *MinKNOW UI* dans le raccourci vers le dossier *Applications*
 
 * Configuration de l’application
@@ -184,13 +197,16 @@ Pour le moment, il n’existe de pas de version pour les systèmes Linux.
     * Dans la section *Saved Host*, devrait apparaitre une icone *Mk1C* ou *MinIT* selon le sequençeur auquel vous vous êtes connecté
     * Cliquez sur l’hôte crée pour pouvoir controler à distance le sequenceur
 
-**Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/MinKNOW* (*~* correspond au chemin de votre dossier personnel). Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relancer l’application.
+**Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/MinKNOW* (*~* correspond au chemin de votre dossier personnel).
+Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relancer l’application.
 
 
 <a name="transfert"></a>
 ## TP 3 : Transfert des données
 
-Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil (les unités de stockage ont des caractéristiques compatibles avec le débit du séquenceur). Il est donc nécessaire de pouvoir transférer des données depuis et vers le séquenceur. Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
+Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil (les unités de stockage ont des caractéristiques compatibles avec le débit du séquenceur).
+Il est donc nécessaire de pouvoir transférer des données depuis et vers le séquenceur.
+ Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
 
 * Disque dur ou clé USB
 * micro SD-Card
@@ -218,9 +234,12 @@ Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION 
 
 ### Partage SMB
 
-Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB. Le protocole SMB (Server Message Block) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows. Désormais ce protocole est pris en charge par macOS et Linux.
+Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB.
+Le protocole SMB (Server Message Block) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows.
+Désormais ce protocole est pris en charge par macOS et Linux.
 
-**Note :** Il faut noter qu’il est possible de faire l’inverse et de monter un partage réseau (SMB ou NFS) depuis l’interface de MinKNOW. Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*.
+**Note :** Il faut noter qu’il est possible de faire l’inverse et de monter un partage réseau (SMB ou NFS) depuis l’interface de MinKNOW.
+Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*.
 
 * Création du montage
     * Dans *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
@@ -238,7 +257,8 @@ Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux f
 
 ### SFTP
 
-SFTP est l’évolution sécurisée du protocole de transfert de fichier FTP qui date des années 70. SFTP est habituellement utilisable sur une machine dès qu’un serveur SSH est configuré, comme c’est le cas sur MinION Mk1C.
+SFTP est l’évolution sécurisée du protocole de transfert de fichier FTP qui date des années 70.
+SFTP est habituellement utilisable sur une machine dès qu’un serveur SSH est configuré, comme c’est le cas sur MinION Mk1C.
 
 * Récupération d’un run. Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
 ```bash
@@ -260,13 +280,16 @@ sftp -rp TOTO minit@minion0X:/data/TOTO-copie .
 <a name="minknow"></a>
 ## TP 4 : Interface de MinKNOW, lancement d'un run et du basecalling via l'interface
 
-Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C. Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues, etc...
+Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C.
+Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues, etc…
 
 
 ### Utilisation du MinION Mk1C via son interface graphique
 
-Après lancement de l'application vous avez accès aux séquenceurs qui lui sont accessibles. Aujourd'hui, vous en voyez deux, minion01 (le minion via le MinIT) et minion02 (le Mk1C).
-Choisissez le séquenceur sur lequel vous travaillez. Placez une flowcell dans l'emplacement prévu. Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interface.
+Après lancement de l'application vous avez accès aux séquenceurs qui lui sont accessibles.
+Aujourd'hui, vous en voyez deux, minion01 (le minion via le MinIT) et minion02 (le Mk1C).
+Choisissez le séquenceur sur lequel vous travaillez. Placez une flowcell dans l'emplacement prévu.
+Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interface.
 
 
 Le menu accessible sur la gauche de l'application vous propose 5 options : Start, Sequencing overview, Experiments, System messages, Host settings.
@@ -284,7 +307,10 @@ Ce sous menu vous permet de :
 
 ### Vérification initiale du séquenceur ou de la flowcell
 
-A la réception du séquenceur vous devez verifier son état. Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l'appareil. Il s’agit de la flowcell de configuration (CTC). Insérez là dans l'emplacement de la flowcell et cliquez sur start. En choisissant la section Hardware check, vois pouvez lancer la vérification de votre matériel.
+A la réception du séquenceur vous devez verifier son état.
+Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l'appareil.
+Il s’agit de la flowcell de configuration (CTC). Insérez là dans l'emplacement de la flowcell et cliquez sur start.
+En choisissant la section Hardware check, vois pouvez lancer la vérification de votre matériel.
 
 **Exercice 2 : Lancez le Hardware Check**
 
@@ -332,7 +358,8 @@ Concrètement, nous ne changeons jamais ces paramètres. Vous pouvez jouer avec 
 
 **Passez à la configuration du basecalling :**
 
-L’appel de base peut être réalisé à la volée ou après le run. Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
+L’appel de base peut être réalisé à la volée ou après le run.
+Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
 Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soit la machine choisie pour réaliser l’appel de base.
 
 Trois modes de basecalling sont possibles :
@@ -340,6 +367,8 @@ Trois modes de basecalling sont possibles :
 - High-accuracy : Plus long mais moins d’erreur
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
+Note : Un mode Super high acurracy existe mais il est seulement disponible en ligne de commande.
+Il est indispensable de disposer d'une carte GPU puissante pour réaliser l'appel de base dans ce mode.
 
 **Passons aux code-barres :**
 
@@ -349,7 +378,9 @@ Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs pa
 - Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue
 - Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé
 
-Attention, le sequençage nanopore est encore imprecis. Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent etre mal reconnues. Vous risquez de perdre beaucoup à être trop stringent.
+Attention, le sequençage nanopore est encore imprecis.
+Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent etre mal reconnues.
+Vous risquez de perdre beaucoup à être trop stringent.
 
 
 **Lancement de l'alignement à la volée :**
@@ -366,7 +397,9 @@ Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construi
 - Des FASTQ : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
 - Des BAM : Ce sont les données alignées si l’alignement à la volée a été demandé
 
-Vous pouvez choisir le critère qui classera la lecture en pass ou fail. Classiquement, les lectures aillant un score de qualité inférieur à 7 sont considérées comme mauvaises (fail). Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
+Vous pouvez choisir le critère qui classera la lecture en pass ou fail.
+Classiquement, les lectures aillant un score de qualité inférieur à 8 sont considérées comme mauvaises (fail).
+Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
 Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
 
 
@@ -382,7 +415,8 @@ Attention, cette option génère un gros volume de données.
 <a name="fast5"></a>
 ## TP 5 : Les fichiers bruts Fast5
 
-Les fichiers Fast5 sont les fichiers contenant les données brutes du séquençage. Ces fichiers sont en fait des fichiers au format [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) qui utilise une structure arborescente propre à Nanopore.
+Les fichiers Fast5 sont les fichiers contenant les données brutes du séquençage.
+Ces fichiers sont en fait des fichiers au format [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) qui utilise une structure arborescente propre à Nanopore.
 
 Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux comprendre le principe le l’appel de base que nous aborderons dans le prochain TP.
 
@@ -412,7 +446,9 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 <a name="basecalling-cmdline"></a>
 ## TP 6 : Appel de Base en ligne de commande
 
-L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies. D’autres outils existent/existaient pour cette tache, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant. Oxford Nanopore propose également d’autres logiciels pour l’appel de base mais ceux-ci sont dédiés à la recherche algorithmique et il ne vaut mieux pas les utiliser en production.
+L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies.
+D’autres outils existent/existaient pour cette tache, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
+Oxford Nanopore propose également d’autres logiciels pour l’appel de base mais ceux-ci sont dédiés à la recherche algorithmique et il ne vaut mieux pas les utiliser en production.
 
 Dans ce TP, nous verrons comment lancer l’appel de base en ligne de commande et nous explorerons les fichiers générés lors de ce traitement.
 
