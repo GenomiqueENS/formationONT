@@ -5,6 +5,7 @@
 Formateurs : Laurent Jourdren (*jourdren@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
 
 Contact Plateforme GenomiqueENS :
+
 * Site Web [https://genomique.biologie.ens.fr](https://genomique.biologie.ens.fr/)
 * Courriel [genomique@bio.ens.psl.eu](mailto:genomique@bio.ens.psl.eu)
 * Twitter [@Genomique_ENS](https://twitter.com/Genomique_ENS)
@@ -263,10 +264,12 @@ Dans la méthode précedente, nous rendions accessible les données du MinION su
 Il est également possible de faire l'inverse, c'est à dire monter un disque réseau sur le MinION.
 
 Pour cela il faut procéder de la manière suivante :
+
 * Dans *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
 * Appuyer sur le Bouton *Add a network drive*
 
 Deux types de protocoles de montage de disque réseau sont disponibles :
+
 * SMB, protocole le plus courant dans le monde Windows et macOS généralement plus simple à mettre en oeuvre
 * NFS, protocole venant du monde Unix/Linux
 
@@ -318,6 +321,7 @@ Parcourez les Host settings.
 Où verifier que MinKNOW est bien à jour ?**
 
 Ce sous menu vous permet de :
+
 - connaitre l’espace qu’il vous reste sur vos disques
 - naviguer dans vos résultats, run par run
 - effectuer la mise à jour du système d’exploitation de votre appareil
@@ -335,6 +339,7 @@ En choisissant la section Hardware check, vois pouvez lancer la vérification de
 
 Avant chaque lancement de run, vous devez aussi vous assurer que la flowcell rempli les conditions d’utilisation: il est nécessaire de vérifier le nombre de pores disponibles sur la flowcell avant de charger les échantillons.
 Le nombre de pores disponibles doit être supérieur à :
+
 - 50 dans le cas d’une flowcell Flongle
 - 800 dans le cas d’une flowcell MinION
 
@@ -361,7 +366,8 @@ Commençons !
 
 Dans la section permettant le choix du kit de séquençage à utiliser, tous les kits sont disponibles.
 Il est possible de les filtrer selon ce que l’on séquence, selon les banques faites…
-Choisissez ce qui vous intéresse. A la plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
+Choisissez ce qui vous intéresse.
+Sur notre plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
 Il est important de ne pas se tromper: chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
 
 
@@ -382,11 +388,12 @@ Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
 Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soit la machine choisie pour réaliser l’appel de base.
 
 Trois modes de basecalling sont possibles :
-- Fast : Pratique pour le diagnostique parce rapide
-- High-accuracy : Plus long mais moins d’erreur
+
+- Fast (fast) : Pratique pour le diagnostique parce rapide
+- High-accuracy (hac) : Plus long mais moins d’erreur
 - Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
-**Note :** Un mode Super acurracy existe mais il est seulement disponible en ligne de commande.
+**Note :** Un mode *super acurracy (sup)* existe mais il est seulement disponible en ligne de commande.
 Il est indispensable de disposer d'une carte GPU puissante pour réaliser l'appel de base dans ce mode.
 
 **Passons aux code-barres :**
@@ -397,7 +404,7 @@ Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs pa
 - Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue
 - Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé
 
-Attention, le sequençage nanopore est encore imprecis.
+**Attention :*** le sequençage nanopore est encore imprecis.
 Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent etre mal reconnues.
 Vous risquez de perdre beaucoup à être trop stringent.
 
@@ -406,8 +413,8 @@ Vous risquez de perdre beaucoup à être trop stringent.
 
 Minknow  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utilisé de façon standard.
 Si vous souhaitez le faire, vous devez fournir un fichier fasta de référence.
-Si vous faites du RNASeq, vous pouvez également donner en entrée de minimap2, un fichier bed12 définissant les jonctions de vos isoformes.
-Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construire à partir des fichiers d’annotation gtf.
+Si vous faites du RNA-seq, vous pouvez également donner en entrée de minimap2, un fichier BED12 définissant les jonctions de vos isoformes.
+Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construire à partir des fichiers d’annotation GTF.
 
 
 **Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?**
@@ -417,16 +424,20 @@ Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construi
 - Des BAM : Ce sont les données alignées si l’alignement à la volée a été demandé
 
 Vous pouvez choisir le critère qui classera la lecture en pass ou fail.
-Classiquement, les lectures aillant un score de qualité inférieur à 8 sont considérées comme mauvaises (fail).
+Classiquement, les lectures aillant un score de qualité inférieur à 8 en mode "fast" sont considérées comme mauvaises (fail).
+La valeur par défaut de ce seuil change selon le type d'appel de base (fast : 8, hac : 9 et sup : 10).
 Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
 Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
 
 
-**Quid du fichier FAST5 Bulk ?**
+**Quid du fichier Fast5 Bulk ?**
 
-Dans ce fichier, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore:
+Dans ce type de fichier Fast5, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore:
+
 - elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
-- il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis]. Selon la séquence, il est possible que MinKnow ne coupe pas au bon endroit. Des chimères peuvent être créees de cette façon.
+- il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis].
+Selon la séquence, il est possible que MinKnow ne coupe pas au bon endroit.
+Des chimères peuvent être créees de cette façon.
 
 Attention, cette option génère un gros volume de données.
 
@@ -442,9 +453,10 @@ Pour visualiser le contenu de ces fichiers, il est nécessaire d’utiliser des 
 **Note :** Depuis la version 21.05.8 de MinKNOW (juin 2021), le format des fichiers Fast5 a évolué.
 Le signal electrique est désormais compressé par défaut à l'aide de l'algorithme [VBZ](https://github.com/nanoporetech/vbz_compression) developpé par ONT.
 Cet algorithme permet de reduire d'environ 1/3 la taille des données précédement compressées à l'aide de l'algorithme gzip et de réduire très fortement les temps de compresssion/décompression.
-Cette algorithme n'étant pas standard, le signal electrique n'est plus visualisable dans HDFView pour les données compressées en VBZ.
+Cette algorithme n'étant pas standard, le signal electrique n’est plus visualisable dans HDFView pour les données compressées avec VBZ.
 
 Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux comprendre le principe le l’appel de base que nous aborderons dans le prochain TP.
+
 * Installation de HDFView
     * Aller dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
     * Faire un double clic sur *HDFView-3.1.2.dmg*
@@ -453,7 +465,9 @@ Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux 
 
 Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le contenu
 
-* Allez dans le menu *File* et sélectionnez *Open*. Appuyez sur le bouton *Option* et sélectionnez *All Files*. Sélectionnez un des fichiers Fast5 présent dans le dossier *Données* des documents de la formation présent sur le bureau de l’ordinateur.
+* Allez dans le menu *File* et sélectionnez *Open*
+* Appuyez sur le bouton *Option* et sélectionnez *All Files*
+* Sélectionnez un des fichiers Fast5 présent dans le dossier *Données* des documents de la formation présent sur le bureau de l’ordinateur.
 
 **Question 1 : Combien y a-t-il d’éléments dans le panneau de gauche et pourquoi ?**
 
@@ -470,7 +484,7 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 ## TP 6 : Appel de Base en ligne de commande
 
 L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies.
-D’autres outils existent/existaient pour cette tache, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
+D’autres outils existent/existaient/existeront (Guppy va être remplacer par Dorado d’ici quelques mois) pour cette tache, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
 Oxford Nanopore propose également d’autres logiciels pour l’appel de base mais ceux-ci sont dédiés à la recherche algorithmique et il ne vaut mieux pas les utiliser en production.
 
 Dans ce TP, nous verrons comment lancer l’appel de base en ligne de commande et nous explorerons les fichiers générés lors de ce traitement.
@@ -596,7 +610,7 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 <a name="qc"></a>
 ## TP 7 Contrôle Qualité post run
 
-Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différent outil et nous en comparerons les avantages et les inconvénients.
+Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différent outils et nous en comparerons les avantages et les inconvénients.
 
 **Note :** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
 
