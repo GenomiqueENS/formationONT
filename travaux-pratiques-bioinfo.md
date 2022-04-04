@@ -195,7 +195,7 @@ Pour le moment, il n’existe de pas de version pour les systèmes Linux.
     * Dans la fenêtre qui s’ouvre, déplacer l’icone *MinKNOW UI* dans le raccourci vers le dossier *Applications*
 
 * Configuration de l’application
-    * Au démarrage MinKNOW vous propose de vous connecter avec votre compte Nanopore. Choisissez *Continue as guest* (à quoi sert la connexion au compte ONT ?)
+    * Au démarrage MinKNOW vous propose de vous connecter avec votre compte Nanopore. Choisissez *Log with your Nanopore account*, et saisissez vos identifiants
     * Vous arrivez sur la page du *Connection manager*. Le mode tutoriel est activé, quittez le en cliquant sur le bouton **⋮**
     * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion0X`
     * Dans la section *Saved Host*, devrait apparaitre une icone *Mk1C* ou *MinIT* selon le sequençeur auquel vous vous êtes connecté
@@ -241,9 +241,6 @@ Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION 
 Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB.
 Le protocole SMB (Server Message Block) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows.
 Désormais ce protocole est pris en charge par macOS et Linux.
-
-**Note :** Il faut noter qu’il est possible de faire l’inverse et de monter un partage réseau (SMB ou NFS) depuis l’interface de MinKNOW.
-Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*.
 
 * Création du montage
     * Dans *MinKNOW*, allez dans *Host settings* / *Section Disk management*
