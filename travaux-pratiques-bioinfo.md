@@ -209,7 +209,7 @@ Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relan
 
 Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil (les unités de stockage ont des caractéristiques compatibles avec le débit du séquenceur).
 Il est donc nécessaire de pouvoir transférer des données depuis et vers le séquenceur.
- Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
+Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
 
 * Disque dur ou clé USB
 * micro SD-Card
@@ -237,8 +237,6 @@ Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION 
 
 ### Partage SMB
 
-**Avertissement :** Cette méthode n'est pas disponible dans la version de MinKNOW utilisée pour ce TP, le bouton *Share Samba network* n'apparaissant pas.
-
 Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB.
 Le protocole SMB (Server Message Block) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows.
 Désormais ce protocole est pris en charge par macOS et Linux.
@@ -247,11 +245,10 @@ Désormais ce protocole est pris en charge par macOS et Linux.
 Pour cela il faut aller dans l’onglet *Network* du *File Manager* de *MinKNOW*.
 
 * Création du montage
-    * Dans *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
-    * Appuyer sur le Bouton grisé *Share Samba network* en haut à droite (Samba est le nom de l'implentation du protocole SMB sous Linux)
+    * Dans *MinKNOW*, allez dans *Host settings* / *Section Disk management*
+    * Activer "l'interupteur" *Share* à coté de la partion */data*
     * Une boite de dialogue apparaît vous demandant de choisir un mot de passe pour ce partage. Remplissez-la.
     * Le partage est alors activé
-
 
 * Montage du partage sur l’ordinateur
     * Dans le Finder et dans le menu sélectionnez *Aller* / *Se connecter au serveur…*
