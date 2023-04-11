@@ -2,7 +2,7 @@
 # Formation MinION Session Bioinformatique<br/>
 
 
-Formateurs : Laurent Jourdren (*jourdren@bio.ens.psl.eu*), Ali Hamraoui (*hamraoui@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
+Formateurs : Salomé Brunon (*brunon@bio.ens.psl.eu*) Ali Hamraoui (*hamraoui@bio.ens.psl.eu*), Laurent Jourdren (*jourdren@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
 
 Contact Plateforme GenomiqueENS :
 
