@@ -175,7 +175,7 @@ Il convient donc d’être __extrêmement__ prudent, car vous n’aurez pas de m
 
 
 <a name="minknow-stand-alone-gui"></a>
-## TP 2 : Connexion à distance gràce à MinKNOW Stand Alone GUI
+## TP 2 : Connexion au Mk1C à distance gràce à MinKNOW Stand Alone GUI
 
 L’écran du MinION est relativement petit et pas toujours très pratique à utiliser, c’est pour cette raison (et aussi, car le MinIT ne disposait pas d’écran) que la société ONT a développé le logiciel *MinKNOW Stand Alone GUI* qui permet de contrôler à distance un ou plusieurs séquenceurs.
 
@@ -205,7 +205,7 @@ Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relan
 
 
 <a name="transfert"></a>
-## TP 3 : Transfert des données
+## TP 3 : Transfert des données présentes sur le Mk1C
 
 Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil (les unités de stockage ont des caractéristiques compatibles avec le débit du séquenceur).
 Il est donc nécessaire de pouvoir transférer des données depuis et vers le séquenceur.
@@ -298,22 +298,27 @@ sftp -rp TOTO minit@minion01:/data/TOTO-copie .
 <a name="minknow"></a>
 ## TP 4 : Interface de MinKNOW, lancement d'un run et du basecalling via l'interface
 
-Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C.
+Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du MinION Mk1b, du Mk1C et du PromethION P2 Solo.
+Même si les versions de MinKNOW varient pour le moment selon le séquenceur à piloter, le paramétrage des runs sont similaires voire identiques.
 Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues, etc…
 
 
-### Utilisation du MinION Mk1C via son interface graphique
+### Utilisation des MinION et du PromethION via leurs interfaces graphiques
 
 Après lancement de l'application vous avez accès aux séquenceurs qui lui sont accessibles.
-Aujourd'hui, vous en voyez deux, minion01 (le minion via le MinIT) et minion02 (le Mk1C).
 Choisissez le séquenceur sur lequel vous travaillez. Placez une flowcell dans l'emplacement prévu.
 Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interface.
 
+Le menu accessible sur la gauche de l'application vous propose 5 options : 
+- Start
+- Sequencing overview
+- Experiments
+- System messages
+- Host settings
 
-Le menu accessible sur la gauche de l'application vous propose 5 options : Start, Sequencing overview, Experiments, System messages, Host settings.
 Parcourez les Host settings.
 
-**Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ?
+**Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du séquenceur ?
 Où verifier que MinKNOW est bien à jour ?**
 
 Ce sous menu vous permet de :
@@ -338,10 +343,11 @@ Le nombre de pores disponibles doit être supérieur à :
 
 - 50 dans le cas d’une flowcell Flongle
 - 800 dans le cas d’une flowcell MinION
+- 5000 dans le cas d’une flowcell PromethION
 
 Les flowcells sont remplacées si ce n’est pas le cas !
 
-**Exercice 3 : Revenez au menu précedent et lancez le Flowcell Check**
+**Exercice 3 : Revenez au menu précédent et lancez le Flowcell Check**
 
 ### Lancement d'un run
 
@@ -365,6 +371,7 @@ Il est possible de les filtrer selon ce que l’on séquence, selon les banques 
 Choisissez ce qui vous intéresse.
 Sur notre plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
 Il est important de ne pas se tromper: chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
+Attention, la chimie est en ce moment en cours d'évolution et les kits ne sont pas tous disponibles selon les Flowcells et les séquenceurs.
 
 
 **Passez au choix des options de runs :**
