@@ -299,7 +299,7 @@ sftp -rp TOTO minit@minion01:/data/TOTO-copie .
 ## TP 4 : Interface de MinKNOW, lancement d'un run et du basecalling via l'interface
 
 Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du MinION Mk1b, du Mk1C et du PromethION P2 Solo.
-Même si les versions de MinKNOW varient pour le moment selon le séquenceur à piloter, le paramétrage des runs sont similaires voire identiques.
+Même si les versions de MinKNOW varient pour le moment selon le séquenceur à piloter, les paramétrages des runs sont similaires voire identiques.
 Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues, etc…
 
 
