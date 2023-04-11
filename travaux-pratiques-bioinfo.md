@@ -242,7 +242,7 @@ Le protocole SMB (Server Message Block) est un protocole permettant le partage d
 Désormais ce protocole est pris en charge par macOS et Linux.
 
 * Création du montage
-    * Dans *MinKNOW*, allez dans *Host settings* / *Section Disk management*
+    * Dans *MinKNOW*, allez dans *Host settings* / Section *Device settings* / Partie *Disk management*
     * Activer "l'interupteur" *Share* à coté de la partion */data*
     * Une boite de dialogue apparaît vous demandant de choisir un mot de passe pour ce partage. Remplissez-la.
     * Le partage est alors activé
@@ -313,7 +313,7 @@ Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interfac
 Le menu accessible sur la gauche de l'application vous propose 5 options : Start, Sequencing overview, Experiments, System messages, Host settings.
 Parcourez les Host settings.
 
-**Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ou du MinIT ?
+**Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ?
 Où verifier que MinKNOW est bien à jour ?**
 
 Ce sous menu vous permet de :
@@ -329,7 +329,7 @@ Ce sous menu vous permet de :
 A la réception du séquenceur vous devez verifier son état.
 Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l'appareil.
 Il s’agit de la flowcell de configuration (CTC). Insérez là dans l'emplacement de la flowcell et cliquez sur start.
-En choisissant la section Hardware check, vois pouvez lancer la vérification de votre matériel.
+En choisissant la section Hardware check dans la section *Start*, vois pouvez lancer la vérification de votre matériel.
 
 **Exercice 2 : Lancez le Hardware Check**
 
@@ -370,24 +370,27 @@ Il est important de ne pas se tromper: chaque kit possède des spécificités d�
 **Passez au choix des options de runs :**
 
 Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps.
-Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
-Le voltage initial de la flowcell peut être modifié mais il vaut mieux être expert pour cela.
-Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer les canaux en permanence pour une meilleure performance de ceux-ci.
+Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois). Le voltage initial de la flowcell peut être modifié mais il vaut mieux être expert pour cela.
+Le contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer les canaux en permanence pour une meilleure performance de ceux-ci.
 Le temps entre chaque changement des canaux (mux scan) est aussi paramétrable. Vous pouvez également sauvegarder un pourcentage de pores pour les faire intervenir dans la durée du run.
-Concrètement, nous ne changeons jamais ces paramètres. Vous pouvez jouer avec pendant le TP.
+C'est dans cette section que vous pouvez parametrer MinKNOW pour qu'il fasse de l'adaptive sampling en enrichissant ou en rejetant certaines séquences. 
+Dans ce cas vous devez fournir une séquence FASTA de référence (type génome) et un fichier BED de ce que vous voulez enrichir ou rejeter.
+Vous pouvez également spécifier des code-barres à enrichir.
+Il faut noter que ces deux possibilités, adaptive sampling ou barcode balancing, sont en version beta.
+Vous pouvez jouer avec ces options pendant le TP.
 
 
 **Passez à la configuration du basecalling :**
 
 L’appel de base peut être réalisé à la volée ou après le run.
-Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
-Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soit la machine choisie pour réaliser l’appel de base.
+Il peut être réalisé sur le Mk1C ou un ordinateur indépendant.
+Nous allons voir comment le lancer à la volée. 
+Les paramètres importants restent les mêmes quelque soit la machine choisie pour réaliser l’appel de base.
 
-Trois modes de basecalling sont possibles :
+Deux modes de basecalling sont possibles :
 
 - Fast (fast) : Pratique pour le diagnostique parce rapide
 - High-accuracy (hac) : Plus long mais moins d’erreur
-- Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
 **Note :** Un mode *super acurracy (sup)* existe mais il est seulement disponible en ligne de commande.
 Il est indispensable de disposer d'une carte GPU puissante pour réaliser l'appel de base dans ce mode.
@@ -396,9 +399,10 @@ Il est indispensable de disposer d'une carte GPU puissante pour réaliser l'appe
 
 Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres :
 
-- Suppression des code-barres aux extrémités des données basecallées
-- Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue
-- Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé
+- Suppression des code-barres aux extrémités des données basecallées (*Trim barcodes*)
+- Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue (*Barcode both ends*)
+- Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé (*Mid-read barcode filtering*)
+- Filtrage des code-barres selon leur score de façon à etre plus stingent sur leur qualité
 
 **Attention :** le sequençage nanopore est encore imprecis.
 Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent être mal reconnues.
@@ -407,28 +411,29 @@ Vous risquez de perdre beaucoup à être trop stringent.
 
 **Lancement de l'alignement à la volée :**
 
-Minknow  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utilisé de façon standard.
-Si vous souhaitez le faire, vous devez fournir un fichier fasta de référence.
+MinKNOW  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utilisé de façon standard.
+Si vous souhaitez le faire, vous devez fournir un fichier FASTA de référence.
 Si vous faites du RNA-seq, vous pouvez également donner en entrée de minimap2, un fichier BED12 définissant les jonctions de vos isoformes.
-Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construire à partir des fichiers d’annotation GTF.
+Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour construire les BED12 correspondant à votre problématique à partir des fichiers d’annotation GTF qui sont plus courant.
 
 
 **Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?**
 
 - Des Fast5 : Ce sont les données brutes. Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
+- Des POD5 : Ce sont les données brutes. Il s'agit d'un nouveau format permettant une meilleure compression des données brutes.
 - Des FASTQ : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
 - Des BAM : Ce sont les données alignées si l’alignement à la volée a été demandé
 
 Vous pouvez choisir le critère qui classera la lecture en pass ou fail.
 Classiquement, les lectures aillant un score de qualité inférieur à 8 en mode "fast" sont considérées comme mauvaises (fail).
 La valeur par défaut de ce seuil change selon le type d'appel de base (fast : 8, hac : 9 et sup : 10).
-Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
-Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
+Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille.
+Vous pouvez aussi choisir de couper les lectures chimériques (voir section suivante) formées au moment du séquençage *Enable read splitting*.
 
 
 **Quid du fichier Fast5 Bulk ?**
 
-Dans ce type de fichier Fast5, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore:
+Dans ce type de fichier Fast5, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore (*Advanced options*):
 
 - elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
 - il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis].
