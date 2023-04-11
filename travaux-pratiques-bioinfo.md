@@ -16,6 +16,7 @@ Contact Plateforme GenomiqueENS :
 * Rappel du principe de la technologie ONT
 * Présentation des différents types de flowcells et séquenceur ONT
 * Principe de l’appel de base
+* [Gestion du P2 solo](#p2solo)
 * [Dépannage : Mise en service d’un MinION Mk1C](#config)
 * [TP 1 : Connexion au MinION Mk1C en ligne de commande](#connexion)
 * [TP 2 : Connexion à distance grace à MinKNOW Stand Alone GUI](#minknow-stand-alone-gui)
@@ -39,10 +40,6 @@ Lors de ce TP, nous utilisons deux séquenceurs MinION et un séquenceur Prometh
 
 MinKNOW est le logiciel pilotant les séquenceurs MinION, GridION et PromethION.
 Au cours de ce TP, la version de MinKNOW utilisé est la 21.12.x datant du 01 février 2023 pour les séquenceurs MinION et la 22.07.5 pour le PromethION P2 solo.
-Le séquenceur P2 solo nécessite actuellement une version différente de MinKNOW de celle requise pour piloter un MinION Mk1B.
-Il est fortement déconseillé d'utiliser la version de MinKNOW prévue pour le MinION Mk1B avec le PromethION P2 solo.
-À terme, d'ici quelques mois les deux versions seront fusionnées.
-
 
 Les données utilisées lors de ce TP sont celles qui ont été produites lors de la session expérimentale de cette formation le 15 mars 2021.
 Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*.
@@ -50,6 +47,32 @@ Deux échantillons avait été multiplexé.
 
 **Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT.
 Il convient évidemment de les changer lors de mise en production d’un séquenceur.
+
+
+<a name="p2solo"></a>
+## Gestion du PromethION P2 solo
+
+Le séquenceur P2 solo peut être assimilé à un MinION Mk1B, le logiciel MinKNOW installé sur un PC fonctionne de la même manière que pour un MinION Mk1B.
+C'est pour cela que dans le reste de ce document, le PromethION P2 solo ne sera peu évoqué.
+
+**Attention :** Le PromethION P2 solo est actuellement un appareil en "early access".
+Un certain nombre de séquenceurs des premières séries sont défectueux.
+Le séquenceur P2 solo nécessite actuellement une version différente de MinKNOW de celle requise pour piloter un MinION Mk1B.
+Il est fortement déconseillé d'utiliser la version de MinKNOW prévue pour le MinION Mk1B avec le PromethION P2 solo.
+Étant donné le peu de séquenceurs installé, la découverte de bogues dans MinKNOW pour le P2 solo peut prendre du temps.
+À terme, d'ici quelques mois les deux versions seront fusionnées.
+
+
+Le domaine où le PromethION P2 solo diffère grandement du MinION Mk1B concerne les prérequis matériels pour le faire fonctionner :
+- Ubuntu 20.04, macOS 10.14 (Mojave) ou Windows 10
+- 2 To SSD interne + 6-8 To SDD pour les données
+- NVIDIA RTX 3080 avec 12 Go / NVIDIA RTX A6000
+- 64 Go RAM
+- 8-12 cores (Intel i7 7ème génération ou AMD Ryzen)
+- USB 5 Gb/s
+
+Chaque run va nécessiter 2 à 3 To pour les données (ultra) brutes (Fast5) ainsi que des GPU puissants pour réaliser l'appel de base.
+Il faut donc bien prendre en considération les besoins matériels et en administration système (gestion des données une fois produites) pour prendre en charge correctement un PromethION P2 solo.
 
 
 <a name="config"></a>
@@ -126,7 +149,7 @@ sudo shutdown --reboot now           # Redémarre le système
 
 
 <a name="connexion"></a>
-## TP 1 : Connexion au MinION Mk1C en ligne de commande
+## TP 1 : Connexion au MinION Mk1C en ligne de commande (MinION Mk1C uniquement)
 
 Le MinION Mk1C comme tous les séquenceurs d’ONT couplés à un ordinateur, fonctionne sous un système Linux.
 Oxford Nanopore Technologies, laisse à ses utilisateurs un accès total au système d’exploitation de ses machines au travers de connexions de type SSH.
@@ -185,7 +208,7 @@ Il convient donc d’être __extrêmement__ prudent, car vous n’aurez pas de m
 
 
 <a name="minknow-stand-alone-gui"></a>
-## TP 2 : Connexion au Mk1C à distance gràce à MinKNOW Stand Alone GUI
+## TP 2 : Connexion au Mk1C à distance gràce à MinKNOW Stand Alone GUI (MinION Mk1C uniquement)
 
 L’écran du MinION est relativement petit et pas toujours très pratique à utiliser, c’est pour cette raison (et aussi, car le MinIT ne disposait pas d’écran) que la société ONT a développé le logiciel *MinKNOW Stand Alone GUI* qui permet de contrôler à distance un ou plusieurs séquenceurs.
 
@@ -217,7 +240,7 @@ Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relan
 
 
 <a name="transfert"></a>
-## TP 3 : Transfert des données présentes sur le Mk1C
+## TP 3 : Transfert des données présentes sur le Mk1C (MinION Mk1C uniquement)
 
 Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil (les unités de stockage ont des caractéristiques compatibles avec le débit du séquenceur).
 Il est donc nécessaire de pouvoir transférer des données depuis et vers le séquenceur.
@@ -707,6 +730,7 @@ Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` 
 ```bash
 pip install toulligqc
 ```
+ToulligQC peut être également installé via Docker ou Conda.
 
 * Avec les données que nous avons générées, la commande à lancer pour produire le rapport est la suivante :
 
@@ -720,8 +744,7 @@ toulligqc --report-name Formation_MinION \
 
 * Sur l’ordinateur, allez dans le dossier *Formation-MinION/qc/ToulligQC* sur le Bureau et ouvrez le rapport HTML.
 
-**Note :** Le rapport produit ici a été réalisé par la version beta 3 de ToulligQC 2.0.
-La version finale est attendue d’ici la fin du mois.
+**Note :** Le rapport produit ici a été réalisé par la version 2.3 de ToulligQC.
 
 **Question 3 : Qu’apporte ToulligQC par rapport produit par PycoQC ?**
 
