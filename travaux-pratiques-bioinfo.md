@@ -31,18 +31,17 @@ Contact Plateforme GenomiqueENS :
 
 #### Informations utiles
 
-Lors de ce TP, nous utilisons deux séquenceurs MinION :
+Lors de ce TP, nous utilisons deux séquenceurs MinION et un séquenceur PromethION P2 solo:
 
-* Un MinION Mk1B couplé à un MinIT, son nom de domaine est `minion01.example.com` ou `minion01`
-* Un MinION Mk1C son nom de domaine est `minion02.example.com` ou `minion02`
+* Un MinION Mk1B couplé à un PC sous Linux
+* Un MinION Mk1C son nom de domaine est `minion01.example.com` ou `minion01`
+* Un PromethION P2 couplé à un PC sous Linux
 
-Au cours de ce TP, des noms de domaine `minion0X.example.com`  seront indiqués, il faudra remplacer le **X** par le numéro de votre séquenceur.
-
-Le MinION Mk1C peut être assimilé à un MinIT couplé à un MinION Mk1B doté d’un écran tactile. Cela signifie que toutes les informations et procédures relatives au MinION Mk1C utilisées dans ce TP sont également valables pour le MinIT.
-
-MinKNOW est le logiciel pilotant les MinION et GridION.
-Au cours de ce TP, la version de MinKNOW utilisé est la 21.11.7 datant du 03 février 2022.
-Il s'agit de la dernière version fonctionnant sous Ubuntu 16.06 ainsi que sur le MinIT, les MinION Mk1C doivent être mis à niveau vers Ubuntu 18.06 pour recevoir les nouvelles mises à jour suivantes de MinKNOW.
+MinKNOW est le logiciel pilotant les séquenceurs MinION, GridION et PromethION.
+Au cours de ce TP, la version de MinKNOW utilisé est la 21.12.x datant du 01 février 2023 pour les séquenceurs MinION et la 22.07.5 pour le PromethION P2 solo.
+Le séquenceur P2 solo nécessite actuellement une version différente de MinKNOW de celle requise pour piloter un MinION Mk1B.
+Il est fortement déconseillée d'utiliser la version de MinKNOW pour le MinION Mk1B avec le P2 solo.
+À terme, d'ici quelques mois les deux versions seront fusionnées.
 
 Les données utilisées lors de ce TP sont celles qui ont été produites lors de la session expérimentale de cette formation le 15 mars 2021. Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*.
 Deux échantillons avait été multiplexé.
@@ -127,14 +126,14 @@ SSH (Secure Shell) est à la fois un programme informatique et un protocole de c
 
 Dans ce TP, nous verrons comment se connecter à un MinION Mk1C via la commande `ssh` et nous récupérerons quelques informations sur le système informatique pilotant le séquenceur.
 
-* Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) et se placer dans le dossier *Formation-MinION* sur le Bureau
+* Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) ou Linux (Appuyer sur la touche Windows du clavier puis taper `Terminal`) et se placer dans le dossier *Formation-MinION* sur le Bureau
 ```bash
 cd ~/Desktop/Formation-MinION
 ```
 
 * Connectez-vous au MinION en ligne de commande (le mot de passe est "**minit**")
 ```bash
-ssh minit@minion0X
+ssh minit@minion01
 ```
 
 **Question 1 : Sous quel système d’exploitation tourne le MinION Mk1C ?**
@@ -191,14 +190,14 @@ Pour le moment, il n’existe de pas de version pour les systèmes Linux.
 
 * Installation du MinKNOW Stand Alone GUI
     * Allez dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
-    * Faire un double clic sur *MinKNOW UI OSX-4.5.5.dmg*
+    * Faire un double clic sur *MinKNOW-UI-OSX-5.4.5-intel.dmg*
     * Dans la fenêtre qui s’ouvre, déplacer l’icone *MinKNOW UI* dans le raccourci vers le dossier *Applications*
 
 * Configuration de l’application
     * Au démarrage MinKNOW vous propose de vous connecter avec votre compte Nanopore. Choisissez *Log with your Nanopore account*, et saisissez vos identifiants
     * Vous arrivez sur la page du *Connection manager*. Le mode tutoriel est activé, quittez le en cliquant sur le bouton **⋮**
-    * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion0X`
-    * Dans la section *Saved Host*, devrait apparaitre une icone *Mk1C* ou *MinIT* selon le sequençeur auquel vous vous êtes connecté
+    * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion01`
+    * Dans la section *Saved Host*, devrait apparaitre une icone *Mk1C* selon le sequençeur auquel vous vous êtes connecté
     * Cliquez sur l’hôte crée pour pouvoir controler à distance le sequenceur
 
 **Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/MinKNOW* (*~* correspond au chemin de votre dossier personnel).
@@ -250,7 +249,7 @@ Désormais ce protocole est pris en charge par macOS et Linux.
 
 * Montage du partage sur l’ordinateur
     * Dans le Finder et dans le menu sélectionnez *Aller* / *Se connecter au serveur…*
-    * Utiliser *smb://minion0X*. Appuyer sur le bouton *Se connecter*
+    * Utiliser *smb://minion01*. Appuyer sur le bouton *Se connecter*
     * Une boite de dialogue apparaît. Choisissez *Utilisateur référencé*, le nom de l’utilisateur est **minit** et le mot de passe celui que vous avez précédemment choisi. Appuyez sur le bouton *Se connecter*
 
 **Exercice 3 : Utiliser ce partage pour copier des fichiers vers le montage. Vérifiez que les fichiers copiés sont bien visibles dans l’interface de MinKNOW**
@@ -282,7 +281,7 @@ SFTP est habituellement utilisable sur une machine dès qu’un serveur SSH est 
 * Récupération d’un run. Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
 ```bash
 cd ~/Desktop/Formation-MinION/Données
-sftp -r minit@minion0X:/data/TOTO .
+sftp -r minit@minion01:/data/TOTO .
 ```
 
 * L’option `-r` de `sftp` active une copie récursive des dossiers/fichiers.
@@ -290,7 +289,7 @@ sftp -r minit@minion0X:/data/TOTO .
 * Dépot de données sur le MinION (ex: pour relancer l’appel de base d'un run) :
 ```bash
 cd ~/Desktop
-sftp -rp TOTO minit@minion0X:/data/TOTO-copie .
+sftp -rp TOTO minit@minion01:/data/TOTO-copie .
 ```
 
 * L’option `-p` de `sftp` permet de préserver les permissions et les dates des fichiers.
@@ -401,8 +400,8 @@ Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs pa
 - Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue
 - Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé
 
-**Attention :*** le sequençage nanopore est encore imprecis.
-Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent etre mal reconnues.
+**Attention :** le sequençage nanopore est encore imprecis.
+Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent être mal reconnues.
 Vous risquez de perdre beaucoup à être trop stringent.
 
 
@@ -447,18 +446,24 @@ Ces fichiers sont en fait des fichiers au format [HDF5](https://en.wikipedia.org
 
 Pour visualiser le contenu de ces fichiers, il est nécessaire d’utiliser des outils spécifiques. Dans le cadre de TP, nous utiliserons l’outil HDFView qui permet de visualiser des fichiers au format HDF5.
 
-**Note :** Depuis la version 21.05.8 de MinKNOW (juin 2021), le format des fichiers Fast5 a évolué.
+**Note 1:** Depuis la version 21.05.8 de MinKNOW (juin 2021), le format des fichiers Fast5 a évolué.
 Le signal electrique est désormais compressé par défaut à l'aide de l'algorithme [VBZ](https://github.com/nanoporetech/vbz_compression) developpé par ONT.
 Cet algorithme permet de reduire d'environ 1/3 la taille des données précédement compressées à l'aide de l'algorithme gzip et de réduire très fortement les temps de compresssion/décompression.
 Cette algorithme n'étant pas standard, le signal electrique n’est plus visualisable dans HDFView pour les données compressées avec VBZ.
 
+**Note 2:** Le format Fast5 ne sera plus le format de fichier de sortie par défaut d'ici quelques mois.
+Le format POD5 prendra la relève, ce format est déjà disponible dans les options de MinKNOW.
+
 Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux comprendre le principe le l’appel de base que nous aborderons dans le prochain TP.
 
-* Installation de HDFView
+* Installation de HDFView sous macOS
     * Aller dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
     * Faire un double clic sur *HDFView-3.1.2.dmg*
     * Acceptez les conditions d’utilisation
     * Une fenêtre avec une icone *HDFView* apparait, cliquez sur cette icône pour lancer l’application
+
+* Installation de HDFView sous Linux
+**TODO**
 
 Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le contenu
 
@@ -481,7 +486,7 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 ## TP 6 : Appel de Base en ligne de commande
 
 L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies.
-D’autres outils existent/existaient/existeront (Guppy va être remplacer par Dorado d’ici quelques mois) pour cette tache, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
+D’autres outils existent/existaient/existeront (Guppy va être remplacé par Dorado d’ici quelques mois) pour cette tâche, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
 Oxford Nanopore propose également d’autres logiciels pour l’appel de base mais ceux-ci sont dédiés à la recherche algorithmique et il ne vaut mieux pas les utiliser en production.
 
 Dans ce TP, nous verrons comment lancer l’appel de base en ligne de commande et nous explorerons les fichiers générés lors de ce traitement.
