@@ -2,7 +2,7 @@
 # Formation MinION Session Bioinformatique<br/>
 
 
-Formateurs : Laurent Jourdren (*jourdren@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
+Formateurs : Laurent Jourdren (*jourdren@bio.ens.psl.eu*) et Sophie Lemoine (*slemoine@bio.ens.psl.eu*)
 
 Contact Plateforme GenomiqueENS :
 
@@ -40,19 +40,23 @@ Lors de ce TP, nous utilisons deux séquenceurs MinION et un séquenceur Prometh
 MinKNOW est le logiciel pilotant les séquenceurs MinION, GridION et PromethION.
 Au cours de ce TP, la version de MinKNOW utilisé est la 21.12.x datant du 01 février 2023 pour les séquenceurs MinION et la 22.07.5 pour le PromethION P2 solo.
 Le séquenceur P2 solo nécessite actuellement une version différente de MinKNOW de celle requise pour piloter un MinION Mk1B.
-Il est fortement déconseillée d'utiliser la version de MinKNOW pour le MinION Mk1B avec le P2 solo.
+Il est fortement déconseillé d'utiliser la version de MinKNOW prévue pour le MinION Mk1B avec le PromethION P2 solo.
 À terme, d'ici quelques mois les deux versions seront fusionnées.
 
-Les données utilisées lors de ce TP sont celles qui ont été produites lors de la session expérimentale de cette formation le 15 mars 2021. Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*.
+
+Les données utilisées lors de ce TP sont celles qui ont été produites lors de la session expérimentale de cette formation le 15 mars 2021.
+Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*.
 Deux échantillons avait été multiplexé.
 
-**Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT. Il convient évidemment de les changer lors de mise en production d’un séquenceur.
+**Note :** Les mots de passes utilisés lors de ce TP sont ceux utilisés par défaut par ONT.
+Il convient évidemment de les changer lors de mise en production d’un séquenceur.
 
 
 <a name="config"></a>
 ## Dépannage : Mise en service d’un MinION Mk1C
 
-La version du système préinstallé sur les MinION Mk1C est (était ?) notoirement boguée notamment en ce qui concerne la configuration réseau via MinKNOW (Elle ne fonctionne pas). Cette configuration initiale est certes délicate à mettre en place mais une fois les mises à jour du système effectuées, l’environnement logiciel du séquenceur s’avère stable.
+La version du système préinstallé sur les MinION Mk1C est (était ?) notoirement boguée notamment en ce qui concerne la configuration réseau via MinKNOW (Elle ne fonctionne pas).
+Cette configuration initiale est certes délicate à mettre en place mais une fois les mises à jour du système effectuées, l’environnement logiciel du séquenceur s’avère stable.
 
 Dans cette partie, vous trouverez la procédure à suivre pour mettre en service un MinION Mk1C.
 
@@ -64,10 +68,13 @@ Pour réaliser cette opération, il est nécessaire de disposer :
 
 La procédure à suivre est la suivante :
 
-1. Branchement de l’appareil au réseau électrique. Attention, les prises électriques mâles des appareils ONT sont parfois capricieuses, une multiprise peut être nécessaire pour brancher correctement l’appareil
+1. Branchement de l’appareil au réseau électrique.
+Attention, les prises électriques mâles des appareils ONT sont parfois capricieuses, une multiprise peut être nécessaire pour brancher correctement l’appareil
 2. On allume l’appareil
-3. À l’aide d’ordinateur, connectez-vous en Wifi au Hotspot *MC-XXXXXX* créé par le séquenceur. Le mot de passe de ce Hotspot est *WarmButterflyWings98*
-5. Trouvez l'adresse IP de la passerelle du réseau à l'aide de la commande `ipconfig` (Windows), `route -n get default` (macOS) ou `ip route` (Linux). Celle-ci est également l'adresse du MinION Mk1C sur ce réseau
+3. À l’aide d’ordinateur, connectez-vous en Wifi au Hotspot *MC-XXXXXX* créé par le séquenceur.
+Le mot de passe de ce Hotspot est *WarmButterflyWings98*
+5. Trouvez l'adresse IP de la passerelle du réseau à l'aide de la commande `ipconfig` (Windows), `route -n get default` (macOS) ou `ip route` (Linux).
+Celle-ci est également l'adresse du MinION Mk1C sur ce réseau
 4. Connectez-vous maintenant en SSH au séquenceur au compte d'administration *minit* (dans l'exemple ci-dessous, 10.42.0.1 correspond à l'adresse IP l'adresse IP de la passerelle du réseau récupérée à l'étape précédente; le mot de passe d'origine du compte d'administration est *minit*)
 ```bash
 ssh minit@10.42.0.1
@@ -100,7 +107,8 @@ La commande `sudo` permet de passer en mode administrateur le temps d’exécute
 sudo nmcli connection down static    # Désactive la configuration statique de la connexion fillaire
 sudo nmcli connection up dhcp        # Active la configuration dynamique de la connexion fillaire
 ```
-* Option 2 : configuration statique de la connexion Ethernet. Il est prudent de recopier la configuration avant toute modification des caractéristiques d’une connexion
+* Option 2 : configuration statique de la connexion Ethernet.
+Il est prudent de recopier la configuration avant toute modification des caractéristiques d’une connexion
 ```bash
 sudo nmcli connection edit static    # Édite la configuration statique de la connexion fillaire
 sudo nmcli connection down dhcp      # Désactive la configuration dynamique de la connexion fillaire
@@ -142,14 +150,16 @@ ssh minit@minion01
 
 **Question 3 : Combien de paquets du système peuvent-ils être mis à jour ?**
 
-* Une fois connecté sur le MinION, nous disposons d’un contrôle complet sur le fonctionnement de l’ordinateur pilotant le séquenceur. On peut ainsi voir en temps réel les programmes en cours d’exécution sur à l’aide de la commande `htop` :
+* Une fois connecté sur le MinION, nous disposons d’un contrôle complet sur le fonctionnement de l’ordinateur pilotant le séquenceur.
+On peut ainsi voir en temps réel les programmes en cours d’exécution sur à l’aide de la commande `htop` :
 ```
 htop
 ```
 
 **Question 4 : Combien de cœur possède le processeur (CPU) ?**
 
-**Exercice 5 : Rechercher MinKNOW dans la liste des processus. On s’aperçoit que MinKNOW que MinKNOW est composé d’au moins deux parties (le cœur du logiciel et l’interface graphique)**
+**Exercice 5 : Rechercher MinKNOW dans la liste des processus.
+On s’aperçoit que MinKNOW que MinKNOW est composé d’au moins deux parties (le cœur du logiciel et l’interface graphique)**
 
 **Question 6 : Quel est le processus qui utilise le plus le processeur ? À quoi sert-il ?**
 
@@ -170,7 +180,7 @@ df -h /data
 
 **Question 8 : Combien d’espace disponible reste-t-il pour stocker de nouveaux runs ?**
 
-**Avertissement :** Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez.
+**Avertissement :** Sur le MinION Mk1C, en mode ligne de commande, vous pouvez faire ce que vous voulez.
 Il convient donc d’être __extrêmement__ prudent, car vous n’aurez pas de message d’avertissements (comme lorsque vous souhaitez supprimer des données avec la commande `rm`).
 
 
@@ -191,16 +201,18 @@ Pour le moment, il n’existe de pas de version pour les systèmes Linux.
 * Installation du MinKNOW Stand Alone GUI
     * Allez dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
     * Faire un double clic sur *MinKNOW-UI-OSX-5.4.5-intel.dmg*
-    * Dans la fenêtre qui s’ouvre, déplacer l’icone *MinKNOW UI* dans le raccourci vers le dossier *Applications*
+    * Dans la fenêtre qui s’ouvre, déplacer l’icône *MinKNOW UI* dans le raccourci vers le dossier *Applications*
 
 * Configuration de l’application
-    * Au démarrage MinKNOW vous propose de vous connecter avec votre compte Nanopore. Choisissez *Log with your Nanopore account*, et saisissez vos identifiants
-    * Vous arrivez sur la page du *Connection manager*. Le mode tutoriel est activé, quittez le en cliquant sur le bouton **⋮**
+    * Au démarrage MinKNOW vous propose de vous connecter avec votre compte Nanopore.
+Choisissez *Log with your Nanopore account*, et saisissez vos identifiants
+    * Vous arrivez sur la page du *Connection manager*.
+Le mode tutoriel est activé, quittez le en cliquant sur le bouton **⋮**
     * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion01`
-    * Dans la section *Saved Host*, devrait apparaitre une icone *Mk1C* selon le sequençeur auquel vous vous êtes connecté
-    * Cliquez sur l’hôte crée pour pouvoir controler à distance le sequenceur
+    * Dans la section *Saved Host*, devrait apparaître une icône *Mk1C* selon le sequençeur auquel vous vous êtes connecté
+    * Cliquez sur l’hôte crée pour pouvoir contrôler à distance le séquenceur
 
-**Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/MinKNOW* (*~* correspond au chemin de votre dossier personnel).
+**Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/MinKNOW* (*~* correspond au chemin de votre dossier personnel).
 Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relancer l’application.
 
 
@@ -233,38 +245,44 @@ Vous pouvez insérer un disque dur, une clé USB ou une carte SD dans le MinION 
 
 **Exercice 1 : Brancher une clé USB et à l’aide de l’interface graphique copier un fichier de la clé dans le dossier */data*.**
 
-**Exercice 2 : À l’aide de l’interface graphique copier un petit dossier vers la clé USB. Démontez-la et retirer là et branchez-la sur l’ordinateur pour vérifier que vous pouvez accéder aux données.**
+**Exercice 2 : À l’aide de l’interface graphique copier un petit dossier vers la clé USB.
+Démontez-la et retirer là et branchez-la sur l’ordinateur pour vérifier que vous pouvez accéder aux données.**
 
 ### Partage SMB
 
 Dans cette partie, nous allons voir comment accéder depuis l’ordinateur aux fichiers présents sur le MinION à l’aide d’un montage SMB.
-Le protocole SMB (Server Message Block) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows.
+Le protocole SMB ([Server Message Block](https://fr.wikipedia.org/wiki/Server_Message_Block)) est un protocole permettant le partage de ressources (fichiers et imprimantes) sur des réseaux locaux à l’origine avec des PC sous Windows.
 Désormais ce protocole est pris en charge par macOS et Linux.
 
 * Création du montage
     * Dans *MinKNOW*, allez dans *Host settings* / *Section Disk management*
-    * Activer "l'interupteur" *Share* à coté de la partion */data*
-    * Une boite de dialogue apparaît vous demandant de choisir un mot de passe pour ce partage. Remplissez-la.
+    * Activer "l'interupteur" *Share* à côté de la partition */data*
+    * Une boite de dialogue apparaît vous demandant de choisir un mot de passe pour ce partage.
+Remplissez-la.
     * Le partage est alors activé
 
 * Montage du partage sur l’ordinateur
     * Dans le Finder et dans le menu sélectionnez *Aller* / *Se connecter au serveur…*
-    * Utiliser *smb://minion01*. Appuyer sur le bouton *Se connecter*
-    * Une boite de dialogue apparaît. Choisissez *Utilisateur référencé*, le nom de l’utilisateur est **minit** et le mot de passe celui que vous avez précédemment choisi. Appuyez sur le bouton *Se connecter*
+    * Utiliser *smb://minion01*.
+Appuyer sur le bouton *Se connecter*
+    * Une boite de dialogue apparaît.
+Choisissez *Utilisateur référencé*, le nom de l’utilisateur est **minit** et le mot de passe celui que vous avez précédemment choisi.
+ Appuyez sur le bouton *Se connecter*
 
-**Exercice 3 : Utiliser ce partage pour copier des fichiers vers le montage. Vérifiez que les fichiers copiés sont bien visibles dans l’interface de MinKNOW**
+**Exercice 3 : Utiliser ce partage pour copier des fichiers vers le montage.
+Vérifiez que les fichiers copiés sont bien visibles dans l’interface de MinKNOW**
 
 ### Montage d'un disque réseau sur le MinION
 
-Dans la méthode précedente, nous rendions accessible les données du MinION sur un autre ordinateur.
-Il est également possible de faire l'inverse, c'est à dire monter un disque réseau sur le MinION.
+Dans la méthode précédente, nous rendions accessible les données du MinION sur un autre ordinateur.
+Il est également possible de faire l'inverse, c’est-à-dire monter un disque réseau sur le MinION.
 
 Pour cela il faut procéder de la manière suivante :
 
 * Dans *MinKNOW*, allez dans *Host settings* / *File Manager* / Onglet *Internal*
 * Appuyer sur le Bouton *Add a network drive*
 
-Deux types de protocoles de montage de disque réseau sont disponibles :
+Deux types de protocoles de montage de disque réseau sont disponibles :
 
 * SMB, protocole le plus courant dans le monde Windows et macOS généralement plus simple à mettre en oeuvre
 * NFS, protocole venant du monde Unix/Linux
@@ -278,7 +296,8 @@ La [documentation de MinKNOW](https://community.nanoporetech.com/docs/prepare/li
 SFTP est l’évolution sécurisée du protocole de transfert de fichier FTP qui date des années 70.
 SFTP est habituellement utilisable sur une machine dès qu’un serveur SSH est configuré, comme c’est le cas sur MinION Mk1C.
 
-* Récupération d’un run. Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
+* Récupération d’un run.
+Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
 ```bash
 cd ~/Desktop/Formation-MinION/Données
 sftp -r minit@minion01:/data/TOTO .
@@ -296,7 +315,7 @@ sftp -rp TOTO minit@minion01:/data/TOTO-copie .
 
 
 <a name="minknow"></a>
-## TP 4 : Interface de MinKNOW, lancement d'un run et du basecalling via l'interface
+## TP 4 : Interface de MinKNOW, lancement d'un run et de l'appel de base via l'interface
 
 Dans ce TP nous allons prendre en main MinKNOW, l'interface graphique permettant le contrôle du minion et du Mk1C.
 Cette interface permet l'accès à un certain nombre de paramètres tels que les lancement des runs, du basecalling, de l'alignements des lectures obtenues, etc…
@@ -305,16 +324,17 @@ Cette interface permet l'accès à un certain nombre de paramètres tels que les
 ### Utilisation du MinION Mk1C via son interface graphique
 
 Après lancement de l'application vous avez accès aux séquenceurs qui lui sont accessibles.
-Aujourd'hui, vous en voyez deux, minion01 (le minion via le MinIT) et minion02 (le Mk1C).
-Choisissez le séquenceur sur lequel vous travaillez. Placez une flowcell dans l'emplacement prévu.
+Aujourd'hui, seul minion01 (le MinION Mk1C) apparait puisque les séquenceurs controlés par des ordinateurs n'apparaissent pas.
+Choisissez le séquenceur sur lequel vous travaillez.
+Placez une flowcell dans l'emplacement prévu.
 Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interface.
 
 
-Le menu accessible sur la gauche de l'application vous propose 5 options : Start, Sequencing overview, Experiments, System messages, Host settings.
+Le menu accessible sur la gauche de l'application vous propose 5 options : Start, Sequencing overview, Experiments, System messages, Host settings.
 Parcourez les Host settings.
 
-**Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ou du MinIT ?
-Où verifier que MinKNOW est bien à jour ?**
+**Exercice 1 : Dans quel sous menu des paramètres devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ou du MinIT ?
+Où verifier que MinKNOW est bien à jour ?**
 
 Ce sous menu vous permet de :
 
@@ -326,15 +346,16 @@ Ce sous menu vous permet de :
 
 ### Vérification initiale du séquenceur ou de la flowcell
 
-A la réception du séquenceur vous devez verifier son état.
+À la réception du séquenceur vous devez vérifier son état.
 Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l'appareil.
-Il s’agit de la flowcell de configuration (CTC). Insérez là dans l'emplacement de la flowcell et cliquez sur start.
+Il s’agit de la flowcell de configuration (CTC).
+Insérez là dans l'emplacement de la flowcell et cliquez sur start.
 En choisissant la section Hardware check, vois pouvez lancer la vérification de votre matériel.
 
 **Exercice 2 : Lancez le Hardware Check**
 
 Avant chaque lancement de run, vous devez aussi vous assurer que la flowcell rempli les conditions d’utilisation: il est nécessaire de vérifier le nombre de pores disponibles sur la flowcell avant de charger les échantillons.
-Le nombre de pores disponibles doit être supérieur à :
+Le nombre de pores disponibles doit être supérieur à :
 
 - 50 dans le cas d’une flowcell Flongle
 - 800 dans le cas d’une flowcell MinION
@@ -347,7 +368,7 @@ Les flowcells sont remplacées si ce n’est pas le cas !
 
 **Exercice 4 : Paramétrez et lancez votre run**
 
-Il faut définir :
+Il faut définir :
 
 - Votre expérience
 - Le kit utilisé
@@ -358,82 +379,88 @@ Il faut définir :
 Commençons !
 
 
-**Définissez votre expérience et passez à la selection du kit (N’oubliez pas de lui donnez un nom !) :**
+**Définissez votre expérience et passez à la sélection du kit (N’oubliez pas de lui donner un nom !) :**
 
 Dans la section permettant le choix du kit de séquençage à utiliser, tous les kits sont disponibles.
 Il est possible de les filtrer selon ce que l’on séquence, selon les banques faites…
 Choisissez ce qui vous intéresse.
 Sur notre plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
-Il est important de ne pas se tromper: chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour la partie basecalling, demultiplexing…
+Il est important de ne pas se tromper: chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour l'appel de base, le démultiplexage…
 
 
 **Passez au choix des options de runs :**
 
 Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps.
-Pour un RNASeq, un run de 72h est adapté. Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
-Le voltage initial de la flowcell peut être modifié mais il vaut mieux être expert pour cela.
-Contrôle actif des canaux est enclenché ce qui autorise MinKNOW a monitorer les canaux en permanence pour une meilleure performance de ceux-ci.
-Le temps entre chaque changement des canaux (mux scan) est aussi paramétrable. Vous pouvez également sauvegarder un pourcentage de pores pour les faire intervenir dans la durée du run.
-Concrètement, nous ne changeons jamais ces paramètres. Vous pouvez jouer avec pendant le TP.
+Pour un RNASeq, un run de 72 h est adapté.
+Si vous souhaitez tester la presence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
+Le voltage initial de la flowcell peut être modifié, mais il vaut mieux être expert pour cela.
+Contrôle actif des canaux est enclenché ce qui autorise MinKNOW à monitorer les canaux en permanence pour une meilleure performance de ceux-ci.
+Le temps entre chaque changement des canaux (mux scan) est aussi paramétrable.
+Vous pouvez également sauvegarder un pourcentage de pores pour les faire intervenir dans la durée du run.
+Concrètement, nous ne changeons jamais ces paramètres.
+Vous pouvez jouer avec pendant le TP.
 
 
-**Passez à la configuration du basecalling :**
+**Passez à la configuration du basecalling :**
 
 L’appel de base peut être réalisé à la volée ou après le run.
-Il peut être réalisé sur le Mk1C, le MinIT ou un ordinateur indépendant.
-Nous allons voir comment le lancer à la volée. Les paramètres importants restent les mêmes quelque soit la machine choisie pour réaliser l’appel de base.
+Il peut être réalisé sur le Mk1C, ou un ordinateur indépendant.
+Nous allons voir comment le lancer à la volée.
+Les paramètres importants restent les mêmes quelle que soit la machine choisie pour réaliser l’appel de base.
 
-Trois modes de basecalling sont possibles :
+Trois modes de basecalling sont possibles :
 
-- Fast (fast) : Pratique pour le diagnostique parce rapide
-- High-accuracy (hac) : Plus long mais moins d’erreur
-- Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
+- Fast (fast) : Pratique pour le diagnostique parce rapide
+- High-accuracy (hac) : Plus long mais moins d’erreur
+- Modified : Dictionnaires de bases possibles incluent certaines bases modifiées
 
 **Note :** Un mode *super acurracy (sup)* existe mais il est seulement disponible en ligne de commande.
 Il est indispensable de disposer d'une carte GPU puissante pour réaliser l'appel de base dans ce mode.
 
-**Passons aux code-barres :**
+**Passons aux codes-barres :**
 
-Dans le  cas d’utilisation de code-barres, vous pouvez jouer sur plusieurs paramètres :
+Dans le  cas d’utilisation de codes-barres, vous pouvez jouer sur plusieurs paramètres :
 
-- Suppression des code-barres aux extrémités des données basecallées
-- Recherche des code-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue
-- Recherche de code-barre au milieu de la lecture: Elimination de la lecture si un code barre est trouvé
+- Suppression des codes-barres aux extrémités des données basecallées
+- Recherche des codes-barres à chaque extrémité de la lecture pour classifier la lecture : si un seul des code-barres est trouvé, la lecture est perdue
+- Recherche de codes-barres au milieu de la lecture : Élimination de la lecture si un code barre est trouvé
 
-**Attention :** le sequençage nanopore est encore imprecis.
-Les sequences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent être mal reconnues.
+**Attention :** le séquençage nanopore est encore imprecis.
+Les séquences si elles sont petites comme des code-barres et qu'elles contiennent des erreurs peuvent être mal reconnues.
 Vous risquez de perdre beaucoup à être trop stringent.
 
 
-**Lancement de l'alignement à la volée :**
+**Lancement de l'alignement à la volée :**
 
-Minknow  peut lancer l’alignement à la volée. Minimap2 est le mapper qui est utilisé de façon standard.
-Si vous souhaitez le faire, vous devez fournir un fichier fasta de référence.
+Minknow  peut lancer l’alignement à la volée.
+Minimap2 est le mapper qui est utilisé de façon standard.
+Si vous souhaitez le faire, vous devez fournir un fichier FASTA de référence.
 Si vous faites du RNA-seq, vous pouvez également donner en entrée de minimap2, un fichier BED12 définissant les jonctions de vos isoformes.
 Vous pouvez utiliser paftools, un outil intégrer à minimap2, pour les construire à partir des fichiers d’annotation GTF.
 
 
 **Quels sont les fichiers de sorties à choisir en sortie de MinKNOW ?**
 
-- Des Fast5 : Ce sont les données brutes. Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
-- Des FASTQ : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
-- Des BAM : Ce sont les données alignées si l’alignement à la volée a été demandé
+- Des Fast5 ou POD5 : Ce sont les données brutes.
+Il est important de les conserver si l’on veut relancer le basecalling en fonction des évolutions de Guppy
+- Des FASTQ : Ce sont les données basecallées, demultiplexées (si besoin) et classées en pass/fail
+- Des BAM : Ce sont les données alignées si l’alignement à la volée a été demandé
 
 Vous pouvez choisir le critère qui classera la lecture en pass ou fail.
 Classiquement, les lectures aillant un score de qualité inférieur à 8 en mode "fast" sont considérées comme mauvaises (fail).
 La valeur par défaut de ce seuil change selon le type d'appel de base (fast : 8, hac : 9 et sup : 10).
-Ce critère peut etre changé et c'est peut-être pertinent de le faire pour le sequençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
-Les lectures peuvent être filtrées sur leur qscore minimal et/ou leur taille
+Ce critère peut être changé et c'est peut-être pertinent de le faire pour le séquençage d'ARN natif (U et bases modifiées font baisser la qualité des lectures).
+Les lectures peuvent être filtrées sur leur score qualité minimal et/ou leur taille
 
 
-**Quid du fichier Fast5 Bulk ?**
+**Quid du fichier Fast5 Bulk ?**
 
-Dans ce type de fichier Fast5, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore:
+Dans ce type de fichier Fast5, MinKNOW ne fait pas de coupure entre chaque lecture d’un pore :
 
-- elles restent liées en une longue séquence comprenant les adaptateurs et les sequences d'interet.
+- elles restent liées en une longue séquence comprenant les adaptateurs et les séquences d'interet.
 - il est possible de visualiser le signal et de voir les coupures déterminant les lectures dans BulkVis par exemple [Publi de Bulkvis].
 Selon la séquence, il est possible que MinKnow ne coupe pas au bon endroit.
-Des chimères peuvent être créees de cette façon.
+Des chimères peuvent être créées de cette façon.
 
 Attention, cette option génère un gros volume de données.
 
@@ -444,14 +471,15 @@ Attention, cette option génère un gros volume de données.
 Les fichiers Fast5 sont les fichiers contenant les données brutes du séquençage.
 Ces fichiers sont en fait des fichiers au format [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) qui utilise une structure arborescente propre à Nanopore.
 
-Pour visualiser le contenu de ces fichiers, il est nécessaire d’utiliser des outils spécifiques. Dans le cadre de TP, nous utiliserons l’outil HDFView qui permet de visualiser des fichiers au format HDF5.
+Pour visualiser le contenu de ces fichiers, il est nécessaire d’utiliser des outils spécifiques.
+Dans le cadre de TP, nous utiliserons l’outil HDFView qui permet de visualiser des fichiers au format HDF5.
 
-**Note 1:** Depuis la version 21.05.8 de MinKNOW (juin 2021), le format des fichiers Fast5 a évolué.
-Le signal electrique est désormais compressé par défaut à l'aide de l'algorithme [VBZ](https://github.com/nanoporetech/vbz_compression) developpé par ONT.
-Cet algorithme permet de reduire d'environ 1/3 la taille des données précédement compressées à l'aide de l'algorithme gzip et de réduire très fortement les temps de compresssion/décompression.
-Cette algorithme n'étant pas standard, le signal electrique n’est plus visualisable dans HDFView pour les données compressées avec VBZ.
+**Note 1 :** Depuis la version 21.05.8 de MinKNOW (juin 2021), le format des fichiers Fast5 a évolué.
+Le signal électrique est désormais compressé par défaut à l'aide de l'algorithme [VBZ](https://github.com/nanoporetech/vbz_compression) développé par ONT.
+Cet algorithme permet de réduire d'environ 1/3 la taille des données précédement compressées à l'aide de l'algorithme gzip et de réduire très fortement les temps de compression/décompression.
+Cet algorithme n'étant pas standard, le signal électrique n’est plus visualisable dans HDFView pour les données compressées avec VBZ.
 
-**Note 2:** Le format Fast5 ne sera plus le format de fichier de sortie par défaut d'ici quelques mois.
+**Note 2 :** Le format Fast5 ne sera plus le format de fichier de sortie par défaut d'ici quelques mois.
 Le format POD5 prendra la relève, ce format est déjà disponible dans les options de MinKNOW.
 
 Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux comprendre le principe le l’appel de base que nous aborderons dans le prochain TP.
@@ -460,7 +488,7 @@ Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux 
     * Aller dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
     * Faire un double clic sur *HDFView-3.1.2.dmg*
     * Acceptez les conditions d’utilisation
-    * Une fenêtre avec une icone *HDFView* apparait, cliquez sur cette icône pour lancer l’application
+    * Une fenêtre avec une icone *HDFView* apparaît, cliquez sur cette icône pour lancer l’application
 
 * Installation de HDFView sous Linux
 **TODO**
@@ -474,8 +502,10 @@ Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le conten
 **Question 1 : Combien y a-t-il d’éléments dans le panneau de gauche et pourquoi ?**
 
 * Sélectionnez un des éléments du fichier et allez dans le sous-dossier *Raw* et double-cliquez sur le « fichier » *Signal*
-* Une fenêtre apparaît avec un tableau contenant une seule colonne. Il s’agit des valeurs brutes du séquençage
-* Sélectionnez la première et seule colonne et appuyez ensuite le bouton en haut à gauche pour visualiser le signal. Une fenêtre avec les options de visualisation apparaît, appuyez simplement sur *OK*
+* Une fenêtre apparaît avec un tableau contenant une seule colonne.
+Il s’agit des valeurs brutes du séquençage
+* Sélectionnez la première et seule colonne et appuyez ensuite le bouton en haut à gauche pour visualiser le signal.
+Une fenêtre avec les options de visualisation apparaît, appuyez simplement sur *OK*
 
 **Question 2 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas)**
 
@@ -494,7 +524,8 @@ Dans ce TP, nous verrons comment lancer l’appel de base en ligne de commande e
 Pour fonctionner, il est nécessaire de fournir à Guppy un fichier de configuration décrivant le modèle à utiliser pour effectuer l’appel de base.
 Celui-ci peut être automatiquement déterminé par Guppy si on lui fournit à l’aide des arguments `--flowcell` et `--kit`.
 Cependant si cette solution est choisie le mode *haute précision (hac)* sera automatiquement sélectionné.
-Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*. Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
+Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*.
+Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
 
 **Note :** Si vous disposez d'une carte GPU puissante (non recommandé sur un MinION Mk1C), vous pouvez également forcer l'utilisation du mode super accuracy à l'aide de la configuration *dna_r9.4.1_450bps_sup*.
 La qualité de l'appel de base en mode super accuracy est légèrement supérieure au mode high accuracy mais demande beaucoup plus de temps de calcul que ce dernier.
@@ -507,7 +538,7 @@ Le mode high accuracy est généralement un bon compromis entre temps de calcul 
 guppy_basecaller --print_workflows
 ```
 
-* L’appel de base peut-être lancer en ligne de commande de la manière suivante sur le MinION Mk1C (le dossier de sortie doit exister):
+* L’appel de base peut-être lancé en ligne de commande de la manière suivante sur le MinION Mk1C (le dossier de sortie doit exister):
 ```bash
 mkdir /data/appel_de_base_ligne_de_commande_guppy_server
 /usr/bin/guppy_basecall_client --port 5555 \
@@ -592,11 +623,14 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 
 **Question 3 : Pourquoi avons-nous plusieurs fichiers FASTQ par code-barre ? Que vaut-il mieux faire avant de réaliser analyse secondaire ?**
 
-**Question 4 : Deux échantillons ont été déposés sur la flowcell lors du run. Pourquoi avons-nous une 12 dossiers pour des codes-barres lieu de 2 ?**
+**Question 4 : Deux échantillons ont été déposés sur la flowcell lors du run.
+Pourquoi avons-nous une 12 dossiers pour des codes-barres lieu de 2 ?**
 
 **Question 5 : À quoi correspond le dossier les fichiers FASTQ du dossier *unclassified* ?**
 
-**Exercice 6 : Ouvrez un des fichiers Fast5 produits lors du démultiplexage avec HDFView. Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage. Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
+**Exercice 6 : Ouvrez un des fichiers Fast5 produits lors du démultiplexage avec HDFView.
+Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage.
+Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
 
 * Sur l’ordinateur, allez dans le dossier *Formation-MinION/appel_de_base* sur le Bureau et ouvrez avec Firefox le fichier *sequencing_telemetry.js*
 
@@ -612,9 +646,10 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy
 <a name="qc"></a>
 ## TP 7 Contrôle Qualité post run
 
-Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différent outils et nous en comparerons les avantages et les inconvénients.
+Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits par différents outils et nous en comparerons les avantages et les inconvénients.
 
-**Note :** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP. PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’executent en quelques secondes/minutes.
+**Note :** Pour des raisons de simplicité et de rapidité, nous utiliserons des rapports générés avant le début du TP.
+PycoQC et ToulligQC sont des outils qui s’installent très facilement et qui s’exécutent en quelques secondes/minutes.
 
 ### Rapport de MinKNOW
 
@@ -625,9 +660,11 @@ Dans ce dernier TP, nous comparons les rapports de contrôle qualité produits p
 
 ### PycoQC
 
-* PycoQC est un outil permettant de produire un rapport de contrôle qualité après démultiplexage. Il se base sur le contenu du fichier *sequencing_summary.txt*.
+* PycoQC est un outil permettant de produire un rapport de contrôle qualité après démultiplexage.
+Il se base sur le contenu du fichier *sequencing_summary.txt*.
 
-* PycoQC est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
+* PycoQC est un outil développé en Python.
+Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 ```bash
 pip install pycoQC
 ```
@@ -646,9 +683,12 @@ pycoQC --summary_file sequencing_summary.txt \
 
 ### ToulliqQC
 
-* ToulliqQC est un autre outil permettant de produire un rapport de contrôle qualité après démultiplexage. Il est développé par la plateforme génomique de l’ENS. Il se base sur les contenus des fichiers *sequencing_summary.txt* et *sequencing_telemetry.js*.
+* ToulliqQC est un autre outil permettant de produire un rapport de contrôle qualité après démultiplexage.
+Il est développé par la plateforme génomique de l’ENS.
+Il se base sur les contenus des fichiers *sequencing_summary.txt* et *sequencing_telemetry.js*.
 
-* ToulliqQC est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
+* ToulliqQC est un outil développé en Python.
+Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 
 ```bash
 pip install toulligqc
@@ -666,7 +706,8 @@ toulligqc --report-name Formation_MinION \
 
 * Sur l’ordinateur, allez dans le dossier *Formation-MinION/qc/ToulligQC* sur le Bureau et ouvrez le rapport HTML.
 
-**Note :** Le rapport produit ici a été réalisé par la version beta 3 de ToulligQC 2.0. La version finale est attendue d’ici la fin du mois.
+**Note :** Le rapport produit ici a été réalisé par la version beta 3 de ToulligQC 2.0.
+La version finale est attendue d’ici la fin du mois.
 
 **Question 3 : Qu’apporte ToulligQC par rapport produit par PycoQC ?**
 
@@ -674,10 +715,12 @@ toulligqc --report-name Formation_MinION \
 
 ### Nanocomp
 
-NanoComp est un outil faisant partie d'une suite appelée NanoPack. Il permet de comparer des echantillons d'un même run via le fichier sequencing_summary.txt, des fichiers fastq, des fasta, des alignements via des fichiers bam.
-Il est donc utilisable à plein d'étapes de l'analyse se qui en fait un outil interessant. 
+NanoComp est un outil faisant partie d'une suite appelée NanoPack.
+Il permet de comparer des echantillons d'un même run via le fichier sequencing_summary.txt, des fichiers FASTQ, des FASTA, des alignements via des fichiers BAM.
+Il est donc utilisable à plein d'étapes de l'analyse se qui en fait un outil intéressant.
 La suite est toujours maintenue.
-NanoPack est un outil développé en Python. Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
+NanoPack est un outil développé en Python.
+Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 
 ```bash
 pip install nanopack
