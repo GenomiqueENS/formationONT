@@ -35,7 +35,7 @@ Contact Plateforme GenomiqueENS :
 Lors de ce TP, nous utilisons deux séquenceurs MinION et un séquenceur PromethION P2 solo:
 
 * Un MinION Mk1B couplé à un PC sous Linux
-* Un MinION Mk1C son nom de domaine est `minion01.example.com` ou `minion01`
+* Un MinION Mk1C son nom de domaine est `minion02.example.com` ou `minion022
 * Un PromethION P2 couplé à un PC sous Linux
 
 MinKNOW est le logiciel pilotant les séquenceurs MinION, GridION et PromethION.
@@ -164,7 +164,7 @@ cd ~/Desktop/Formation-MinION
 
 * Connectez-vous au MinION en ligne de commande (le mot de passe est "**minit**")
 ```bash
-ssh minit@minion01
+ssh minit@minion02
 ```
 
 **Question 1 : Sous quel système d’exploitation tourne le MinION Mk1C ?**
@@ -231,7 +231,7 @@ Pour le moment, il n’existe de pas de version pour les systèmes Linux.
 Choisissez *Log with your Nanopore account*, et saisissez vos identifiants
     * Vous arrivez sur la page du *Connection manager*.
 Le mode tutoriel est activé, quittez le en cliquant sur le bouton **⋮**
-    * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion01`
+    * Ajoutez une connexion à un séquenceur en cliquant sur le bouton **⊕ Add host**, et rentrez le nom de domaine du séquenceur `minion02`
     * Dans la section *Saved Host*, devrait apparaître une icône *Mk1C* selon le sequençeur auquel vous vous êtes connecté
     * Cliquez sur l’hôte crée pour pouvoir contrôler à distance le séquenceur
 
@@ -286,7 +286,7 @@ Remplissez-la.
 
 * Montage du partage sur l’ordinateur
     * Dans le Finder et dans le menu sélectionnez *Aller* / *Se connecter au serveur…*
-    * Utiliser *smb://minion01*.
+    * Utiliser *smb://minion02*.
 Appuyer sur le bouton *Se connecter*
     * Une boite de dialogue apparaît.
 Choisissez *Utilisateur référencé*, le nom de l’utilisateur est **minit** et le mot de passe celui que vous avez précédemment choisi.
@@ -323,7 +323,7 @@ SFTP est habituellement utilisable sur une machine dès qu’un serveur SSH est 
 Ouvrir l’application `Terminal` de macOS et lancer les commandes suivantes :
 ```bash
 cd ~/Desktop/Formation-MinION/Données
-sftp -r minit@minion01:/data/TOTO .
+sftp -r minit@minion02:/data/TOTO .
 ```
 
 * L’option `-r` de `sftp` active une copie récursive des dossiers/fichiers.
@@ -331,7 +331,7 @@ sftp -r minit@minion01:/data/TOTO .
 * Dépot de données sur le MinION (ex: pour relancer l’appel de base d'un run) :
 ```bash
 cd ~/Desktop
-sftp -rp TOTO minit@minion01:/data/TOTO-copie .
+sftp -rp TOTO minit@minion02:/data/TOTO-copie .
 ```
 
 * L’option `-p` de `sftp` permet de préserver les permissions et les dates des fichiers.
@@ -348,7 +348,7 @@ Cette interface permet l'accès à un certain nombre de paramètres tels que les
 ### Utilisation des MinION et du PromethION via leurs interfaces graphiques
 
 Après lancement de l'application vous avez accès aux séquenceurs qui lui sont accessibles.
-Aujourd'hui, seul minion01 (le MinION Mk1C) apparait puisque les séquenceurs controlés par des ordinateurs n'apparaissent pas.
+Aujourd'hui, seul minion02 (le MinION Mk1C) apparait puisque les séquenceurs controlés par des ordinateurs n'apparaissent pas.
 Choisissez le séquenceur sur lequel vous travaillez.
 Placez une flowcell dans l'emplacement prévu.
 Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interface.
