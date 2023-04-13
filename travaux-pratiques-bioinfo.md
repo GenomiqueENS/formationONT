@@ -35,11 +35,11 @@ Contact Plateforme GenomiqueENS :
 Lors de ce TP, nous utilisons deux séquenceurs MinION et un séquenceur PromethION P2 solo:
 
 * Un MinION Mk1B couplé à un PC sous Linux
-* Un MinION Mk1C son nom de domaine est `minion02.example.com` ou `minion022
-* Un PromethION P2 couplé à un PC sous Linux
+* Un MinION Mk1C son nom de domaine est `minion02.example.com` ou `minion02`
+* Un PromethION P2 solo couplé à un PC sous Linux
 
 MinKNOW est le logiciel pilotant les séquenceurs MinION, GridION et PromethION.
-Au cours de ce TP, la version de MinKNOW utilisé est la 21.12.x datant du 01 février 2023 pour les séquenceurs MinION et la 22.07.5 pour le PromethION P2 solo.
+Au cours de ce TP, la version de MinKNOW utilisé est la 21.12 datant du 01 février 2023 pour les séquenceurs MinION et la 22.07.5 pour le PromethION P2 solo.
 
 Les données utilisées lors de ce TP sont celles qui ont été produites lors de la session expérimentale de cette formation le 15 mars 2021.
 Le run effectué lors de la session expérimentale de la formation se nommait *TOTO*, un peu plus 21 000 lectures avaient été produites en utilisant une flowcell de type *FLO-MIN106* et le kit *SQK-PBK004*.
@@ -53,14 +53,14 @@ Il convient évidemment de les changer lors de mise en production d’un séquen
 ## Gestion du PromethION P2 solo
 
 Le séquenceur P2 solo peut être assimilé à un MinION Mk1B, le logiciel MinKNOW installé sur un PC fonctionne de la même manière que pour un MinION Mk1B.
-C'est pour cela que dans le reste de ce document, le PromethION P2 solo ne sera peu évoqué.
+C'est pour cela que dans le reste de ce document, le PromethION P2 solo ne sera que peu évoqué.
 
 **Attention :** Le PromethION P2 solo est actuellement un appareil en "early access".
-Un certain nombre de séquenceurs des premières séries sont défectueux.
+Un certain nombre de séquenceurs des premières séries sont défectueux et vont être remplacés.
 Le séquenceur P2 solo nécessite actuellement une version différente de MinKNOW de celle requise pour piloter un MinION Mk1B.
 Il est fortement déconseillé d'utiliser la version de MinKNOW prévue pour le MinION Mk1B avec le PromethION P2 solo.
-Étant donné le peu de séquenceurs installé, la découverte de bogues dans MinKNOW pour le P2 solo peut prendre du temps.
-À terme, d'ici quelques mois les deux versions seront fusionnées.
+Étant donné le peu de séquenceurs installés, la découverte de bogues dans MinKNOW pour le P2 solo peut prendre du temps.
+D'ici quelques mois les deux versions seront fusionnées.
 
 
 Le domaine où le PromethION P2 solo diffère grandement du MinION Mk1B concerne les prérequis matériels pour le faire fonctionner :
@@ -78,7 +78,7 @@ Il faut donc bien prendre en considération les besoins matériels et en adminis
 <a name="config"></a>
 ## Dépannage : Mise en service d’un MinION Mk1C
 
-La version du système préinstallé sur les MinION Mk1C est (était ?) notoirement boguée notamment en ce qui concerne la configuration réseau via MinKNOW (Elle ne fonctionne pas).
+La version du système préinstallé sur les MinION Mk1C était notoirement boguée au lancement du produit, notamment en ce qui concerne la configuration réseau via MinKNOW (Elle ne fonctionne pas).
 Cette configuration initiale est certes délicate à mettre en place mais une fois les mises à jour du système effectuées, l’environnement logiciel du séquenceur s’avère stable.
 
 Dans cette partie, vous trouverez la procédure à suivre pour mettre en service un MinION Mk1C.
@@ -157,7 +157,7 @@ SSH (Secure Shell) est à la fois un programme informatique et un protocole de c
 
 Dans ce TP, nous verrons comment se connecter à un MinION Mk1C via la commande `ssh` et nous récupérerons quelques informations sur le système informatique pilotant le séquenceur.
 
-* Ouvrir l’application `Terminal` de macOS (disponible dans le dossier *Applications/Utilitaires*) ou Linux (Appuyer sur la touche Windows du clavier puis taper `Terminal`) et se placer dans le dossier *Formation-MinION* sur le Bureau
+* Ouvrir l’application `Terminal` de macOS (disponible sur le dock ou dans le dossier *Applications/Utilitaires*) ou Linux (disponible sur le dock ou accessible via un appuis sur la touche Windows du clavier puis en tapant `Terminal`) et se placer dans le dossier *Formation-MinION* sur le Bureau
 ```bash
 cd ~/Desktop/Formation-MinION
 ```
@@ -210,14 +210,16 @@ Il convient donc d’être __extrêmement__ prudent, car vous n’aurez pas de m
 <a name="minknow-stand-alone-gui"></a>
 ## TP 2 : Connexion au Mk1C à distance gràce à MinKNOW Stand Alone GUI (MinION Mk1C uniquement)
 
-L’écran du MinION est relativement petit et pas toujours très pratique à utiliser, c’est pour cette raison (et aussi, car le MinIT ne disposait pas d’écran) que la société ONT a développé le logiciel *MinKNOW Stand Alone GUI* qui permet de contrôler à distance un ou plusieurs séquenceurs.
+L’écran du MinION Mk1C est relativement petit et pas toujours très pratique à utiliser, c’est pour cette raison (et aussi, car le MinIT ne disposait pas d’écran) que la société ONT a développé le logiciel *MinKNOW Stand Alone GUI* qui permet de contrôler à distance un ou plusieurs séquenceurs.
 
 Dans ce TP, nous verrons comment installer ce logiciel sur un ordinateur de bureau (un iMac) et le configurer pour prendre le contrôle d’un séquenceur.
+Seuls les séquenceurs embarquant un système d'exploitation (MinION Mk1C, GridION, PromethION à l'exception du P2 solo) peuvent être contrôlés à distance.
 
 L’application *MinKNOW Stand Alone GUI* est disponible sur différents supports :
 * [Windows et macOS](https://community.nanoporetech.com/downloads)
 * [Android](https://play.google.com/store/apps/details?id=com.nanoporetech.minknowui)
 * [IPhone et iPad](https://apps.apple.com/fr/app/minknow/id1504645283)
+
 
 Pour le moment, il n’existe de pas de version pour les systèmes Linux.
 
@@ -242,7 +244,7 @@ Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relan
 <a name="transfert"></a>
 ## TP 3 : Transfert des données présentes sur le Mk1C (MinION Mk1C uniquement)
 
-Les séquenceurs MinION Mk1C, GridION et PromethION enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil (les unités de stockage ont des caractéristiques compatibles avec le débit du séquenceur).
+Les séquenceurs MinION Mk1C, GridION et PromethION (sauf le P2 solo) enregistrent par défaut (et cela est fortement conseillé) les données produites lors du séquençage dans le stockage interne de l’appareil (les unités de stockage ont des caractéristiques compatibles avec le débit du séquenceur).
 Il est donc nécessaire de pouvoir transférer des données depuis et vers le séquenceur.
 Il existe de très nombreuses méthodes pour transférer des données de et vers un MinION Mk1C :
 
@@ -353,14 +355,13 @@ Choisissez le séquenceur sur lequel vous travaillez.
 Placez une flowcell dans l'emplacement prévu.
 Vous devez maintenant voir la flowcell que vous avez mis en place sur l'interface.
 
-Le menu accessible sur la gauche de l'application vous propose 5 options : 
+Le menu accessible sur la gauche de l'application vous propose 5 options :
 - Start
 - Sequencing overview
 - Experiments
 - System messages
 - Host settings
 
-Le menu accessible sur la gauche de l'application vous propose 5 options : Start, Sequencing overview, Experiments, System messages, Host settings.
 Parcourez les Host settings.
 
 **Exercice 1 : Dans quel sous menu des settings devez vous aller pour redémarrer ou éteindre le système d'exploitation du Mk1C ?
@@ -440,7 +441,7 @@ Vous pouvez jouer avec ces options pendant le TP.
 
 L’appel de base peut être réalisé à la volée ou après le run.
 Il peut être réalisé sur le Mk1C ou un ordinateur indépendant.
-Nous allons voir comment le lancer à la volée. 
+Nous allons voir comment le lancer à la volée.
 Les paramètres importants restent les mêmes quelque soit la machine choisie pour réaliser l’appel de base.
 
 Deux modes de basecalling sont possibles :
@@ -528,7 +529,9 @@ Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux 
     * Une fenêtre avec une icone *HDFView* apparaît, cliquez sur cette icône pour lancer l’application
 
 * Installation de HDFView sous Linux
-**TODO**
+    * Aller dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
+    * Ouvrir le dossier *HDFView-Linux*
+    * Faire un double clic sur *hdfview.sh* puis cliquer sur *Lancer dans un terminal*
 
 Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le contenu
 
@@ -590,6 +593,8 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy_server
                                --config dna_r9.4.1_450bps_fast.cfg \
                                --barcode_kits SQK-PBK004
 ```
+
+**Note :** Pour réaliser l'appel de base en mode serveur en utilisant le GPU avec le PromethION P2 solo, il est nécessaire de réaliser une [configuration additionnelle de MinKNOW](https://community.nanoporetech.com/docs/prepare/library_prep_protocols/promethion-2-solo-user-manual/v/p2s_9172_v1_revh_14oct2022/installing-gpu-version-of-guppy-with-minknow-for-minion).
 
 * À titre d’information, on peut également lancer Guppy hors mode serveur avec la ligne de commande suivante (il faut retirer l’option `--device` si vous ne disposez pas d’un GPU) :
 
