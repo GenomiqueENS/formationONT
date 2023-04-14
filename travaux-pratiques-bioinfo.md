@@ -237,7 +237,7 @@ Le mode tutoriel est activé, quittez le en cliquant sur le bouton **⋮**
     * Dans la section *Saved Host*, devrait apparaître une icône *Mk1C* selon le sequençeur auquel vous vous êtes connecté
     * Cliquez sur l’hôte crée pour pouvoir contrôler à distance le séquenceur
 
-**Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/MinKNOW* (*~* correspond au chemin de votre dossier personnel).
+**Note :** Sous macOS, les données de l’application `MinKNOW UI` sont stockées dans le dossier *~/Library/Application Support/minknow* (*~* correspond au chemin de votre dossier personnel).
 Pour réinitialiser l'application, il suffit de supprimer ce dossier et de relancer l’application.
 
 
