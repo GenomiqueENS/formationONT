@@ -581,17 +581,16 @@ guppy_basecaller --print_workflows
 * L’appel de base peut-être lancé en ligne de commande de la manière suivante sur le MinION Mk1C (le dossier de sortie doit exister):
 ```bash
 mkdir /data/appel_de_base_ligne_de_commande_guppy_server
-/usr/bin/guppy_basecall_client --port 5555 \
-                               --server_file_load_timeout 600 \
-                               --num_callers=1 \
-                               --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5 \
-                               --fast5_out \
-                               --save_path /data/appel_de_base_ligne_de_commande_guppy_server \
-                               --compress_fastq \
-                               --recursive \
-                               --min_score 40.000000 \
-                               --config dna_r9.4.1_450bps_fast.cfg \
-                               --barcode_kits SQK-PBK004
+/opt/ont/guppy/bin/guppy_basecall_client \
+                                         --port ipc:///tmp/.guppy/5555 \
+                                         --server_file_load_timeout 600 \
+                                         --save_path /data/appel_de_base_ligne_de_commande_guppy_server \
+                                         --config dna_r9.4.1_e8.1_fast_mk1c.cfg \
+                                         --progress_stats_frequency 2 \
+                                         --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5/ \
+                                         --compress_fastq \
+                                         --recursive \
+                                         --barcode_kits SQK-PBK004
 ```
 
 **Note :** Pour réaliser l'appel de base en mode serveur en utilisant le GPU avec le PromethION P2 solo, il est nécessaire de réaliser une [configuration additionnelle de MinKNOW](https://community.nanoporetech.com/docs/prepare/library_prep_protocols/promethion-2-solo-user-manual/v/p2s_9172_v1_revh_14oct2022/installing-gpu-version-of-guppy-with-minknow-for-minion).
@@ -600,18 +599,15 @@ mkdir /data/appel_de_base_ligne_de_commande_guppy_server
 
 ```bash
 mkdir /data/appel_de_base_ligne_de_commande_guppy
-/usr/bin/guppy_basecaller --device auto \
-                          --save_path /data/appel_de_base_ligne_de_commande_guppy \
-                          --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5 \
-                          --fast5_out \
-                          --compress_fastq \
-                          --recursive \
-                          --min_score 40.000000 \
-                          --config dna_r9.4.1_450bps_fast.cfg \
-                          --barcode_kits SQK-PBK004
+/opt/ont/guppy/bin/guppy_basecaller \
+                                    --device auto \
+                                    --save_path /data/appel_de_base_ligne_de_commande_guppy \
+                                    --config dna_r9.4.1_e8.1_fast_mk1c.cfg \
+                                    --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5/ \
+                                    --compress_fastq \
+                                    --recursive \
+                                    --barcode_kits SQK-PBK004
 ```
-
-* Remarquera que cette ligne de commande précédente est plus lente (14m30s) que la précédente (7m30) car les paramètres de parallélisation n’ont pas été optimisés.
 
 * Pour plus d’informations, notamment sur comment configurer l’alignement et le rognage des adaptateurs, il convient de se reporter à la [documentation de Guppy](https://community.nanoporetech.com/protocols/Guppy-protocol/v/gpb_2003_v1_revu_14dec2018) et à l’aide en ligne de commande (`guppy_basecaller --help`).
 
