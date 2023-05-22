@@ -517,8 +517,9 @@ Le signal électrique est désormais compressé par défaut à l'aide de l'algor
 Cet algorithme permet de réduire d'environ 1/3 la taille des données précédement compressées à l'aide de l'algorithme gzip et de réduire très fortement les temps de compression/décompression.
 Cet algorithme n'étant pas standard, le signal électrique n’est plus visualisable dans HDFView pour les données compressées avec VBZ.
 
-**Note 2 :** Le format Fast5 ne sera plus le format de fichier de sortie par défaut d'ici quelques mois.
-Le format POD5 prendra la relève, ce format est déjà disponible dans les options de MinKNOW.
+**Note 2 :** Le format Fast5 n'est plus le format de fichier de sortie par défaut depuis la mi-mai 2023 pour les runs utilisant le Kit 14.
+Le format POD5 est le remplaçant du format Fast5.
+Il est bien plus performant dans la manière de stocker les données et permet notamment de réaliser bien plus efficacement l'appel de base duplex.
 
 Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux comprendre le principe le l’appel de base que nous aborderons dans le prochain TP.
 
@@ -555,6 +556,8 @@ Une fenêtre avec les options de visualisation apparaît, appuyez simplement sur
 <a name="basecalling-cmdline"></a>
 ## TP 6 : Appel de Base en ligne de commande
 
+L’appel de base est l'étape au cours de laquelle où le signal électrique est traduit en séquences nucléotidiques.
+Au cours de cette étape, on passe de données dans un format Fast5/POD5 à des données au format FASTQ.
 L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies.
 D’autres outils existent/existaient/existeront (Guppy va être remplacé par Dorado d’ici quelques mois) pour cette tâche, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
 Oxford Nanopore propose également d’autres logiciels pour l’appel de base mais ceux-ci sont dédiés à la recherche algorithmique et il ne vaut mieux pas les utiliser en production.
@@ -567,7 +570,11 @@ Cependant si cette solution est choisie le mode *haute précision (hac)* sera au
 Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*.
 Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
 
-**Note :** Si vous disposez d'une carte GPU puissante (non recommandé sur un MinION Mk1C), vous pouvez également forcer l'utilisation du mode super accuracy à l'aide de la configuration *dna_r9.4.1_450bps_sup*.
+**Note 1 :** Avec Dorado, le nouveau "basecaller" de Nanopore, les données en sortie de l'appel de base seront stockées au format BAM.
+Le format BAM est à l'origine un format de fichier dédié au stockage d'alignements de séquences sur un génome de référence.
+Il peut toutefois être utilisé pour stocker des séquences qui n'ont pas été alignées.
+
+**Note 2 :** Si vous disposez d'une carte GPU puissante (non recommandé sur un MinION Mk1C), vous pouvez également forcer l'utilisation du mode super accuracy à l'aide de la configuration *dna_r9.4.1_450bps_sup*.
 La qualité de l'appel de base en mode super accuracy est légèrement supérieure au mode high accuracy mais demande beaucoup plus de temps de calcul que ce dernier.
 Le mode high accuracy est généralement un bon compromis entre temps de calcul et qualité de l'appel de base.
 
@@ -680,6 +687,9 @@ Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
 
 **Question 9 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
 
+
+**Note 3 :** Avec Dorado, le nouveau "basecaller" de Nanopore, le fichier *sequencing_summary.txt* n'est plus automatiquement généré lors de l'appel de base.
+Pour créer ce fichier il faudra utiliser la commande `dorado summary`.
 
 <a name="qc"></a>
 ## TP 7 Contrôle Qualité post run
