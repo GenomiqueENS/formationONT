@@ -14,7 +14,7 @@ Contact Plateforme GenomiqueENS :
 
 * Présentation de la Plateforme Génomique de l'ENS
 * Rappel du principe de la technologie ONT
-* Présentation des différents types de flowcells et séquenceur ONT
+* Présentation des différents types de flow cells et séquenceur ONT
 * Principe de l’appel de base
 * [Gestion du P2 solo](#p2solo)
 
@@ -82,8 +82,8 @@ Cette interface permet l’accès à un certain nombre de paramètres tels que l
 
 Après lancement de l’application vous avez accès aux séquenceurs qui lui sont accessibles.
 Choisissez le séquenceur sur lequel vous travaillez.
-Placez une flowcell dans l’emplacement prévu.
-Vous devez maintenant voir la flowcell que vous avez mis en place sur l’interface.
+Placez une flow cell dans l’emplacement prévu.
+Vous devez maintenant voir la flow cell que vous avez mis en place sur l’interface.
 
 Le menu accessible sur la gauche de l’application vous propose 4 options :
 - Start
@@ -92,26 +92,26 @@ Le menu accessible sur la gauche de l’application vous propose 4 options :
 - System messages
 
 
-### Vérification initiale du séquenceur ou de la flowcell
+### Vérification initiale du séquenceur ou de la flow cell
 
 À la réception du séquenceur vous devez vérifier son état.
-Pour le faire, vous trouverez une flowcell factice en plastique blanc dans la boite de l’appareil.
-Il s’agit de la flowcell de configuration (CTC).
-Insérez là dans l’emplacement de la flowcell et cliquez sur start.
+Pour le faire, vous trouverez une flow cell factice en plastique blanc dans la boite de l’appareil.
+Il s’agit de la flow cell de configuration (CTC).
+Insérez là dans l’emplacement de la flow cell et cliquez sur start.
 En choisissant la section Hardware check dans la section *Start*, vous pouvez lancer la vérification de votre matériel.
 
 **Exercice 1 : Lancez le Hardware Check**
 
-Avant chaque lancement de run, vous devez aussi vous assurer que la flowcell rempli les conditions d’utilisation : il est nécessaire de vérifier le nombre de pores disponibles sur la flowcell avant de charger les échantillons.
+Avant chaque lancement de run, vous devez aussi vous assurer que la flow cell rempli les conditions d’utilisation : il est nécessaire de vérifier le nombre de pores disponibles sur la flow cell avant de charger les échantillons.
 Le nombre de pores disponibles doit être supérieur à :
 
-- 50 dans le cas d’une flowcell Flongle
-- 800 dans le cas d’une flowcell MinION
-- 5000 dans le cas d’une flowcell PromethION
+- 50 dans le cas d’une flow cell Flongle
+- 800 dans le cas d’une flow cell MinION
+- 5000 dans le cas d’une flow cell PromethION
 
-Les flowcells sont remplacées si ce n’est pas le cas !
+Les flow cells sont remplacées si ce n’est pas le cas !
 
-**Exercice 2 : Revenez au menu précédent et lancez le Flowcell Check**
+**Exercice 2 : Revenez au menu précédent et lancez le Flow cell Check**
 
 ### Lancement d’un run
 
@@ -135,15 +135,15 @@ Il est possible de les filtrer selon ce que l’on séquence, selon les banques 
 Choisissez ce qui vous intéresse.
 Sur notre plateforme nous utilisons le kit SQK-PBK004, C’est un kit ADN avec PCR.
 Il est important de ne pas se tromper : chaque kit possède des spécificités d’amorces et cet aspect sera primordial pour l’appel de base, le démultiplexage…
-Attention, la chimie est en ce moment en cours d’évolution et les kits ne sont pas tous disponibles selon les Flowcells et les séquenceurs.
+Attention, la chimie est en ce moment en cours d’évolution et les kits ne sont pas tous disponibles selon les Flow cells et les séquenceurs.
 
 
 **Passez au choix des options de runs :**
 
 Selon le type de séquençage que vous souhaitez faire, votre run va durer plus ou moins longtemps.
-Pour un RNASeq, un run de 72 h est adapté.
-Si vous souhaitez tester la présence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
-Le voltage initial de la flowcell peut être modifié, mais il vaut mieux être expert pour cela.
+Pour un RNA-seq, un run de 72 h est adapté.
+Si vous souhaitez tester la présence ou non d’une bactérie, 20 minutes peuvent suffire (votre flow cell peut être utilisée plusieurs fois).
+Le voltage initial de la flow cell peut être modifié, mais il vaut mieux être expert pour cela.
 Le contrôle actif des canaux est enclenché ce qui autorise MinKNOW à monitorer les canaux en permanence pour une meilleure performance de ceux-ci.
 Le temps entre chaque changement des canaux (mux scan) est aussi paramétrable.
 Vous pouvez également sauvegarder un pourcentage de pores pour les faire intervenir dans la durée du run.
@@ -324,7 +324,7 @@ Les paramètres enregistrés peuvent désormais être utilisés pour lancer un o
 
 
 
-**Exercice 1** : Ouvrir un éditeur de texte, créer un fichier « settings » nommé `setting-r9-fast.json` et importer le lors du lancement d’un run avec une flowcell.
+**Exercice 1** : Ouvrir un éditeur de texte, créer un fichier « settings » nommé `setting-r9-fast.json` et importer le lors du lancement d’un run avec une flow cell.
 
 
 <a name="fast5"></a>
@@ -368,7 +368,7 @@ Une fenêtre avec les options de visualisation apparaît, appuyez simplement sur
 
 **Question 2 : Identifiez la zone du signal correspondant à la queue polyA de la lecture (toutes les lectures n’en possèdent pas)**
 
-**Exercice 3 : Dans les sous dossiers d’une lecture, retrouvez le numéro de pore, le numéro de la flowcell et la date de début de run**
+**Exercice 3 : Dans les sous dossiers d’une lecture, retrouvez le numéro de pore, le numéro de la flow cell et la date de début de run**
 
 
 <a name="pod5"></a>
@@ -392,7 +392,7 @@ cd ~/Bureau/Formation/Données/pod5
 inspect debug  FAW68019_c16beb57_cd2d48c7_0.pod5
 ```
 
-**Question 1 : Retrouver la date du run, le type de séquenceur, le type de flowcell et le type de kit ?**
+**Question 1 : Retrouver la date du run, le type de séquenceur, le type de flow cell et le type de kit ?**
 
 * Afficher un résumé d’un fichier POD5
 ```bash
@@ -555,7 +555,7 @@ dorado basecaller \
 
 Comme on peut le voir
 
-*Note 1* : Lorsque cette commande va être exécutée, Dorado va télécharger le modèle demandé, à savoir *dna_r9.4.1_e8_fast@v3.4* (le type de flowcell est indiqué dans les fichiers POD5, est le type de model est indiqué sur la ligne de commande : *fast*).
+*Note 1* : Lorsque cette commande va être exécutée, Dorado va télécharger le modèle demandé, à savoir *dna_r9.4.1_e8_fast@v3.4* (le type de flow cell est indiqué dans les fichiers POD5, est le type de model est indiqué sur la ligne de commande : *fast*).
 Pour éviter de re-télécharger le modèle à chaque lancement de Dorado, il est possible de télécharger une fois pour toute les modèles à l’aide de la commande `dorado download`.
 Il faudra juste remplacer dans la ligne de commande *fast* par le chemin du modèle à utiliser.
 
@@ -569,7 +569,7 @@ Il faut toutefois noter que l’identification des codes barres a fait beaucoup 
 samtools view -H ~/Bureau/Formation/Données/output.bam
 ```
 
-**Exercice 2 : Retrouver dans les entetes, la ligne de commande utilisée pour l’appel de base, le modèle, le numéro de flowcell et les codes barres recherchés.**
+**Exercice 2 : Retrouver dans les entetes, la ligne de commande utilisée pour l’appel de base, le modèle, le numéro de flow cell et les codes barres recherchés.**
 
 ```bash
 # On affiche les 10 premières lectures appelées
@@ -823,7 +823,7 @@ L’option `--eqx` permet de distinguer les matches et mismatches dans les codes
 Comme les données d’entrée proviennent d’une expérience de RNA-seq, nous utilisons l’option `-x splice` ainsi qu’un fichier de jonction (option `--junc-bed`) au format BED afin que minimap2 gère correctement les introns sur le génome de référence.
 
 
-``bash
+```bash
 # On se place dans le dossier des données
 cd ~/Bureau/Formation/Données
 
