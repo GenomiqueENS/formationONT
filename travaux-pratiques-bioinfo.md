@@ -23,12 +23,13 @@ Contact Plateforme GenomiqueENS :
 * [TP 3 : Utilisation de paramètres enregistrés](#settings)
 * [TP 4 : Les fichiers bruts Fast5](#fast5)
 * [TP 5 : Les fichiers bruts POD5](#pod5)
-* [TP 6 : Appel de Base en ligne de commande](#basecalling-cmdline)
-* [TP 7 : Contrôle Qualité post run](#qc)
+* [TP 6 : Appel de Base avec MinKNOW](#basecalling-gui)
+* [TP 7 : Appel de Base en ligne de commande](#basecalling-cli)
+* [TP 8 : Contrôle Qualité post run](#qc)
 * Alignement
-* [TP 8 : Création d'un index pour minimap2 avec l'interface graphique](#index-gui)
-* [TP 9 : Faire un alignement avec l'interface graphique](#align-gui)
-* [TP 10 : Faire un alignement en ligne de commande](align-cli)
+* [TP 9 : Création d'un index pour minimap2 avec l'interface graphique](#index-gui)
+* [TP 10 : Faire un alignement avec l'interface graphique](#align-gui)
+* [TP 11 : Faire un alignement en ligne de commande](align-cli)
 * Conclusion
 * [Bibliographie](#biblio)
 
@@ -146,7 +147,7 @@ Pour un RNASeq, un run de 72 h est adapté.
 Si vous souhaitez tester la présence ou non d’une bactérie, 20 minutes peuvent suffire (votre flowcell peut être utilisée plusieurs fois).
 Le voltage initial de la flowcell peut être modifié mais il vaut mieux être expert pour cela.
 Le contrôle actif des canaux est enclenché ce qui autorise MinKNOW à monitorer les canaux en permanence pour une meilleure performance de ceux-ci.
-Le temps entre chaque changement des canaux (mux scan) est aussi paramétrable.i
+Le temps entre chaque changement des canaux (mux scan) est aussi paramétrable.
 Vous pouvez également sauvegarder un pourcentage de pores pour les faire intervenir dans la durée du run.
 C'est dans cette section que vous pouvez parametrer MinKNOW pour qu'il fasse de l'adaptive sampling en enrichissant ou en rejetant certaines séquences. 
 Dans ce cas vous devez fournir une séquence FASTA de référence (type génome) et un fichier BED de ce que vous voulez enrichir ou rejeter.
@@ -229,20 +230,18 @@ Attention, cette option génère un gros volume de données.
 <a name="samplesheet"></a>
 ## TP 2 : Utilisation d'une samplesheet
 
-
-L'utilisation d'une sample sheet permet aux utilisateurs d'automatiser la configuration du lancement d'un ou de plusieurs run simultanément.
-Il s'agit de fichiers texte au format CVS (Comma-separated values) contenant sous un forme d'un tableau différents information concernant le run :
-- Le nom de l'expérience (champ "experiment_id")
-- L'échantillon (champ "sample_id")
-- Le type de flow cell (champ "flow_cell_product_code")
-- Le numéro de série de la flow cell (champ "flow_cell_id")
-- La position de la flow cell sur le séquenceur (champ "position_id")
-- Le kit utilisé (champ "kit")
-- Le ou les échantillons séquencés ainsi que leurs code barres (champs "barcode" et "kit")
-
+L’utilisation d’une sample sheet permet aux utilisateurs d’automatiser la configuration du lancement d’un ou de plusieurs run simultanément.
+Il s’agit de fichiers texte au format CVS (Comma-separated values) contenant sous la forme d’un tableau différentes informations concernant le run :
+- Le nom de l’expérience (champ « experiment_id »)
+- L'échantillon (champ « sample_id »)
+- Le type de flow cell (champ « flow_cell_product_code »)
+- Le numéro de série de la flow cell (champ « flow_cell_id »)
+- La position de la flow cell sur le séquenceur (champ « position_id »)
+- Le kit utilisé (champ « kit »)
+- Le ou les échantillons séquencés ainsi que leur code barres (champs « barcode » et « kit »)
 
 
-* Exemple de sample sheet minimale pour un séquenceur avec une seule position (MinION)
+* Exemple de sample sheet minimale pour un séquenceur avec une seule position (MinION) :
 
 | flow_cell_id | experiment_id | flow_cell_product_code | kit           |
 | ------------ | ------------- | ---------------------- |-------------- |
@@ -250,7 +249,7 @@ Il s'agit de fichiers texte au format CVS (Comma-separated values) contenant sou
 
 
 
-* Exemple de sample sheet pour un séquenceur avec plusieurs position (GridION, PromethION)
+* Exemple de sample sheet pour un séquenceur avec plusieurs position (GridION, PromethION) :
 
 | flow_cell_id | position_id | experiment_id | sample_id      | flow_cell_product_code | kit           |
 | ------------ | ----------- | ------------- | -------------- | ---------------------- |-------------- |
@@ -258,7 +257,7 @@ Il s'agit de fichiers texte au format CVS (Comma-separated values) contenant sou
 
 
 
-* Exemple sample sheet pour un séquenceur avec une seule position avec des codes barres
+* Exemple sample sheet pour un séquenceur avec une seule position avec des codes barres :
 
 | flow_cell_id | experiment_id | flow_cell_product_code | kit           | barcode   | alias    |
 | ------------ | ------------- | ---------------------- |-------------- | --------- | -------- |
@@ -270,15 +269,14 @@ Il s'agit de fichiers texte au format CVS (Comma-separated values) contenant sou
 | FAK02081     | Bidon_A2024   | FLO-MIN106             | SQK-PCB111-24 | barcode06 | Mutant03 |
 
 
-Les champs "experiment_id", "flow_cell_product_code", "kit" et "flow_cell_id" ou "position_id" sont obligatoires.
+Les champs « experiment_id », « flow_cell_product_code », « kit » et « flow_cell_id » ou « position_id » sont obligatoires.
 Des champs non définis dans la spécification de Nanopore peuvent être utilisés mais seront sans effet sur MinKNOW ou tout autre logiciel (ils ne provoqueront pas d'erreur).
 
 
-La spécification du format des fichiers sample sheet décrit des champs non évoqué ici ("type", "internal_barcode", "external_barcode"...), vous pouvez retrouver
-les spécifications complete du format en ligne dans la documentation de [MinKNOW](https://community.nanoporetech.com/docs/prepare/library_prep_protocols/experiment-companion-minknow/v/mke_1013_v1_revdc_11apr2016/sample-sheet-upload).
+La spécification du format des fichiers sample sheet décrit des champs non évoqué ici (comme « type », « internal_barcode », « external_barcode »...), vous pouvez retrouver les spécifications complete du format en ligne dans la documentation de [MinKNOW](https://community.nanoporetech.com/docs/prepare/library_prep_protocols/experiment-companion-minknow/v/mke_1013_v1_revdc_11apr2016/sample-sheet-upload).
 
 Le plus simple pour créer de tel fichiers est d'utiliser un tableur.
-Cependant, il faut bien faire attention au moment de sauver le fichier au format CSV car dans les pays où le séparateur décimal est la virgule, le caractère ";" sera utilisé comme séparateur entre les champs au lieu de la virgule.
+Cependant, il faut bien faire attention au moment de sauver le fichier au format CSV car dans les pays où le séparateur décimal est la virgule, le caractère « ; » sera utilisé comme séparateur entre les champs au lieu de la virgule.
 
 
 Pour importer un fichier sample sheet dans MinKNOW, appuyer sur Start puis sur le boutton "⁝ More" et selectionner "Sample sheet import".
@@ -291,14 +289,13 @@ MinKNOW utilisera les paramètres par defaut.
 Cependant, il est possible de définir ces autres paramètres à l'aide d'un fichier "settings".
 
 
+**Exercice 1** : À partir du premier exemple de sample sheet, ouvrir un tableur (Libreoffice Calc sous Linux) faire un fichier CSV et importer le dans MinKNOW.
 
-Question 1 : À partir du premier exemple de sample sheet, ouvrir un tableur (Libreoffice Calc sous Linux) faire un fichier CSV et importer le dans MinKNOW.
-Question 2 : Faire un fichier CSV valide utilisant toutes les positions disponibles des séquenceurs connecter à votre ordinateur. Le fichier samplesheet doit posseder un champ "sample_id" et un nombre de codes barres différent sur chaque flow cell.
+**Exercice 2** : Faire un fichier CSV valide utilisant toutes les positions disponibles des séquenceurs connecter à votre ordinateur. Le fichier samplesheet doit posseder un champ "sample_id" et un nombre de codes barres différent sur chaque flow cell.
 
 
 <a name="settings"></a>
 ## TP 3 : Utilisation de paramètres enregistrés
-
 
 Comme nous l'avons vu précédement, il peut être utile de réutiliser les paramètres de sauvegarde des données brutes, basecalling, demultiplexage et alignement utilisés pour plusieurs runs.
 Ces paramètres (settings) sont écrits dans un fichier au format JSON une fois sauvegardés.
@@ -318,7 +315,15 @@ Les valeurs par défaut des paramètres seront utilisées si les paramètres son
 }
 ```
 
+
+**Astuce** : Un fichier "settings" complet est créé lors du lancement d'un run avec une sample sheet mais sans fichier "settings" dans le dossier de sortie du run.
+
+
 Les paramètres enregistrés peuvent désormais être utiliser pour lancer un ou plusieurs runs à l'aide d'une sample sheet.
+
+
+
+**Exercice 1** : Ouvrir un éditeur de texte, créer un fichier settings nommé `setting-r9-fast.json` et importer le lors du lancement d'un run avec une flowcell.
 
 
 <a name="fast5"></a>
@@ -341,14 +346,16 @@ Dans ce TP, nous allons explorer le contenu de ces fichiers Fast5 afin de mieux 
 
 * Installation de HDFView sous Linux
     * Aller dans le dossier *Outils* des documents de la formation présent sur le bureau de l’ordinateur
-    * Ouvrir le dossier *HDFView-Linux*
+    * Ouvrir le dossier *HDFView*
     * Faire un double clic sur *hdfview.sh* puis cliquer sur *Lancer dans un terminal*
 
 Nous allons maintenant ouvrir un des fichiers Fast5 pour en visualiser le contenu
 
 * Allez dans le menu *File* et sélectionnez *Open*
 * Appuyez sur le bouton *Option* et sélectionnez *All Files*
-* Sélectionnez un des fichiers Fast5 présent dans le dossier *Données* des documents de la formation présent sur le bureau de l’ordinateur.
+* Sélectionnez le fichier Fast5 présent dans le dossier *Données/un-fast5* des documents de la formation présent sur le bureau de l’ordinateur.
+
+**Note** : Ce fichier Fast5 previent d'un run plus ancien que le reste des données sur lesquels nous allons travailler lors de cette formation.
 
 **Question 1 : Combien y a-t-il d’éléments dans le panneau de gauche et pourquoi ?**
 
@@ -380,7 +387,7 @@ pip3 install pod5
 ```bash
 
 # Se placer dans le dossier où sont les données
-cd ~/Bureau/formation/Données/pod5
+cd ~/Bureau/Formation/Données/pod5
 
 inspect debug  FAW68019_c16beb57_cd2d48c7_0.pod5
 ``
@@ -391,7 +398,7 @@ inspect debug  FAW68019_c16beb57_cd2d48c7_0.pod5
 ```bash
 
 # Se placer dans le dossier où sont les données
-cd ~/Bureau/formation/Données/pod5
+cd ~/Bureau/Formation/Données/pod5
 
 # Créer un fichier résumé
 pod5 view  FAW68019_c16beb57_cd2d48c7_0.pod5 --output ~/Bureau/pod5-summary.tsv
@@ -417,6 +424,8 @@ pod5 convert to_fast5  pod5/*.pod5 --output fast5/
 ls -ltr fast5/
 ```
 
+**Exercice 1 : Convertir les fichiers Fast5 de test, puis ouvrir un des fichier Fast5 à l'aide de HDFView. Retrouver y la date du run ainsi que le numero de série de la flow cell utilisée.**
+
 * Conversion de fichiers POD5 en Fast5
 ```bash
 
@@ -433,144 +442,212 @@ pod5 convert fast5  fast5/*.fast5 --output pod5-from-fast5/
 ls -ltr pod5-from-fast5/
 ```
 
+<a name="basecalling-cmdline"></a>
+## TP 6 : Appel de Base avec MinKNOW
+
+
+Au cours de ce TP, nous allons lancer un appel de base après que le run ait été effectué.
+Il est parfois utile de relancer l'appel de base d'un run plusieurs mois après le run car les algorithmes évoluent très rapidement et permettent d'obtenir un appel de base de bien meilleur qualité et/ou avec des informations supplémentaires (bases modifiées).
+
+
+Dans l'interface de MinKNOW, appuyer sur le Bouton "Start", puis cliquer sur l'icone "Analysis"et choisir "Basecalling".
+
+
+- Premier Onglet
+    - Définir le chemin de où sont les fichiers à appeler (les fichiers POD5 ou Fast5).
+    choisir `Bureau/Formation/Données/pod5`
+    - Laisser cocher la case "Process all daa in sub-directories within the input folder"
+
+
+- Onglet "Output Folder"
+    - Définir le chemin de où seront produit les fichiers FASTQ : Choisir `Bureau/fastq`
+    - Laisser cocher "Compress FASTQ files using Gzip to ~55% of original size"
+
+- Onglet "Basecalling settings"
+    - Run settings
+        - Flow cell product code : FLO-MIN106
+        - Chemistry : DNA - 450 bps
+    - Basecalling settings
+        - Model : Selectionner High-accurary basecalling
+        - Modified basecalling : None
+
+- Onglet "Barcoding settings
+  - Barcoding kits : SQK-PCB111-24
+  - Cocher "trim barcode"
+  - Ne pas cocher "Barcode both ends", "Mid-read barcode filtering"et "Override minimum barcode score"
+
+- Onglet "alignment settings"
+  - Ne pas cocher "Alignment reference"
+
+- Onglet "Review"
+  - Vérifier que les parametres définis sont bien corrects
+
+- Appuyer sur le bouton "Start"
+
+
+L'appel de base va durer ici un peu moins de 5 minutes.
+
+
+
+** Exercice 1 : Une fois l'appel de base terminé, regarder en ligne de commande l'organisation des fichiers produits à l'aide de la commande `tree`.**
+
+** Question 2 : Cette organisation, vous apparait-elle simple ?  Que faudrait-il faire pour la simplifier ? **
+
+
+Cet appel de base base va générer en plus des fichiers FASTQ, un fichier `sequencing_summary.txt` et un fichier `sequencing_telemetry.json`.
+
+
 
 <a name="basecalling-cmdline"></a>
-## TP 6 : Appel de Base en ligne de commande
+## TP 7 : Appel de Base en ligne de commande
 
 L’appel de base est l'étape au cours de laquelle où le signal électrique est traduit en séquences nucléotidiques.
 Au cours de cette étape, on passe de données dans un format Fast5/POD5 à des données au format FASTQ.
-L’appel de base est réalisé à l’aide du logiciel Guppy développé par Oxford Nanopore Technologies.
-D’autres outils existent/existaient/existeront (Guppy va être remplacé par Dorado d’ici quelques mois) pour cette tâche, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
+L’appel de base est réalisé à l’aide du logiciel Dorado développé par Oxford Nanopore Technologies.
+D’autres outils existent/existaient/existeront pour cette tâche, mais il est recommandé d’utiliser celui d’ONT qui certainement aujourd’hui le plus performant.
 Oxford Nanopore propose également d’autres logiciels pour l’appel de base mais ceux-ci sont dédiés à la recherche algorithmique et il ne vaut mieux pas les utiliser en production.
 
 Dans ce TP, nous verrons comment lancer l’appel de base en ligne de commande et nous explorerons les fichiers générés lors de ce traitement.
 
-Pour fonctionner, il est nécessaire de fournir à Guppy un fichier de configuration décrivant le modèle à utiliser pour effectuer l’appel de base.
-Celui-ci peut être automatiquement déterminé par Guppy si on lui fournit à l’aide des arguments `--flowcell` et `--kit`.
-Cependant si cette solution est choisie le mode *haute précision (hac)* sera automatiquement sélectionné.
-Dans le cadre des données utilisées pour ce TP, ce sera la configuration *dna_r9.4.1_450bps_hac*.
-Afin de réduire les temps de calcul, nous forcerons l’utilisation de la configuration *dna_r9.4.1_450bps_fast* qui permettra d’effectuer l’appel de base en mode rapide.
+Dorado présente plusieurs différnces avec ses prédécesseurs :
 
-**Note 1 :** Avec Dorado, le nouveau "basecaller" de Nanopore, les données en sortie de l'appel de base seront stockées au format BAM.
+- C'est un programme modulaire disposant de plusieurs sous-commandes : basecaller, demux, summary...
+Là où avec un seul lancement de Guppy suffisait, il faudra maintenant lancer plusieurs Dorado avec des sous-commandes différentes.
+En pratique, il est possible de réduire le nombre de lancements de Dorado.
+- Autre différence notable entre Dorado et Guppy est le format de sortie de l'appel de base.
+Celui-ci est désormais au format BAM au lieu de FASTQ.
+En effet le format BAM permet de sauver des informations qui ne sont pas présentes dans les fichiers FASTQ (base modifiées, taille de la queue polyA, qscore moyen...) et ce de manière structurée et compressée.
 Le format BAM est à l'origine un format de fichier dédié au stockage d'alignements de séquences sur un génome de référence.
 Il peut toutefois être utilisé pour stocker des séquences qui n'ont pas été alignées.
+- Avec Dorado, les modèles (réseaux de neurones) utilisés pour l'appel de base ne sont plus inclus dans le logiciel.
+Ils sont téléchargé à la demande depuis un dépot central.
 
-**Note 2 :** Si vous disposez d'une carte GPU puissante (non recommandé sur un MinION Mk1C), vous pouvez également forcer l'utilisation du mode super accuracy à l'aide de la configuration *dna_r9.4.1_450bps_sup*.
-La qualité de l'appel de base en mode super accuracy est légèrement supérieure au mode high accuracy mais demande beaucoup plus de temps de calcul que ce dernier.
-Le mode high accuracy est généralement un bon compromis entre temps de calcul et qualité de l'appel de base.
+Il existe deux versions de Dorado téléchargeable sur le site de Nanopore :
 
-* Ouvrez le logiciel `Terminal` sur l'ordinateur et connectez-vous via `ssh` au séquenceur
+- Dorado basecall server : Il s'agit de la version incluse dans MinKNOW, comme son nom l'indique, cette version de Dorado tourne en permanence sur l'ordinateur en attendant que des fichiers POD5 lui soit soumis.
+- Dorado : C'est la version "classique" en ligne de commande.
 
-* Pour connaître les fichiers de configuration qui seront automatiquement sélectionnés en fonction de la flowcell et du kit, il suffit de lancer la commande suivante :
-```bash
-guppy_basecaller --print_workflows
-```
+**Question 1 : Dans quel cas choisir l'une ou l'autre des deux versions ?**
 
-* L’appel de base peut-être lancé en ligne de commande de la manière suivante sur le MinION Mk1C (le dossier de sortie doit exister):
-```bash
-mkdir /data/appel_de_base_ligne_de_commande_guppy_server
-/opt/ont/guppy/bin/guppy_basecall_client \
-                                         --port ipc:///tmp/.guppy/5555 \
-                                         --server_file_load_timeout 600 \
-                                         --save_path /data/appel_de_base_ligne_de_commande_guppy_server \
-                                         --config dna_r9.4.1_e8.1_fast_mk1c.cfg \
-                                         --progress_stats_frequency 2 \
-                                         --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5/ \
-                                         --compress_fastq \
-                                         --recursive \
-                                         --barcode_kits SQK-PBK004
-```
 
-**Note :** Pour réaliser l'appel de base en mode serveur en utilisant le GPU avec le PromethION P2 solo, il est nécessaire de réaliser une [configuration additionnelle de MinKNOW](https://community.nanoporetech.com/docs/prepare/library_prep_protocols/promethion-2-solo-user-manual/v/p2s_9172_v1_revh_14oct2022/installing-gpu-version-of-guppy-with-minknow-for-minion).
+Dans la suite de ce TP, nous n'utiliserons que la version classique qui est plus simple à utiliser en ligne de commande.
+Cette version n'est pas incluse avec MinKNOW, pour l'utiliser, il est nécessaire de la télécharger depuis le site de Nanopore puis de l'installer sur votre ordinateur ou serveur.
+Dans le cadre de cette formation, nous avons préalablement installer Dorado sur les postes de travail.
 
-* À titre d’information, on peut également lancer Guppy hors mode serveur avec la ligne de commande suivante (il faut retirer l’option `--device` si vous ne disposez pas d’un GPU) :
+Avant d'aller plus loin, il faut ouvrir le logiciel `Terminal`.
+
+### Lancement de l'appel de base
+
+Il s'agit de l'étape la plus gourmande en ressources informatiques.
+Il faut bien choisir son modèle en fonction de la puissance de calcul de votre équipement informatique et du temps de calcul.
+Les derniers modèles "*sup*" pour les flow cells R10.4.1 durent 5 fois plus longtemps à tourner que les modèles "*hac*".
 
 ```bash
-mkdir /data/appel_de_base_ligne_de_commande_guppy
-/opt/ont/guppy/bin/guppy_basecaller \
-                                    --device auto \
-                                    --save_path /data/appel_de_base_ligne_de_commande_guppy \
-                                    --config dna_r9.4.1_e8.1_fast_mk1c.cfg \
-                                    --input_path /data/TOTO/no_sample/20210315_1508_MC-110337_0_FAO31058_dad08772/fast5/ \
-                                    --compress_fastq \
-                                    --recursive \
-                                    --barcode_kits SQK-PBK004
+# On se place dans le dossier des données
+cd ~/Bureau/Formation/Données
+
+# On lance l'appel de base avec Dorado
+dorado basecaller \
+         --device cuda:all \
+         --recursive \
+         --kit-name SQK-PCB111-24 \
+         --sample-sheet samplesheet/samplesheet.csv \
+         fast \
+         pod5/ \
+         > output.bam
 ```
 
-* Pour plus d’informations, notamment sur comment configurer l’alignement et le rognage des adaptateurs, il convient de se reporter à la [documentation de Guppy](https://community.nanoporetech.com/protocols/Guppy-protocol/v/gpb_2003_v1_revu_14dec2018) et à l’aide en ligne de commande (`guppy_basecaller --help`).
+Comme on peut le voir
 
-**Question 1 : Quel est l’intérêt d’utiliser Guppy en mode serveur sur un MinION Mk1C ? et sur GridION ou PromethION ?**
+*Note 1* : Lorsque cette commande va être executée, Dorado va télécharger le modèle demandé, à savoir *dna_r9.4.1_e8_fast@v3.4* (le type de flowcell est indiqué dans les fichiers POD5, est le type de model est indiqué sur la ligne de commande : *fast*).
+Pour éviter de retélécharger le modele à chaque lancement de Dorado, il est possible de télécharger une fois pour toute les modèles à l'aide de la commande `dorado download`.
+Il faudra juste remplace dans la ligne de commande *fast* par le chemin du modèle à utiliser.
 
-**Question 2 : Quel est le désavantage d’utiliser Guppy en mode serveur ?**
+*Note 2* : L'argument `--sample-sheet` est optionnel et ne sert qu'à selectionner les séquences avec des codes barres d'interet.
+Tous les codes barres qui ne sont pas dans la sample sheet seront classées comme "unclassified".
+Il faut toutefois noter que l'indentification des codes barres a fait beaucoup de progrès et que sur les 40 000 lectures du jeu de test, aucune n'a été mal identifiée.
 
-* À la fin de l’appel de base on obtient l’arborescence suivante :
-```
-.
-├── barcode01
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_0_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_1_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_2_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_3_0.fastq.gz
-│   └── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_5_0.fastq.gz
-├── barcode02
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_0_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_1_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_2_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_3_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_4_0.fastq.gz
-│   └── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_5_0.fastq.gz
-...
-├── barcode12
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_0_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_1_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_2_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_3_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_4_0.fastq.gz
-│   └── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_5_0.fastq.gz
-├── guppy_basecall_client_log-2021-03-21_13-07-22.log
-├── guppy_basecall_client_log-2021-03-21_13-14-23.log
-├── sequencing_summary.txt
-├── sequencing_telemetry.js
-├── unclassified
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_0_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_1_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_2_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_3_0.fastq.gz
-│   ├── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_4_0.fastq.gz
-│   └── fastq_runid_ec55bcd2efa6d77e9b07d97d4dbbdf4ea224aadb_5_0.fastq.gz
-└── workspace
-    ├── FAO31058_ec55bcd2_0.fast5
-    ├── FAO31058_ec55bcd2_1.fast5
-    ├── FAO31058_ec55bcd2_2.fast5
-    ├── FAO31058_ec55bcd2_3.fast5
-    ├── FAO31058_ec55bcd2_4.fast5
-    └── FAO31058_ec55bcd2_5.fast5
+**Exercice 1: Lancer l'appel de base avec la commande précédente et visualiser le contenu du fichier de sortie à l'aide des commandes suivantes :**
+```bash
+# On affiche les entetes du fichier BAM
+samtools view -H ~/Bureau/Formation/Données/output.bam
 ```
 
-**Question 3 : Pourquoi avons-nous plusieurs fichiers FASTQ par code-barre ? Que vaut-il mieux faire avant de réaliser analyse secondaire ?**
+**Exercice 2 : Retrouver dans les entetes, la ligne de commande utilisée pour l'appel de base, le modèle, le numéro de flowcell et les codes barres recherchés.**
 
-**Question 4 : Deux échantillons ont été déposés sur la flowcell lors du run.
-Pourquoi avons-nous une 12 dossiers pour des codes-barres lieu de 2 ?**
+```bash
+# On affiche les 10 premières lectures appelées
+samtools view ~/Bureau/Formation/Données/output.bam | head
+```
 
-**Question 5 : À quoi correspond le dossier les fichiers FASTQ du dossier *unclassified* ?**
+**Exercice 3 : Pour une lecture retrouver la sequencée appellée, la séquence de qualité, la qualité moyenne, le code barre.**
 
-**Exercice 6 : Ouvrez un des fichiers Fast5 produits lors du démultiplexage avec HDFView.
-Comparez leur structure avec celle des fichiers Fast5 avant démultiplexage.
-Retrouvez les séquences appelées au format FASTQ dans les fichiers Fast5.**
-
-* Sur l’ordinateur, allez dans le dossier *Formation-MinION/appel_de_base* sur le Bureau et ouvrez avec Firefox le fichier *sequencing_telemetry.js*
-
-**Question 7 : Que contient ce fichier ? Avons-nous vu déjà une partie de ces informations quelque part ?**
-
-* Toujours dans le même dossier, ouvrez le fichier *sequencing_summary.txt* à l’aide d’un tableur (Microsoft Excel ou Libreoffice Calc), il s’agit d’un fichier texte tabulé (TSV).
-
-**Question 8 : Que contient ce fichier ? Avons-nous vu un fichier avec un nom identique précédemment ? Quelles sont les différences entre ces fichiers ?**
-
-**Question 9 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
+**Note 3** : La signification des tags du fichier BAM est disponible en [ligne](https://github.com/nanoporetech/dorado/blob/release-v0.7/documentation/SAM.md).
 
 
-**Note 3 :** Avec Dorado, le nouveau "basecaller" de Nanopore, le fichier *sequencing_summary.txt* n'est plus automatiquement généré lors de l'appel de base.
-Pour créer ce fichier il faudra utiliser la commande `dorado summary`.
+### Créer le fichier sequencing summary
+
+À la différence de ses prédécesseurs, le fichier `sequencing_summary.txt` n'est pas automatiquement créé lors de l'appel de base.
+Ce fichier est souvent nécessaire pour les outils de controle qualité que nous verrons dans un prochain TP.
+
+```bash
+# On se place dans le dossier des données
+cd ~/Bureau/Formation/Données
+
+# On crée le fichier sequencing_summary.txt
+dorado summary \
+         output.bam > sequencing_summary.txt
+```
+
+**Exercice 4 : Ouvrir le fichier sequencing_summary.txt à l'aide de Visidata (commande `vd`) ou d'un tableur. Trouver dans ce fichier les colonnes contant **
+
+
+**Exercice 5 : Trouvez les colonnes pour identifier les lectures passant les filtres qualité, la longueur des lectures, la qualité moyenne des lectures et le code barre identifié**
+
+**Attention** : S'il est tout à fait possible d'ouvrir le fichier `sequencing_summary.txt` créé lors de cette formation à l'aide d'un tableur, cela ne sera pas le cas avec des runs générant plusieurs milliers de lectures.
+
+
+**Note** : Malheureusement, il ne semble pas possible de générer un fichier `sequencing_telemetry.js` à l'aide de Dorado en ligne de commande.
+Ce fichier contenant de nombreuses informations sur le run est utilisés par certains outils de QC comme ToulligQC.
+Le fichier `sequencing_telemetry.js` reste toutefois généré lorsque l'on passe par MinKNOW.
+
+
+
+
+### Création des fichiers FASTQ
+
+Si le format BAM offre de multiples avantages pour stocker les données appelées, il n'est que très rarement pris en charge par des outils utilisés en aval de l'analyse comme les aligneurs.
+Il est donc nécessaire de convertir le fichier BAM en fichiers FASTQ.
+Pour cela, on utilise la commande suivante :
+
+```bash
+# On se place dans le dossier des données
+cd ~/Bureau/Formation/Données
+
+# On converti le fichier BAM en fichiers FASTQ
+dorado demux \
+         --no-classify \
+         --emit-fastq \
+         --output-dir fastq \
+         output.bam
+
+# On compresse les fichiers fastq (optionnel)
+gzip fastq/*.fastq
+```
+
+
+**Question 6 : Après avoir listé le contenu du dossier *fastq*, quelle est la différence entre MinKNOW et l'appel de base en ligne de commande ?**
+
+
+**Note** : Il est egalement possible de compresser le fichier *sequencing_summary.txt* à l'aide de la commande `gzip`.
+Des outils comme ToulligQC sont capables de prendre en charge ces fichiers compréssés.
+
+
+
+
+
+
+
 
 <a name="qc"></a>
 ## TP 7 Contrôle Qualité post run
@@ -595,7 +672,7 @@ Il se base sur le contenu du fichier *sequencing_summary.txt*.
 * PycoQC est un outil développé en Python.
 Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 ```bash
-pip install pycoQC
+pip3 install pycoQC
 ```
 
 * Avec les données que nous avons générées, la commande à lancer pour produire le rapport est la suivante :
@@ -620,7 +697,7 @@ Il se base sur les contenus des fichiers *sequencing_summary.txt* et *sequencing
 Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 
 ```bash
-pip install toulligqc
+pip3 install toulligqc
 ```
 ToulligQC peut être également installé via Docker ou Conda.
 
@@ -652,7 +729,7 @@ NanoPack est un outil développé en Python.
 Pour l’installer, il suffit de lancer la commande suivante (la commande `pip` est remplacé dans certaines distributions Linux par `pip3` pour la version Python 3 de pip qui doit être utilisée pour installer l’outil) :
 
 ```bash
-pip install nanopack
+pip3 install nanopack
 ```
 
 * Avec les données que nous avons générées, la commande à lancer pour produire le rapport est la suivante :
@@ -668,7 +745,7 @@ NanoComp --summary /data/sequencing_summary.txt \
 
 
 <a name="index-gui"></a>
-## TP 8 : Création d'un index pour minimap2 avec l'interface graphique
+## TP 9 : Création d'un index pour minimap2 avec l'interface graphique
 
 - Appuyer sur Start > ⁝ More > Create .mmi from .fasta
 - Select an input .fasta file : chemin vers le fichier .fasta
@@ -680,6 +757,9 @@ NanoComp --summary /data/sequencing_summary.txt \
 
 <a name="align-gui"></a>
 ## TP 10 : Faire un alignement avec l'interface graphique
+
+
+
 
 
 <a name="align-cli"></a>
