@@ -4,7 +4,7 @@ Ce dépot contient les documents des [formations MinION](https://genomique.biolo
 - [Diapos de cours de la session expérimentale](https://raw.githubusercontent.com/GenomicParisCentre/formationONT/master/diapos-exp.pdf)
 - [Diapos de cours de la session bioinformatique](https://raw.githubusercontent.com/GenomicParisCentre/formationONT/master/diapos-bioinfo.pdf)
 - [Support pour les travaux pratiques de la session bioinformatique](travaux-pratiques-bioinfo.md)
-- [Données d'exemple utilisées pour l'appel de base lors de la formation bioinfo](http://outils.genomique.biologie.ens.fr/leburon/downloads/formation-ONT-bioinfo-data-example.zip)
+- [Données d'exemple utilisées pour l'appel de base lors de la formation bioinfo](http://outils.genomique.biologie.ens.fr/leburon/downloads/formation-ONT-bioinfo-data-2024.zip)
 
 ## Précédentes sessions de formation
 Les supports pour les précédentes sessions de formations sont accessibles via les liens suivants :
